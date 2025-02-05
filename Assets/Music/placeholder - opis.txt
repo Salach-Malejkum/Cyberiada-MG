@@ -1,0 +1,15 @@
+Takty 1,2 - intro
+Takty 3-10 - chill loop
+Takty 11-16 - walka loop 1
+Takty 17-24 - walka loop 2
+
+Takty 1-16 - Tempo 90
+Takty 17-24 - Tempo 120
+
+
+Bez przejść, proste melodie na test
+Dodatkowo wyeksportowane osobne sekcje jakby sie nie dało ładnie przerobić zgodnie z opisem
+
+Full jest do toola, reszta jest po prostu do synchronizacji i testu BPM
+
+Tempo poszczególnych części zapisane w tytule mp3
