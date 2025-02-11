@@ -32,7 +32,7 @@ public class CameraFollow : MonoBehaviour
 
     void motionDetection()
     {
-        isPlayerStationary = playerRb.linearVelocity.Equals(Vector3.zero);
+        isPlayerStationary = playerRb.linearVelocity.sqrMagnitude < 0.01f;
     }
 
     void FollowPlayer()
@@ -44,17 +44,10 @@ public class CameraFollow : MonoBehaviour
 
     void HandleVerticalLook()
     {
-        if (isPlayerStationary)
+        if (isPlayerStationary && lookInputY != 0)
         {
-            if (lookInputY != 0)
-            {
-                float targetLookY = Mathf.Clamp(lookInputY * lookOffset, minLookY, maxLookY);
-                currentLookY = Mathf.SmoothDamp(currentLookY, targetLookY, ref lookVelocity, lookSmoothTime);
-            }
-            else
-            {
-                currentLookY = Mathf.SmoothDamp(currentLookY, 0, ref lookVelocity, lookSmoothTime);
-            }
+            float targetLookY = Mathf.Clamp(lookInputY * lookOffset, minLookY, maxLookY);
+            currentLookY = Mathf.SmoothDamp(currentLookY, targetLookY, ref lookVelocity, lookSmoothTime);
         }
         else
         {
@@ -63,8 +56,9 @@ public class CameraFollow : MonoBehaviour
 
     }
 
-    public void OnLook(InputAction.CallbackContext context)
+    void OnLook(InputValue value)
     {
-        lookInputY = context.ReadValue<float>();
+        lookInputY = value.Get<float>();
+        SendMessage("HandleLookInput", lookInputY, SendMessageOptions.DontRequireReceiver);
     }
 }

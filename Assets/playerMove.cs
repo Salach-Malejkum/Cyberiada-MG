@@ -42,15 +42,17 @@ public class playerMove : MonoBehaviour
         isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, 1.1f, groundLayer);
     }
 
-    public void OnMove(InputAction.CallbackContext context)
+    void OnMove(InputValue value)
     {
-        moveInput = context.ReadValue<Vector2>();
+        moveInput = value.Get<Vector2>();
+        SendMessage("HandleMoveInput", moveInput, SendMessageOptions.DontRequireReceiver);
     }
 
-    public void OnJump(InputAction.CallbackContext context)
+    void OnJump(InputValue value)
     {
-        if (context.performed)
+        if (value.isPressed)
         {
+            SendMessage("HandleJumpInput", true, SendMessageOptions.DontRequireReceiver);
             Jump();
         }
     }
