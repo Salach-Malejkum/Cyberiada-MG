@@ -52,11 +52,11 @@ public class playerMove : MonoBehaviour
 
     void Update()
     {
-        if (rb.linearVelocity.x != 0f && rb.linearVelocity.y == 0)
+        if (rb.linearVelocity.x != 0f && isGrounded)
         {
             sprintTimer -= Time.deltaTime;
         }
-        else
+        else if (rb.linearVelocity.x == 0f)
         {
             ResetTimer();
         }
@@ -197,7 +197,6 @@ public class playerMove : MonoBehaviour
     {
         if (inputAction.started && canDash)
         {
-            ResetTimer();
             StartCoroutine(Dash());
         }
     }
