@@ -189,7 +189,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 395825957}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: a355d43eb160f4848a103863f17a513a, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -218,7 +218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: 344a38994686e3d4fac20761bfa9e9d8, type: 3}
-  m_NotificationBehavior: 0
+  m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -266,6 +266,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 34600b2b-7214-4640-9792-261dac72d8c9
     m_ActionName: 'Camera/look[/Keyboard/s,/Keyboard/w]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 395825962}
+        m_TargetAssemblyTypeName: playerMove, Assembly-CSharp
+        m_MethodName: OnDash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 269bb0d7-a1fa-403d-a533-d2e8bf356f66
+    m_ActionName: 'Player/dash[/Keyboard/shift]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -286,6 +302,7 @@ MonoBehaviour:
   moveSpeed: 5
   airSpeedChange: 0.05
   jumpForce: 10
+  jumpMultiBase: 0.5
   wallJumpForce: 5
   groundLayer:
     serializedVersion: 2
@@ -319,7 +336,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 691002515}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e522108e76ee2a74a82946f87620d8c3, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -427,7 +444,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1316017560}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e522108e76ee2a74a82946f87620d8c3, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

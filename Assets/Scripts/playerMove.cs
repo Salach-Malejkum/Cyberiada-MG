@@ -1,73 +1,74 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class playerMove : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-    public float airSpeedChange = 1f;
-    public float jumpForce = 10f;
-    public float jumpMultiBase = 0.5f;
-    public float wallJumpForce = 5f;
-    public LayerMask groundLayer;
-    public LayerMask wallLayer;
+    [Header("Move")]
+    [SerializeField] private float baseMoveSpeed = 5f;
+    private float moveSpeed;
 
-    private Rigidbody rb;
-    private Vector2 moveInput;
+    [Header("Jump")]
+    [SerializeField] private float airSpeedChange = 1f;
+    [SerializeField] private float jumpForce = 10f;
+    [SerializeField] private float jumpMultiBase = 0.5f;
+    [SerializeField] private float wallJumpForce = 5f;
+    [SerializeField] private float jumpCancelMulti = 0.5f;
+    [SerializeField] private float maxHorisontalAirSpeed = 5f;
 
     private bool isGrounded;
     private bool isWalled = false;
     private bool doubleJumped = false;
     private bool isFacingRight = true;
-    private bool isJumpCharging = false;
-    private float jumpMulti = 0.5f;
 
+    [Header("Dash")]
+    [SerializeField] private float dashPower = 24f;
+    [SerializeField] private float dashTime = 0.2f;
+    [SerializeField] private float dashCooldown = 2f;
     private bool canDash = true;
     private bool isDashing;
-    private float dashPower = 24f;
-    private float dashTime = 0.2f;
-    private float dashCooldown = 2f;
 
-    private float timerToSprint = 3f;
-    private float targetTime = 3f;
+    [Header("Sprint")]
+    [SerializeField] private float timeToSprint = 0.5f;
+    [SerializeField] private float maxSprintSpeed = 10f;
+    [SerializeField] private float sprintSpeedIncrement = 0.1f;
+    private float sprintTimer;
+
+    [Header("Layers")]
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask wallLayer;
+
+    private Rigidbody rb;
+    private Vector2 moveInput;
+
+    private bool isWallLeft;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        moveSpeed = baseMoveSpeed;
+        sprintTimer = timeToSprint;
     }
 
     void Update()
     {
         if (rb.linearVelocity.x != 0f && rb.linearVelocity.y == 0)
         {
-            targetTime -= Time.deltaTime;
+            sprintTimer -= Time.deltaTime;
         }
         else
         {
             ResetTimer();
         }
 
-        if (targetTime <= 0.0f)
+        if (sprintTimer <= 0.0f)
         {
             Sprint();
-        }
-
-        if (isJumpCharging && jumpMulti <= 1)
-        {
-            jumpMulti += 0.05f;
-            Debug.Log(jumpMulti);
         }
         
         Move();
         CheckGrounded();
         CheckWall();
-
-        if (isGrounded && !canDash)
-        {
-            canDash = true;
-        }
     }
 
     void Move()
@@ -92,13 +93,13 @@ public class playerMove : MonoBehaviour
             }
             else
             {
-                if (rb.linearVelocity.x + moveInput.x * airSpeedChange < moveSpeed && rb.linearVelocity.x + moveInput.x * airSpeedChange > -moveSpeed)
+                if (rb.linearVelocity.x + moveInput.x * airSpeedChange <= maxHorisontalAirSpeed && rb.linearVelocity.x + moveInput.x * airSpeedChange >= -maxHorisontalAirSpeed)
                 {
                     rb.linearVelocity = new Vector3(rb.linearVelocity.x + moveInput.x*airSpeedChange, rb.linearVelocity.y, 0f);
                 }
                 else
                 {
-                    rb.linearVelocity = new Vector3(move.x, rb.linearVelocity.y, 0f);
+                    rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, 0f);
                 }
             }
         }
@@ -108,25 +109,30 @@ public class playerMove : MonoBehaviour
     {
         if (isGrounded)
         {
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce*jumpMulti, 0f);
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, 0f);
             doubleJumped = false;
         }
         else
         {
-            if (!doubleJumped && isWalled && moveInput.x == 0 || !doubleJumped && !isWalled)
+            if (!doubleJumped && !isWalled)
             {
-                rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce*jumpMulti, 0f);
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, 0f);
                 doubleJumped = true;
             }
-            if (isWalled && moveInput.x != 0)
+            if (isWalled && isWallLeft)
             {
-                rb.linearVelocity = new Vector3(moveInput.x * -wallJumpForce*jumpMulti, jumpForce*jumpMulti, 0f);
+                rb.linearVelocity = new Vector3(wallJumpForce, jumpForce, 0f);
+            }
+            if (isWalled && !isWallLeft)
+            {
+                rb.linearVelocity = new Vector3(-wallJumpForce, jumpForce, 0f);
             }
         }
 
         if (isDashing)
         {
-            rb.linearVelocity = new Vector3(moveSpeed, jumpForce*jumpMulti, 0f);
+            rb.linearVelocity = new Vector3(moveSpeed, jumpForce, 0f);
+            DashCancel();
         }
     }
 
@@ -142,9 +148,11 @@ public class playerMove : MonoBehaviour
         {
             RaycastHit hit;
             isWalled = Physics.Raycast(transform.position, Vector3.right, out hit, 1.1f, wallLayer);
+            isWallLeft = false;
             if (!isWalled)
             {
                 isWalled = Physics.Raycast(transform.position, Vector3.left, out hit, 1.1f, wallLayer);
+                isWallLeft = true;
             }
         }
 
@@ -152,46 +160,52 @@ public class playerMove : MonoBehaviour
 
     void Sprint()
     {
-        moveSpeed = 10f;
+        if (moveSpeed < maxSprintSpeed)
+        {
+            moveSpeed += sprintSpeedIncrement;
+        }
+        else
+        {
+            moveSpeed = maxSprintSpeed;
+        }
     }
 
     void ResetTimer()
     {
-        targetTime = timerToSprint;
-        moveSpeed = 5f;
+        sprintTimer = timeToSprint;
+        moveSpeed = baseMoveSpeed;
     }
 
-    void OnMove(InputValue value)
+    public void OnMove(InputAction.CallbackContext inputAction)
     {
-        moveInput = value.Get<Vector2>();
-        SendMessage("HandleMoveInput", moveInput, SendMessageOptions.DontRequireReceiver);
+        moveInput = inputAction.ReadValue<Vector2>();
     }
 
-    void OnJump(InputValue value)
+    public void OnJump(InputAction.CallbackContext inputAction)
     {
-        if (value.isPressed)
+        if (inputAction.started)
         {
-            Debug.Log("pressed");
-            isJumpCharging = true;
-        }
-        if (!value.isPressed)
-        {
-            Debug.Log("released");
-            ResetTimer();
             Jump();
-            isJumpCharging = false;
-            jumpMulti = jumpMultiBase;
         }
-        SendMessage("HandleJumpInput", true, SendMessageOptions.DontRequireReceiver);
+        else if (inputAction.canceled && rb.linearVelocity.y > 0)
+        {
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y * jumpCancelMulti, 0f);
+        }
     }
 
-    void OnDash(InputValue value)
+    public void OnDash(InputAction.CallbackContext inputAction)
     {
-        if (canDash)
+        if (inputAction.started && canDash)
         {
             ResetTimer();
             StartCoroutine(Dash());
         }
+    }
+
+    public void DashCancel()
+    {
+        isDashing = false;
+        rb.useGravity = true;
     }
 
     private IEnumerator Dash()
@@ -199,14 +213,19 @@ public class playerMove : MonoBehaviour
         canDash = false;
         isDashing = true;
         rb.useGravity = false;
+        float speedBefourDash = rb.linearVelocity.x;
         rb.linearVelocity = new Vector3((isFacingRight ? 1f : -1f) * dashPower, 0f, 0f);
         yield return new WaitForSeconds(dashTime);
-        rb.useGravity = true;
-        isDashing = false;
-        yield return new WaitForSeconds(dashCooldown);
-        if (isGrounded)
+        if (!isDashing)
         {
-            canDash = false;
+            rb.linearVelocity = new Vector3(rb.linearVelocity.y, rb.linearVelocity.y, 0f);
         }
+        else
+        {
+            DashCancel();
+            rb.linearVelocity = new Vector3(speedBefourDash, rb.linearVelocity.y, 0f);
+        }
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
     }
 }

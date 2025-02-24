@@ -71,7 +71,7 @@
                     "name": "",
                     "id": "30aec7b0-578e-43a2-8abe-8ee46b1b5bc2",
                     "path": "<Keyboard>/space",
-                    "interactions": "Press(behavior=2)",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "jump",
