@@ -204,8 +204,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 8f6f284d2bf9c1b4a845927d6c6a3aa6, type: 3}
+      propertyPath: m_ReceiveGI
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 8f6f284d2bf9c1b4a845927d6c6a3aa6, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 8f6f284d2bf9c1b4a845927d6c6a3aa6, type: 3}
       propertyPath: m_ReceiveShadows
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 8f6f284d2bf9c1b4a845927d6c6a3aa6, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 8f6f284d2bf9c1b4a845927d6c6a3aa6, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 8f6f284d2bf9c1b4a845927d6c6a3aa6, type: 3}
       propertyPath: m_ReflectionProbeUsage
@@ -218,6 +234,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 8f6f284d2bf9c1b4a845927d6c6a3aa6, type: 3}
       propertyPath: m_Name
       value: platform_side_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8f6f284d2bf9c1b4a845927d6c6a3aa6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -340,7 +360,7 @@ Transform:
   m_GameObject: {fileID: 395825957}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.2, z: 0}
+  m_LocalPosition: {x: -71.45, y: 1.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1267,8 +1287,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 87984b15c45ae5e41803113869a6345f, type: 3}
+      propertyPath: m_ReceiveGI
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 87984b15c45ae5e41803113869a6345f, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 87984b15c45ae5e41803113869a6345f, type: 3}
       propertyPath: m_ReceiveShadows
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 87984b15c45ae5e41803113869a6345f, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 87984b15c45ae5e41803113869a6345f, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 87984b15c45ae5e41803113869a6345f, type: 3}
       propertyPath: m_ReflectionProbeUsage
@@ -1281,6 +1317,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 87984b15c45ae5e41803113869a6345f, type: 3}
       propertyPath: m_Name
       value: platform_side_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 87984b15c45ae5e41803113869a6345f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2349,8 +2389,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 5716136b7ab8e244b8b1f5ec26a9b73d, type: 3}
+      propertyPath: m_ReceiveGI
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 5716136b7ab8e244b8b1f5ec26a9b73d, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 5716136b7ab8e244b8b1f5ec26a9b73d, type: 3}
       propertyPath: m_ReceiveShadows
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 5716136b7ab8e244b8b1f5ec26a9b73d, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 5716136b7ab8e244b8b1f5ec26a9b73d, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 5716136b7ab8e244b8b1f5ec26a9b73d, type: 3}
       propertyPath: m_ReflectionProbeUsage
@@ -2363,6 +2419,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 5716136b7ab8e244b8b1f5ec26a9b73d, type: 3}
       propertyPath: m_Name
       value: platform_side_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5716136b7ab8e244b8b1f5ec26a9b73d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2768,6 +2828,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2091375918}
   - component: {fileID: 2091375917}
+  - component: {fileID: 2091375919}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -2855,6 +2916,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &2091375919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2091375916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &2134539042 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 118b3ac3484f3fd4f9deb0464632c2b0, type: 3}
