@@ -38,6 +38,10 @@ public class playerMove : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
 
+    [Header("Animations")]
+    [SerializeField] private Animator animator;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+
     private Rigidbody rb;
     private Vector2 moveInput;
 
@@ -74,17 +78,20 @@ public class playerMove : MonoBehaviour
     void Move()
     {
         Vector3 move = new Vector3(moveInput.x, 0f, 0f) * moveSpeed;
+        animator.SetFloat("Speed", Mathf.Abs(move.x));
+
         if (moveInput.x > 0 && !isFacingRight)
         {
             isFacingRight = true;
+            spriteRenderer.flipX = false;
             ResetTimer();
         }
         if (moveInput.x < 0 && isFacingRight)
         {
             isFacingRight = false;
+            spriteRenderer.flipX = true;
             ResetTimer();
         }
-
         if (!isDashing)
         {
             if (isGrounded)
@@ -103,6 +110,7 @@ public class playerMove : MonoBehaviour
                 }
             }
         }
+
     }
 
     void Jump()
@@ -139,7 +147,7 @@ public class playerMove : MonoBehaviour
     void CheckGrounded()
     {
         RaycastHit hit;
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, 1.1f, groundLayer);
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, 1.2f, groundLayer);
     }
 
     void CheckWall()
