@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9af1615386fa5048b74e827c6bbb1d7, type: 3}
-  m_Name: NPC1testDialogue1Responce3
+  m_Name: NPC2testDialogue1
   m_EditorClassIdentifier: 
-  actors: 02000000
-  eventsRequired: ffffffff
-  eventsStarted: 00000000
+  actors: 03000000
+  eventsRequired: 01000000
+  eventsStarted: ffffffff
   isRepeatable: 0
+  wasHeld: 0
   dialogue:
-  - well fuck you too
+  - nice to meet you
   optionText: []
   option0: {fileID: 0}
   option1: {fileID: 0}

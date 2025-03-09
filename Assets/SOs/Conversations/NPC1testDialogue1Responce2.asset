@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: NPC1testDialogue1Responce2
   m_EditorClassIdentifier: 
   actors: 02000000
+  eventsRequired: ffffffff
+  eventsStarted: 01000000
+  isRepeatable: 0
   dialogue:
   - oh, thats fine
   optionText: []

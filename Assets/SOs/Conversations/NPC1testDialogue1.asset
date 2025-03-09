@@ -13,15 +13,18 @@ MonoBehaviour:
   m_Name: NPC1testDialogue1
   m_EditorClassIdentifier: 
   actors: 010000000200000000000000
+  eventsRequired: ffffffff
+  eventsStarted: ffffffff
+  isRepeatable: 0
   dialogue:
   - Hi
   - What's up?
   optionText:
   - ok
   - not much
-  - not well
+  - fuck off
   option0: {fileID: 11400000, guid: 383a00c4007084e4a99c3ebc917e7839, type: 2}
   option1: {fileID: 11400000, guid: 56b1b3c9958306e48b4c894d3ef209ef, type: 2}
   option2: {fileID: 11400000, guid: 06bf0774e3df6cb49ac37f9351a07180, type: 2}
-  option3: {fileID: 11400000, guid: d91b524b45e47df4c9d1004c1ca4bba5, type: 2}
-  option4: {fileID: 11400000, guid: 91f8eddb61ba736429e0d736d32af9ed, type: 2}
+  option3: {fileID: 0}
+  option4: {fileID: 0}

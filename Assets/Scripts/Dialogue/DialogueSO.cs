@@ -4,6 +4,10 @@ using UnityEngine;
 public class DialogueSO : ScriptableObject
 {
     public DialogueActors[] actors;
+    public DialogueEvents[] eventsRequired;
+    public DialogueEvents[] eventsStarted;
+    public bool isRepeatable;
+    //public bool wasHeld = false;
 
     [Header("Dialogue")]
     [TextArea]

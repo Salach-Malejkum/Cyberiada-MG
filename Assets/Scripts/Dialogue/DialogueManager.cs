@@ -2,10 +2,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
+using System;
 
 public class DialogueManager : MonoBehaviour
 {
     private DialogueSO currentConversation;
+    private NpcDialog currentNpcDialog;
     private int stepNum = 0;
     private bool dialogueActivated;
 
@@ -23,8 +25,11 @@ public class DialogueManager : MonoBehaviour
     private TMP_Text[] optionButtonText;
     private GameObject optionsPanel;
 
+    private EventManager eventManager;
+
     private void Start()
     {
+        eventManager = GameObject.Find("EventManager").GetComponent<EventManager>();
         optionsPanel = GameObject.Find("OptionPanel");
         optionsPanel.SetActive(false);
 
@@ -49,7 +54,9 @@ public class DialogueManager : MonoBehaviour
 
     public void InitiateDialogue(NpcDialog npcDialogue)
     {
-        currentConversation = npcDialogue.conversation[0];
+        currentNpcDialog = npcDialogue;
+        currentConversation = npcDialogue.conversation;
+        CheckForEvents();
         dialogueActivated = true;
     }
 
@@ -67,6 +74,8 @@ public class DialogueManager : MonoBehaviour
         {
             if (stepNum >= currentConversation.actors.Length)
             {
+                currentNpcDialog.RemoveConversationsHeld();
+                //currentConversation.wasHeld = true;
                 TurnOffDialogue();
             } 
             else
@@ -124,11 +133,14 @@ public class DialogueManager : MonoBehaviour
 
     public void Option(int optionNum)
     {
-        Debug.Log("OptionSelected");
+        //Debug.Log("OptionSelected");
         foreach (GameObject button in optionButton)
         {
             button.SetActive(false);
         }
+
+        //currentConversation.wasHeld = true;
+        currentNpcDialog.RemoveConversationsHeld();
 
         if (optionNum == 0)
         {
@@ -150,8 +162,22 @@ public class DialogueManager : MonoBehaviour
         {
             currentConversation = currentConversation.option4;
         }
-
+        CheckForEvents();
         stepNum = 0;
+    }
+
+    private void CheckForEvents()
+    {
+        foreach (DialogueEvents e in (DialogueEvents[])Enum.GetValues(typeof(DialogueEvents)))
+        {
+            for (int i = 0; i < currentConversation.eventsStarted.Length; i++)
+            {
+                if (currentConversation.eventsStarted[i] == e)
+                {
+                    eventManager.EventOccured(e);
+                }
+            }
+        }
     }
 }
 
@@ -160,7 +186,7 @@ public enum DialogueActors
     Branch,
     Player,
     testNPC,
-    NPC3,
+    testNPC2,
     NPC4,
     NPC5,
     NPC6,
