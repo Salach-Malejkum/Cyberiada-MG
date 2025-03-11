@@ -299,11 +299,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd0b865223eef73459064f117d7f03f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  baseMoveSpeed: 5
   airSpeedChange: 0.05
   jumpForce: 10
   jumpMultiBase: 0.5
   wallJumpForce: 5
+  jumpCancelMulti: 0.5
+  maxHorisontalAirSpeed: 5
+  dashPower: 24
+  dashTime: 0.2
+  dashCooldown: 2
+  timeToSprint: 0.5
+  maxSprintSpeed: 10
+  sprintSpeedIncrement: 0.1
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -731,9 +739,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1999227324}
   - component: {fileID: 1999227323}
-  - component: {fileID: 1999227322}
   - component: {fileID: 1999227326}
   - component: {fileID: 1999227325}
+  - component: {fileID: 1999227327}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -741,14 +749,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1999227322
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1999227321}
-  m_Enabled: 1
 --- !u!20 &1999227323
 Camera:
   m_ObjectHideFlags: 0
@@ -889,6 +889,20 @@ MonoBehaviour:
   lookSmoothTime: 0.2
   minLookY: -2
   maxLookY: 2
+--- !u!114 &1999227327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999227321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 0}
 --- !u!1 &2042916347
 GameObject:
   m_ObjectHideFlags: 0
