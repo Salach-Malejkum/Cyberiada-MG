@@ -11,7 +11,7 @@ public class playerMove : MonoBehaviour
     [Header("Jump")]
     [SerializeField] private float airSpeedChange = 1f;
     [SerializeField] private float jumpForce = 10f;
-    [SerializeField] private float jumpMultiBase = 0.5f;
+    //[SerializeField] private float jumpMultiBase = 0.5f;
     [SerializeField] private float wallJumpForce = 5f;
     [SerializeField] private float jumpCancelMulti = 0.5f;
     [SerializeField] private float maxHorisontalAirSpeed = 5f;
