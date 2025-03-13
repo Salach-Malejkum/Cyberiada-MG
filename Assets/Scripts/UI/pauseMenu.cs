@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class pauseMenu : MonoBehaviour
+public class PauseMenu : MonoBehaviour
 {
     private bool isGamePaused;
     [SerializeField] private GameObject pauseMenuPanel;
@@ -20,8 +20,7 @@ public class pauseMenu : MonoBehaviour
         if (isGamePaused)
         {
             Debug.Log("unpause");
-            DisablePanels();
-            Time.timeScale = 1;
+            Resume();
         }
         else
         {
@@ -47,5 +46,11 @@ public class pauseMenu : MonoBehaviour
         pauseMenuPanel.gameObject.SetActive(true);
         menuBackGround.gameObject.SetActive(true);
         pauseOptionsPanel.gameObject.SetActive(false);
+    }
+
+    public void Resume()
+    {
+        DisablePanels();
+        Time.timeScale = 1;
     }
 }
