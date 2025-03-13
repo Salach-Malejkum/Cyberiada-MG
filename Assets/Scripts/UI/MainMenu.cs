@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour
     public void StartGmae()
     {
         Debug.Log("start");
-        SceneManager.LoadScene("SampleScene", LoadSceneMode.Additive);
+        SceneManager.LoadScene("test scene");
     }
 
     public void ExitGame()
@@ -19,7 +19,8 @@ public class MainMenu : MonoBehaviour
 
     public void ShowOptions()
     {
-        this.gameObject.SetActive(false);
         optionsPanel.SetActive(true);
+        this.gameObject.SetActive(false);
+        Debug.Log("options");
     }
 }
