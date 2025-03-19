@@ -15,6 +15,7 @@ public class playerMove : MonoBehaviour
     [SerializeField] private float wallJumpForce = 5f;
     [SerializeField] private float jumpCancelMulti = 0.5f;
     [SerializeField] private float maxHorisontalAirSpeed = 5f;
+    [SerializeField] private float airDragMovementModifier = 400f;
 
     private bool isGrounded;
     private bool isWalled = false;
@@ -99,7 +100,8 @@ public class playerMove : MonoBehaviour
                 }
                 else
                 {
-                    rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, 0f);
+                    // Clamp to create drag in air
+                    rb.linearVelocity = new Vector3(Mathf.Clamp(rb.linearVelocity.x + (move.x / airDragMovementModifier), -maxSprintSpeed, maxSprintSpeed), rb.linearVelocity.y, 0f);
                 }
             }
         }
