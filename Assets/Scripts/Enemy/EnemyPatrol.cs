@@ -3,27 +3,29 @@ using UnityEngine;
 
 public class EnemyPatrol : MonoBehaviour
 {
+    [Header("statstics")]
+    [SerializeField] private float speed;
+    [Header("Patrol")]
     [SerializeField] private GameObject leftEdge;
     [SerializeField] private GameObject rightEdge;
     [SerializeField] private float patrolEdgeSize = 0.5f;
-    private Rigidbody EnemyRb;
-    [SerializeField] private CapsuleCollider collider;
-    private Transform currentDestination;
-    [SerializeField] private float patrolPauseTime = 2f; // Time to wait at patrol edges
-    private bool isWaiting = false;
-
-    [SerializeField] private float speed;
-
-    [SerializeField] private float maxHight;
-    [SerializeField] private float maxDistance;
-    [SerializeField] private float offsetHorizontal;
-    [SerializeField] private float offsetVertical;
+    [SerializeField] private float patrolPauseTime = 2f;
+    [Header("field of vision")]
+    [SerializeField] private float fieldOfVisionVerticalRange;
+    [SerializeField] private float fieldOfVisionHorisontalRange;
+    [SerializeField] private float fieldOfVisionHorizontalOffset;
+    [SerializeField] private float fieldOfVisionVerticalOffset;
     [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private CapsuleCollider collider;
 
+    private Transform currentDestination;
+    private Rigidbody EnemyRb;
     RaycastHit playerHit;
     private Transform player;
+
     private bool chasingPlayer = false;
     private bool patrolWaitCancel = false;
+    private bool isWaiting = false;
 
     void Start()
     {
@@ -157,11 +159,11 @@ public class EnemyPatrol : MonoBehaviour
 
     private bool PlayerInSight()
     {
-        Vector3 origin = collider.bounds.center + new Vector3(offsetHorizontal * transform.localScale.x, offsetVertical, 0f);
+        Vector3 origin = collider.bounds.center + new Vector3(fieldOfVisionHorizontalOffset * transform.localScale.x, fieldOfVisionVerticalOffset, 0f);
         Vector3 direction = transform.right * transform.localScale.x;
-        Vector3 fieldOfVisionSize = new Vector3(0f, maxHight, 0f);
+        Vector3 fieldOfVisionSize = new Vector3(0f, fieldOfVisionVerticalRange, 0f);
         origin += direction * (fieldOfVisionSize.x / 2);
-        return Physics.BoxCast(origin, fieldOfVisionSize / 2, direction, out playerHit, Quaternion.identity, maxDistance, playerLayer);
+        return Physics.BoxCast(origin, fieldOfVisionSize / 2, direction, out playerHit, Quaternion.identity, fieldOfVisionHorisontalRange, playerLayer);
     }
 
     private void OnDrawGizmos()
@@ -174,11 +176,11 @@ public class EnemyPatrol : MonoBehaviour
         Gizmos.DrawLine(leftEdge.transform.position, rightEdge.transform.position);
 
         Gizmos.color = Color.red;
-        Vector3 origin = collider.bounds.center + new Vector3(offsetHorizontal * transform.localScale.x, offsetVertical, 0f);
-        Vector3 fieldOfVisionSize = new Vector3(0f, maxHight, 0f);
-        Gizmos.DrawWireCube(origin + transform.right * transform.localScale.x * maxDistance / 2, fieldOfVisionSize);
+        Vector3 origin = collider.bounds.center + new Vector3(fieldOfVisionHorizontalOffset * transform.localScale.x, fieldOfVisionVerticalOffset, 0f);
+        Vector3 fieldOfVisionSize = new Vector3(0f, fieldOfVisionVerticalRange, 0f);
+        Gizmos.DrawWireCube(origin + transform.right * transform.localScale.x * fieldOfVisionHorisontalRange / 2, fieldOfVisionSize);
 
         Gizmos.color = Color.green;
-        Gizmos.DrawLine(origin, origin + transform.right * transform.localScale.x * maxDistance);
+        Gizmos.DrawLine(origin, origin + transform.right * transform.localScale.x * fieldOfVisionHorisontalRange);
     }
 }
