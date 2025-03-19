@@ -13,12 +13,16 @@ public class PlayerAttack : MonoBehaviour
     private float attackTimeCounter;
     private float ComboEndCounter;
     private int meleeComboAttackNumber;
+    private bool isOnBeat = false;
+    private float beatTime;
+    private float attackTime;
+    [SerializeField] private float attackErrorMargin = 0.1f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         this.stats = GetComponent<PlayerStats>();
         attackTimeCounter = stats.TimeBtwAttacks;
+        MusicManager.Instance.Subscribe(CheckBeatChange);
     }
 
     private void Update()
@@ -29,10 +33,10 @@ public class PlayerAttack : MonoBehaviour
 
     public void OnMeleeAttack(InputAction.CallbackContext inputAction)
     {
-        
         if (inputAction.started && attackTimeCounter >= stats.TimeBtwAttacks)
         {
 
+            attackTime = Time.time;
             if (ComboEndCounter > stats.TimeBtwCombos)
             {
                 meleeComboAttackNumber = 1;
@@ -42,18 +46,35 @@ public class PlayerAttack : MonoBehaviour
             {
                 case 1:
                     //run animation for attack 1
-                    Debug.Log(meleeComboAttackNumber);
-                    meleeComboAttackNumber ++;
+                    meleeComboAttackNumber++;
                     break;
                 case 2:
                     //run animation for attack 2
-                    Debug.Log(meleeComboAttackNumber);
                     meleeComboAttackNumber = 1;
                     break;
             }
             attackTimeCounter = 0;
             ComboEndCounter = 0;
             DealMeleeDamage(); // tymczasowo zanim nie bêdzie animacji, wywo³ywane jako animation event
+        }
+    }
+
+    private void CheckBeatChange(int beatNum, float beatTime)
+    {
+        //Debug.Log(beatTime + ", " + beatNum);
+        this.beatTime = beatTime;
+        OnBeat();
+    }
+
+    private void OnBeat()
+    {
+        if (Mathf.Abs(beatTime - attackTime) < attackErrorMargin)
+        {
+            isOnBeat = true;
+        }
+        else
+        {
+            isOnBeat = false;
         }
     }
 
@@ -65,13 +86,15 @@ public class PlayerAttack : MonoBehaviour
             EnemyStats enemyStats = hits[i].collider.gameObject.GetComponent<EnemyStats>();
             if (enemyStats != null)
             {
-                if (true)//warunek czy atak w têpie
+                if (isOnBeat)//warunek czy atak w têpie
                 {
-                    enemyStats.RemoveHealthOnAttack(stats.UnitAttackDamage+ stats.UnitAttackBuff, this.gameObject);
+                    enemyStats.RemoveHealthOnAttack(stats.UnitAttackDamage + stats.UnitAttackBuff, this.gameObject);
+                    Debug.Log("onBeat");
                 }
                 else
                 {
                     enemyStats.RemoveHealthOnAttack(stats.UnitAttackDamage, this.gameObject);
+                    Debug.Log("not on beat");
                 }
             }
         }
