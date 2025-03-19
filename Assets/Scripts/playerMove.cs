@@ -16,10 +16,11 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float jumpCancelMulti = 0.5f;
     [SerializeField] private float maxHorisontalAirSpeed = 5f;
     [SerializeField] private float airDragMovementModifier = 400f;
-
+    [SerializeField] private float maxDistanceToGround = 1.2f;
     private bool isGrounded;
     private bool isWalled = false;
     private bool doubleJumped = false;
+    public bool isAttacking = false;
     public bool isFacingRight { get; private set; }
     [Header("Dash")]
     [SerializeField] private float dashPower = 24f;
@@ -43,12 +44,15 @@ public class PlayerMove : MonoBehaviour
 
     private bool isWallLeft;
 
+    Animator anim;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         moveSpeed = baseMoveSpeed;
         sprintTimer = timeToSprint;
         isFacingRight = true;
+        anim = this.GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -87,25 +91,32 @@ public class PlayerMove : MonoBehaviour
             ResetTimer();
             Flip();
         }
-
-        if (!isDashing)
+        if (!isAttacking)
         {
-            if (isGrounded)
+            if (!isDashing)
             {
-                rb.linearVelocity = new Vector3(move.x, rb.linearVelocity.y, 0f);
-            }
-            else
-            {
-                if (rb.linearVelocity.x + moveInput.x * airSpeedChange <= maxHorisontalAirSpeed && rb.linearVelocity.x + moveInput.x * airSpeedChange >= -maxHorisontalAirSpeed)
+                if (isGrounded)
                 {
-                    rb.linearVelocity = new Vector3(rb.linearVelocity.x + moveInput.x*airSpeedChange, rb.linearVelocity.y, 0f);
+                    rb.linearVelocity = new Vector3(move.x, rb.linearVelocity.y, 0f);
                 }
                 else
                 {
-                    // Clamp to create drag in air
-                    rb.linearVelocity = new Vector3(Mathf.Clamp(rb.linearVelocity.x + (move.x / airDragMovementModifier), -maxSprintSpeed, maxSprintSpeed), rb.linearVelocity.y, 0f);
+                    if (rb.linearVelocity.x + moveInput.x * airSpeedChange <= maxHorisontalAirSpeed && rb.linearVelocity.x + moveInput.x * airSpeedChange >= -maxHorisontalAirSpeed)
+                    {
+                        rb.linearVelocity = new Vector3(rb.linearVelocity.x + moveInput.x*airSpeedChange, rb.linearVelocity.y, 0f);
+                    }
+                    else
+                    {
+                        // Clamp to create drag in air
+                        rb.linearVelocity = new Vector3(Mathf.Clamp(rb.linearVelocity.x + (move.x / airDragMovementModifier), -maxSprintSpeed, maxSprintSpeed), rb.linearVelocity.y, 0f);
+                    }
                 }
             }
+        }
+        else
+        {
+            anim.SetFloat("speed", Mathf.Abs(rb.linearVelocity.x));
+            rb.linearVelocity = new Vector3(0f, 0f, 0f);
         }
     }
 
@@ -143,7 +154,8 @@ public class PlayerMove : MonoBehaviour
     void CheckGrounded()
     {
         RaycastHit hit;
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, 1.1f, groundLayer);
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, maxDistanceToGround, groundLayer);
+        anim.SetBool("isGrouded", isGrounded);
     }
 
     void CheckWall()

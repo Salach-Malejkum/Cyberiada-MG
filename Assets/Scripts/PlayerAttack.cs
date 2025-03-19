@@ -17,12 +17,17 @@ public class PlayerAttack : MonoBehaviour
     private float beatTime;
     private float attackTime;
     [SerializeField] private float attackErrorMargin = 0.1f;
+    PlayerMove playerMove;
+
+    Animator anim;
 
     void Start()
     {
         this.stats = GetComponent<PlayerStats>();
         attackTimeCounter = stats.TimeBtwAttacks;
         MusicManager.Instance.Subscribe(CheckBeatChange);
+        playerMove = GetComponent<PlayerMove>();
+        anim = this.GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -35,7 +40,8 @@ public class PlayerAttack : MonoBehaviour
     {
         if (inputAction.started && attackTimeCounter >= stats.TimeBtwAttacks)
         {
-
+            playerMove.isAttacking = true;
+            anim.SetBool("isAttacking", true);
             attackTime = Time.time;
             if (ComboEndCounter > stats.TimeBtwCombos)
             {
@@ -46,16 +52,18 @@ public class PlayerAttack : MonoBehaviour
             {
                 case 1:
                     //run animation for attack 1
+                    anim.SetInteger("attackNum", meleeComboAttackNumber);
                     meleeComboAttackNumber++;
                     break;
                 case 2:
                     //run animation for attack 2
+                    anim.SetInteger("attackNum", meleeComboAttackNumber);
                     meleeComboAttackNumber = 1;
                     break;
             }
             attackTimeCounter = 0;
             ComboEndCounter = 0;
-            DealMeleeDamage(); // tymczasowo zanim nie bêdzie animacji, wywo³ywane jako animation event
+            //DealMeleeDamage(); // tymczasowo zanim nie bêdzie animacji, wywo³ywane jako animation event
         }
     }
 
@@ -98,6 +106,8 @@ public class PlayerAttack : MonoBehaviour
                 }
             }
         }
+        anim.SetBool("isAttacking", false);
+        playerMove.isAttacking = false;
     }
 
     private void OnDrawGizmos()
