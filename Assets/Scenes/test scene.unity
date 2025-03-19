@@ -525,6 +525,7 @@ MonoBehaviour:
   wallJumpForce: 5
   jumpCancelMulti: 0.5
   maxHorisontalAirSpeed: 5
+  airDragMovementModifier: 400
   dashPower: 24
   dashTime: 0.2
   dashCooldown: 2
@@ -2567,6 +2568,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 631729746565169618, guid: aec99fcf4ea53bc4192fa5505fc515b3, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1947084701601529143, guid: aec99fcf4ea53bc4192fa5505fc515b3, type: 3}
       propertyPath: speed
       value: 5
