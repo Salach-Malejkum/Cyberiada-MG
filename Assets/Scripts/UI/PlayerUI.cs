@@ -16,12 +16,6 @@ public class PlayerUI : MonoBehaviour
         this.unitStats.OnUnitHealthUpdate -= PlayerHealthUpdated;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void PlayerHealthUpdated(float newCurrHP, float newMaxHP)
     {
         if (newCurrHP > newMaxHP)

@@ -141,11 +141,10 @@ public class EnemyPatrol : MonoBehaviour
         }
     }
 
-    // Checks if there's ground in front of the enemy
     private bool CheckGroundAhead(float directionX)
     {
         Vector3 rayOrigin = transform.position + new Vector3(directionX * patrolEdgeSize, 0f, 0f);
-        float rayLength = 1.5f; // Adjust based on how far below the enemy should detect ground
+        float rayLength = 1.5f;
         return Physics.Raycast(rayOrigin, Vector3.down, rayLength, LayerMask.GetMask("Ground"));
     }
 

@@ -34,18 +34,17 @@ public abstract class UnitStats : MonoBehaviour
     public virtual void RemoveHealthOnAttack(float hpAmount, GameObject aggressor)
     {
         if (this.gameObject == null) { return; }
-
-        this.unitCurrentHealth -= hpAmount;
         if (aggressor.CompareTag("Player"))
         {
             this.lastAggressor = aggressor;
             Debug.Log("Aggressor: " + aggressor);
         }
-        this.OnDeathCheck();
+        this.OnHealthChanged(UnitCurrentHealth, UnitCurrentHealth - hpAmount);
     }
 
     private void OnHealthChanged(float oldHP, float newHP)
     {
+        this.unitCurrentHealth = newHP;
         this.OnUnitHealthUpdate?.Invoke(newHP, unitMaxHealth);
         this.OnDeathCheck();
     }
