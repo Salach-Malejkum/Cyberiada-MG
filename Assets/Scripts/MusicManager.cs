@@ -9,18 +9,31 @@ public class MusicManager : MonoBehaviour
 
     [SerializeField]
     public EventReference music;
+    
 
     [StructLayout(LayoutKind.Sequential)]
     public class TimelineInfo
     {
-        public int currentBeat = 0;
+        public event Action<int> OnBeatChanged;
+        public int CurrentBeat 
+        {
+            get => _currentBeat;
+            set 
+            {
+                if (_currentBeat != value)
+                {
+                    _currentBeat = value;
+                    OnBeatChanged?.Invoke(_currentBeat);
+                }
+            }
+        }
+        private int _currentBeat = 0;
         public int currentBar = 0;
         public float currentTempo = 0;
         public int currentPosition = 0;
         public float songLength = 0;
         public FMOD.StringWrapper lastMarker = new FMOD.StringWrapper();
     }
-
 
     public TimelineInfo timelineInfo = null;
     private GCHandle timelineHandle;
@@ -36,12 +49,12 @@ public class MusicManager : MonoBehaviour
 
         musicPlayEvent = RuntimeManager.CreateInstance(music);
         musicPlayEvent.start();
+        timelineInfo = new TimelineInfo();
     }
 
 
     private void Start()
     {
-        timelineInfo = new TimelineInfo();
         beatCallback = new FMOD.Studio.EVENT_CALLBACK(BeatEventCallback);
 
         timelineHandle = GCHandle.Alloc(timelineInfo, GCHandleType.Pinned);
@@ -82,7 +95,7 @@ public class MusicManager : MonoBehaviour
                 case FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_BEAT:
                     {
                         var parameter = (FMOD.Studio.TIMELINE_BEAT_PROPERTIES)Marshal.PtrToStructure(parameterPtr, typeof(FMOD.Studio.TIMELINE_BEAT_PROPERTIES));
-                        timelineInfo.currentBeat = parameter.beat;
+                        timelineInfo.CurrentBeat = parameter.beat;
                         timelineInfo.currentBar = parameter.bar;
                         timelineInfo.currentTempo = parameter.tempo;
                     }
@@ -106,5 +119,16 @@ public class MusicManager : MonoBehaviour
         musicPlayEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         musicPlayEvent.release();
         timelineHandle.Free();
+    }
+
+    public void Subscribe(Action<int> onBeatChanged)
+    {
+        timelineInfo.OnBeatChanged += onBeatChanged;
+    }
+
+
+    public void Unsubscribe(Action<int> onBeatChanged)
+    {
+        timelineInfo.OnBeatChanged -= onBeatChanged;
     }
 }
