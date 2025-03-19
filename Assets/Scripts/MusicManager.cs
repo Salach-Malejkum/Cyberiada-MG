@@ -14,7 +14,7 @@ public class MusicManager : MonoBehaviour
     [StructLayout(LayoutKind.Sequential)]
     public class TimelineInfo
     {
-        public event Action<int> OnBeatChanged;
+        public event Action<int, float> OnBeatChanged;
         public int CurrentBeat 
         {
             get => _currentBeat;
@@ -23,7 +23,7 @@ public class MusicManager : MonoBehaviour
                 if (_currentBeat != value)
                 {
                     _currentBeat = value;
-                    OnBeatChanged?.Invoke(_currentBeat);
+                    OnBeatChanged?.Invoke(_currentBeat, Time.time);
                 }
             }
         }
@@ -121,13 +121,13 @@ public class MusicManager : MonoBehaviour
         timelineHandle.Free();
     }
 
-    public void Subscribe(Action<int> onBeatChanged)
+    public void Subscribe(Action<int, float> onBeatChanged)
     {
         timelineInfo.OnBeatChanged += onBeatChanged;
     }
 
 
-    public void Unsubscribe(Action<int> onBeatChanged)
+    public void Unsubscribe(Action<int, float> onBeatChanged)
     {
         timelineInfo.OnBeatChanged -= onBeatChanged;
     }
