@@ -93,7 +93,6 @@ public class EnemyPatrol : MonoBehaviour
             Flip();
             currentDestination = (currentDestination == rightEdge.transform) ? leftEdge.transform : rightEdge.transform;
             isWaiting = false;
-            Debug.Log("canceld?");
         }
     }
 

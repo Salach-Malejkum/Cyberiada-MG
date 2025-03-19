@@ -74,7 +74,8 @@ GameObject:
   - component: {fileID: 8942873761751442220}
   - component: {fileID: 4207401632632912369}
   - component: {fileID: 1947084701601529143}
-  m_Layer: 0
+  - component: {fileID: 8920913877592544062}
+  m_Layer: 8
   m_Name: Enemy1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,19 +160,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fa8de97277988145bd143900e16c0cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 5
   leftEdge: {fileID: 2901510152446050051}
   rightEdge: {fileID: 4039365863838941631}
   patrolEdgeSize: 0.5
-  collider: {fileID: 4207401632632912369}
   patrolPauseTime: 2
-  speed: 5
-  maxHight: 4
-  maxDistance: 10
-  offsetHorizontal: -1
-  offsetVertical: 1
+  fieldOfVisionVerticalRange: 0
+  fieldOfVisionHorisontalRange: 0
+  fieldOfVisionHorizontalOffset: 0
+  fieldOfVisionVerticalOffset: 0
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
+  collider: {fileID: 4207401632632912369}
+--- !u!114 &8920913877592544062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7391265441507225753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ae21aa31311f664a936a27ceb52080f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitMaxHealth: 100
+  unitCurrentHealth: 0
+  unitAttackDamage: 0
+  lastAggressor: {fileID: 0}
 --- !u!1 &8449278852241577265
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,7 +199,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2655034862768894541}
   - component: {fileID: 9103630484463548567}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnemySprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

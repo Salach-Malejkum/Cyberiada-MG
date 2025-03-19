@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class playerMove : MonoBehaviour
+public class PlayerMove : MonoBehaviour
 {
     [Header("Move")]
     [SerializeField] private float baseMoveSpeed = 5f;
@@ -19,8 +19,7 @@ public class playerMove : MonoBehaviour
     private bool isGrounded;
     private bool isWalled = false;
     private bool doubleJumped = false;
-    private bool isFacingRight = true;
-
+    public bool isFacingRight { get; private set; }
     [Header("Dash")]
     [SerializeField] private float dashPower = 24f;
     [SerializeField] private float dashTime = 0.2f;
@@ -48,6 +47,7 @@ public class playerMove : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         moveSpeed = baseMoveSpeed;
         sprintTimer = timeToSprint;
+        isFacingRight = true;
     }
 
     void Update()
@@ -78,11 +78,13 @@ public class playerMove : MonoBehaviour
         {
             isFacingRight = true;
             ResetTimer();
+            Flip();
         }
         if (moveInput.x < 0 && isFacingRight)
         {
             isFacingRight = false;
             ResetTimer();
+            Flip();
         }
 
         if (!isDashing)
@@ -226,5 +228,11 @@ public class playerMove : MonoBehaviour
         }
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
+    }
+    private void Flip()
+    {
+        Vector3 localScale = transform.localScale;
+        localScale.x *= -1;
+        transform.localScale = localScale;
     }
 }
