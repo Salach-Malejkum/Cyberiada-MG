@@ -46,6 +46,7 @@ public class PlayerMove : MonoBehaviour
 
     private Animator anim;
     private SpriteRenderer renderer;
+    [Header("Attack zone")]
     [SerializeField] private Transform attackTransform;
 
     void Awake()

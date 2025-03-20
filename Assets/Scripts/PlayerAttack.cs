@@ -9,17 +9,16 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float meleeAttackRadius;
     [SerializeField] private Transform attackTransform;
     [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private float attackErrorMargin = 0.1f;
+    [SerializeField] SpriteRenderer rythmDebug;
     private float attackTimeCounter;
-    private float ComboEndCounter;
+    private float comboEndCounter;
     private int meleeComboAttackNumber;
     private bool isOnBeat = false;
     private float beatTime;
     private float attackTime;
-    [SerializeField] private float attackErrorMargin = 0.1f;
     PlayerMove playerMove;
-
     Animator anim;
-    [SerializeField] SpriteRenderer rythmDebug;
 
     void Start()
     {
@@ -33,7 +32,7 @@ public class PlayerAttack : MonoBehaviour
     private void Update()
     {
         attackTimeCounter += Time.deltaTime;
-        ComboEndCounter += Time.deltaTime;
+        comboEndCounter += Time.deltaTime;
 
         if (Mathf.Abs(Time.time - beatTime) <= attackErrorMargin)
         {
@@ -52,7 +51,7 @@ public class PlayerAttack : MonoBehaviour
             playerMove.isAttacking = true;
             anim.SetBool("isAttacking", true);
             attackTime = Time.time;
-            if (ComboEndCounter > stats.TimeBtwCombos)
+            if (comboEndCounter > stats.TimeBtwCombos)
             {
                 meleeComboAttackNumber = 1;
             }
@@ -60,25 +59,21 @@ public class PlayerAttack : MonoBehaviour
             switch (meleeComboAttackNumber)
             {
                 case 1:
-                    //run animation for attack 1
                     anim.SetInteger("attackNum", meleeComboAttackNumber);
                     meleeComboAttackNumber++;
                     break;
                 case 2:
-                    //run animation for attack 2
                     anim.SetInteger("attackNum", meleeComboAttackNumber);
                     meleeComboAttackNumber = 1;
                     break;
             }
             attackTimeCounter = 0;
-            ComboEndCounter = 0;
-            //DealMeleeDamage(); // tymczasowo zanim nie bêdzie animacji, wywo³ywane jako animation event
+            comboEndCounter = 0;
         }
     }
 
     private void CheckBeatChange(int beatNum, float beatTime)
     {
-        //Debug.Log(beatTime + ", " + beatNum);
         this.beatTime = beatTime;
         OnBeat();
     }
@@ -106,12 +101,10 @@ public class PlayerAttack : MonoBehaviour
                 if (isOnBeat)
                 {
                     enemyStats.RemoveHealthOnAttack(stats.UnitAttackDamage + stats.UnitAttackBuff, this.gameObject);
-                    Debug.Log("onBeat");
                 }
                 else
                 {
                     enemyStats.RemoveHealthOnAttack(stats.UnitAttackDamage, this.gameObject);
-                    Debug.Log("not on beat");
                 }
             }
         }
@@ -121,6 +114,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        Gizmos.color = Color.black;
         Gizmos.DrawWireSphere(attackTransform.position, meleeAttackRadius);
     }
 }
