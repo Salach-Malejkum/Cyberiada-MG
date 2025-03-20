@@ -47,7 +47,7 @@ public class PlayerMove : MonoBehaviour
     private Animator anim;
     private SpriteRenderer renderer;
     [Header("Attack zone")]
-    [SerializeField] private Transform attackTransform;
+    [SerializeField] private Transform attackPosition;
 
     void Awake()
     {
@@ -252,8 +252,8 @@ public class PlayerMove : MonoBehaviour
     {
         renderer.flipX = !renderer.flipX;
 
-        Vector3 position = attackTransform.localPosition;
+        Vector3 position = attackPosition.localPosition;
         position.x *= -1;
-        attackTransform.localPosition = position;
+        attackPosition.localPosition = position;
     }
 }
