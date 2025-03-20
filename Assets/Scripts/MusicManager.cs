@@ -15,6 +15,7 @@ public class MusicManager : MonoBehaviour
     public class TimelineInfo
     {
         public event Action<int, float> OnBeatChanged;
+		
         public int CurrentBeat
         {
             get => _currentBeat;
