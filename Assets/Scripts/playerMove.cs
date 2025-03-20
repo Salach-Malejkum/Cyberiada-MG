@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class playerMove : MonoBehaviour
+public class PlayerMove : MonoBehaviour
 {
     [Header("Move")]
     [SerializeField] private float baseMoveSpeed = 5f;
@@ -16,12 +16,12 @@ public class playerMove : MonoBehaviour
     [SerializeField] private float jumpCancelMulti = 0.5f;
     [SerializeField] private float maxHorisontalAirSpeed = 5f;
     [SerializeField] private float airDragMovementModifier = 400f;
-
+    [SerializeField] private float maxDistanceToGround = 1.2f;
     private bool isGrounded;
     private bool isWalled = false;
     private bool doubleJumped = false;
-    private bool isFacingRight = true;
-
+    public bool isAttacking = false;
+    public bool isFacingRight { get; private set; }
     [Header("Dash")]
     [SerializeField] private float dashPower = 24f;
     [SerializeField] private float dashTime = 0.2f;
@@ -44,11 +44,19 @@ public class playerMove : MonoBehaviour
 
     private bool isWallLeft;
 
+    private Animator anim;
+    private SpriteRenderer renderer;
+    [Header("Attack zone")]
+    [SerializeField] private Transform attackPosition;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         moveSpeed = baseMoveSpeed;
         sprintTimer = timeToSprint;
+        isFacingRight = true;
+        anim = this.GetComponentInChildren<Animator>();
+        renderer = this.GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -79,31 +87,33 @@ public class playerMove : MonoBehaviour
         {
             isFacingRight = true;
             ResetTimer();
+            Flip();
         }
         if (moveInput.x < 0 && isFacingRight)
         {
             isFacingRight = false;
             ResetTimer();
+            Flip();
         }
-
-        if (!isDashing)
+        if (!isAttacking)
         {
-            if (isGrounded)
+            if (!isDashing)
             {
-                rb.linearVelocity = new Vector3(move.x, rb.linearVelocity.y, 0f);
-            }
-            else
-            {
-                if (rb.linearVelocity.x + moveInput.x * airSpeedChange <= maxHorisontalAirSpeed && rb.linearVelocity.x + moveInput.x * airSpeedChange >= -maxHorisontalAirSpeed)
+                if (isGrounded)
                 {
-                    rb.linearVelocity = new Vector3(rb.linearVelocity.x + moveInput.x*airSpeedChange, rb.linearVelocity.y, 0f);
+                    rb.linearVelocity = new Vector3(move.x, rb.linearVelocity.y, 0f);
                 }
                 else
                 {
-                    // Clamp to create drag in air
                     rb.linearVelocity = new Vector3(Mathf.Clamp(rb.linearVelocity.x + (move.x / airDragMovementModifier), -maxSprintSpeed, maxSprintSpeed), rb.linearVelocity.y, 0f);
                 }
             }
+            anim.SetFloat("speed", Mathf.Abs(rb.linearVelocity.x));
+        }
+        else
+        {
+            rb.linearVelocity = new Vector3(0f, 0f, 0f);
+            anim.SetFloat("speed", Mathf.Abs(rb.linearVelocity.x));
         }
     }
 
@@ -141,7 +151,8 @@ public class playerMove : MonoBehaviour
     void CheckGrounded()
     {
         RaycastHit hit;
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, 1.1f, groundLayer);
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, maxDistanceToGround, groundLayer);
+        anim.SetBool("isGrouded", isGrounded);
     }
 
     void CheckWall()
@@ -228,5 +239,13 @@ public class playerMove : MonoBehaviour
         }
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
+    }
+    private void Flip()
+    {
+        renderer.flipX = !renderer.flipX;
+
+        Vector3 attackPosition = this.attackPosition.localPosition;
+        attackPosition.x *= -1;
+        this.attackPosition.localPosition = attackPosition;
     }
 }

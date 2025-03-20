@@ -9,16 +9,17 @@ public class MusicManager : MonoBehaviour
 
     [SerializeField]
     public EventReference music;
-    
+
 
     [StructLayout(LayoutKind.Sequential)]
     public class TimelineInfo
     {
         public event Action<int, float> OnBeatChanged;
-        public int CurrentBeat 
+		
+        public int CurrentBeat
         {
             get => _currentBeat;
-            set 
+            set
             {
                 if (_currentBeat != value)
                 {
@@ -44,7 +45,8 @@ public class MusicManager : MonoBehaviour
     public FMOD.Studio.EventInstance musicPlayEvent;
 
 
-    private void Awake() {
+    private void Awake()
+    {
         Instance = this;
 
         musicPlayEvent = RuntimeManager.CreateInstance(music);

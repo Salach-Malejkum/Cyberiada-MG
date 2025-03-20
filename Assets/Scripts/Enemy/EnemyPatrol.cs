@@ -138,7 +138,7 @@ public class EnemyPatrol : MonoBehaviour
     {
         Vector3 fieldOfVisionSize = new Vector3(fieldOfVisionHorisontalRange, fieldOfVisionVerticalRange, 5f);
         RaycastHit[] hits = Physics.BoxCastAll(transformer.position, fieldOfVisionSize/2, transform.right * transform.localScale.x, Quaternion.identity, 0f, playerLayer);
-        Debug.Log(hits.Length);
+
         if (hits.Length > 0)
         {
             playerHit = hits[0];
