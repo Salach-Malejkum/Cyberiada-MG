@@ -44,7 +44,9 @@ public class PlayerMove : MonoBehaviour
 
     private bool isWallLeft;
 
-    Animator anim;
+    private Animator anim;
+    private SpriteRenderer renderer;
+    [SerializeField] private Transform attackTransform;
 
     void Awake()
     {
@@ -53,6 +55,7 @@ public class PlayerMove : MonoBehaviour
         sprintTimer = timeToSprint;
         isFacingRight = true;
         anim = this.GetComponentInChildren<Animator>();
+        renderer = this.GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -112,11 +115,12 @@ public class PlayerMove : MonoBehaviour
                     }
                 }
             }
+            anim.SetFloat("speed", Mathf.Abs(rb.linearVelocity.x));
         }
         else
         {
-            anim.SetFloat("speed", Mathf.Abs(rb.linearVelocity.x));
             rb.linearVelocity = new Vector3(0f, 0f, 0f);
+            anim.SetFloat("speed", Mathf.Abs(rb.linearVelocity.x));
         }
     }
 
@@ -245,8 +249,10 @@ public class PlayerMove : MonoBehaviour
     }
     private void Flip()
     {
-        Vector3 localScale = transform.localScale;
-        localScale.x *= -1;
-        transform.localScale = localScale;
+        renderer.flipX = !renderer.flipX;
+
+        Vector3 position = attackTransform.localPosition;
+        position.x *= -1;
+        attackTransform.localPosition = position;
     }
 }

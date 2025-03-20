@@ -4,7 +4,6 @@ using UnityEngine.InputSystem;
 public class PlayerAttack : MonoBehaviour
 {
     private PlayerStats stats;
-    [SerializeField] private LayerMask attackableLayer;
     private RaycastHit[] hits;
     [Header("Melee Attack Range")]
     [SerializeField] private float meleeAttackRadius;
@@ -20,6 +19,7 @@ public class PlayerAttack : MonoBehaviour
     PlayerMove playerMove;
 
     Animator anim;
+    [SerializeField] SpriteRenderer rythmDebug;
 
     void Start()
     {
@@ -34,6 +34,15 @@ public class PlayerAttack : MonoBehaviour
     {
         attackTimeCounter += Time.deltaTime;
         ComboEndCounter += Time.deltaTime;
+
+        if (Mathf.Abs(Time.time - beatTime) <= attackErrorMargin)
+        {
+            rythmDebug.color = Color.blue;
+        }
+        else
+        {
+            rythmDebug.color = Color.red;
+        }
     }
 
     public void OnMeleeAttack(InputAction.CallbackContext inputAction)
@@ -76,7 +85,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnBeat()
     {
-        if (Mathf.Abs(beatTime - attackTime) < attackErrorMargin)
+        if (Mathf.Abs(beatTime - attackTime) <= attackErrorMargin)
         {
             isOnBeat = true;
         }
@@ -86,7 +95,7 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    private void DealMeleeDamage()// animation event function
+    private void DealMeleeDamage()
     {
         hits = Physics.SphereCastAll(attackTransform.position, meleeAttackRadius, transform.right * transform.localScale.x, 0f, enemyLayer);
         for (int i = 0; i < hits.Length; i++)
@@ -94,7 +103,7 @@ public class PlayerAttack : MonoBehaviour
             EnemyStats enemyStats = hits[i].collider.gameObject.GetComponent<EnemyStats>();
             if (enemyStats != null)
             {
-                if (isOnBeat)//warunek czy atak w têpie
+                if (isOnBeat)
                 {
                     enemyStats.RemoveHealthOnAttack(stats.UnitAttackDamage + stats.UnitAttackBuff, this.gameObject);
                     Debug.Log("onBeat");

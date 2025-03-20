@@ -96,6 +96,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2655034862768894541}
+  - {fileID: 3800500433622036151}
   m_Father: {fileID: 8726580614435318933}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &8942873761751442220
@@ -165,14 +166,12 @@ MonoBehaviour:
   rightEdge: {fileID: 4039365863838941631}
   patrolEdgeSize: 0.5
   patrolPauseTime: 2
-  fieldOfVisionVerticalRange: 0
-  fieldOfVisionHorisontalRange: 0
-  fieldOfVisionHorizontalOffset: 0
-  fieldOfVisionVerticalOffset: 0
+  fieldOfVisionVerticalRange: 4
+  fieldOfVisionHorisontalRange: 10
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  collider: {fileID: 4207401632632912369}
+  transformer: {fileID: 3800500433622036151}
 --- !u!114 &8920913877592544062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,6 +275,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &8725975468955600628
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3800500433622036151}
+  m_Layer: 8
+  m_Name: Visiontransform
+  m_TagString: Untagged
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3800500433622036151
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8725975468955600628}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.66, y: 1.42, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 631729746565169618}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8910591283942566989
 GameObject:
   m_ObjectHideFlags: 0
