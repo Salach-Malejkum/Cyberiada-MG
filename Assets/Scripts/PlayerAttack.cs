@@ -17,8 +17,8 @@ public class PlayerAttack : MonoBehaviour
     private bool isOnBeat = false;
     private float beatTime;
     private float attackTime;
-    PlayerMove playerMove;
-    Animator anim;
+    private PlayerMove playerMove;
+    private Animator anim;
 
     void Start()
     {
