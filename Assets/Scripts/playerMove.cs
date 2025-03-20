@@ -252,8 +252,8 @@ public class PlayerMove : MonoBehaviour
     {
         renderer.flipX = !renderer.flipX;
 
-        Vector3 position = attackPosition.localPosition;
-        position.x *= -1;
-        attackPosition.localPosition = position;
+        Vector3 attackPosition = this.attackPosition.localPosition;
+        attackPosition.x *= -1;
+        this.attackPosition.localPosition = attackPosition;
     }
 }
