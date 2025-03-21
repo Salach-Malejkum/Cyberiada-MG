@@ -92,7 +92,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void DealMeleeDamage()
     {
-        hits = Physics.SphereCastAll(attackTransform.position, meleeAttackRadius, transform.right * transform.localScale.x, 0f, enemyLayer);
+        hits = Physics.SphereCastAll(attackTransform.position, meleeAttackRadius, transform.right, 0f, enemyLayer);
         for (int i = 0; i < hits.Length; i++)
         {
             EnemyStats enemyStats = hits[i].collider.gameObject.GetComponent<EnemyStats>();
