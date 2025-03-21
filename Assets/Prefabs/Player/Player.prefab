@@ -227,15 +227,15 @@ MonoBehaviour:
   wallJumpForce: 5
   jumpCancelMulti: 0.5
   maxHorisontalAirSpeed: 5
-  airDragMovementModifier: 400
-  maxDistanceToGround: 1.6
+  airDragMovementModifier: 30
   isAttacking: 0
-  dashPower: 24
-  dashTime: 0.2
-  dashCooldown: 2
-  timeToSprint: 0.5
-  maxSprintSpeed: 10
-  sprintSpeedIncrement: 0.1
+  maxDistanceToGround: 1.6
+  dashPower: 30
+  dashTime: 0.15
+  dashCooldown: 1
+  timeToSprint: 1
+  maxSprintSpeed: 8
+  sprintSpeedIncrement: 0.01
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -344,7 +344,7 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: e72fbb55-ed30-4642-9233-33bfeec03a24
     m_ActionName: 'Player/attack[/Mouse/leftButton]'
-  m_NeverAutoSwitchControlSchemes: 1
+  m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
