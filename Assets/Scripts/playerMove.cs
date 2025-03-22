@@ -9,13 +9,11 @@ public class PlayerMove : MonoBehaviour
     private float moveSpeed;
 
     [Header("Jump")]
-    [SerializeField] private float airSpeedChange = 1f;
     [SerializeField] private float jumpForce = 10f;
-    //[SerializeField] private float jumpMultiBase = 0.5f;
     [SerializeField] private float wallJumpForce = 5f;
     [SerializeField] private float jumpCancelMulti = 0.5f;
-    [SerializeField] private float maxHorisontalAirSpeed = 5f;
     [SerializeField] private float airDragMovementModifier = 400f;
+    [Header("Attacking")]
     public bool isAttacking = false;
     [Header("Raycast Length")]
     [SerializeField] private float maxDistanceToGround = 1.2f;
@@ -67,7 +65,7 @@ public class PlayerMove : MonoBehaviour
         capsuleCollider = this.GetComponent<CapsuleCollider>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (rb.linearVelocity.x != 0f && isGrounded)
         {
@@ -90,7 +88,6 @@ public class PlayerMove : MonoBehaviour
 
     void Move()
     {
-        Vector3 move = new Vector3(moveInput.x, 0f, 0f) * moveSpeed;
         if (moveInput.x > 0 && !isFacingRight)
         {
             isFacingRight = true;
@@ -103,26 +100,28 @@ public class PlayerMove : MonoBehaviour
             ResetTimer();
             Flip();
         }
-        if (!isAttacking)
-        {
-            if (!isDashing)
-            {
-                if (isGrounded)
-                {
-                    rb.linearVelocity = new Vector3(move.x, rb.linearVelocity.y, 0f);
-                }
-                else
-                {
-                    rb.linearVelocity = new Vector3(Mathf.Clamp(rb.linearVelocity.x + (move.x / airDragMovementModifier), -maxSprintSpeed, maxSprintSpeed), rb.linearVelocity.y, 0f);
-                }
-            }
-            anim.SetFloat("speed", Mathf.Abs(rb.linearVelocity.x));
-        }
-        else
+
+        if (isAttacking)
         {
             rb.linearVelocity = new Vector3(0f, 0f, 0f);
             anim.SetFloat("speed", Mathf.Abs(rb.linearVelocity.x));
+            return;
         }
+
+        if (!isDashing)
+        {
+            Vector3 move = new Vector3(moveInput.x, 0f, 0f) * moveSpeed;
+            if (isGrounded)
+            {
+                Debug.Log("jestem tutaj");
+                rb.linearVelocity = new Vector3(move.x, rb.linearVelocity.y, 0f);
+            }
+            else
+            {
+                rb.linearVelocity = new Vector3(Mathf.Clamp(rb.linearVelocity.x + (move.x / airDragMovementModifier), -moveSpeed, moveSpeed), rb.linearVelocity.y, 0f);
+            }
+        }
+        anim.SetFloat("speed", Mathf.Abs(rb.linearVelocity.x));
     }
 
     void Jump()
@@ -131,30 +130,27 @@ public class PlayerMove : MonoBehaviour
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, 0f);
             doubleJumped = false;
+            return;
         }
-        else
-        {
-            if (!doubleJumped && !isWalled)
-            {
-                if (!IsSameSign(moveInput.x, rb.linearVelocity.x))
-                {
-                    SecondJumpOtherDirection();
-                }
-                else
-                {
-                    SecondJumpSameDirection();
-                }
 
-                doubleJumped = true;
-            }
-            if (isWalled && isWallLeft)
+        if (!doubleJumped && !isWalled)
+        {
+            if (!IsSameSign(moveInput.x, rb.linearVelocity.x))
             {
-                rb.linearVelocity = new Vector3(wallJumpForce, jumpForce, 0f);
+                SecondJumpOtherDirection();
             }
-            if (isWalled && !isWallLeft)
+            else
             {
-                rb.linearVelocity = new Vector3(-wallJumpForce, jumpForce, 0f);
+                SecondJumpSameDirection();
             }
+
+            doubleJumped = true;
+        }
+
+        if (isWalled)
+        {
+            int sign = isWallLeft ? 1 : -1;
+            rb.linearVelocity = new Vector3(sign * wallJumpForce, jumpForce, 0f);
         }
 
         if (isDashing)
