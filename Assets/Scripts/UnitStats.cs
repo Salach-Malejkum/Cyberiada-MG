@@ -20,6 +20,11 @@ public abstract class UnitStats : MonoBehaviour
     {
         get { return this.unitAttackDamage; }
     }
+    [SerializeField] protected Vector3 unitRespownCcoordinates;
+    public Vector3 UnitRespownCcoordinates
+    {
+        get { return this.unitRespownCcoordinates; }
+    }
 
     public event Action onUnitDeath;
 
@@ -37,9 +42,20 @@ public abstract class UnitStats : MonoBehaviour
         if (aggressor.CompareTag("Player"))
         {
             this.lastAggressor = aggressor;
-            Debug.Log("Aggressor: " + aggressor);
         }
         this.OnHealthChanged(UnitCurrentHealth, UnitCurrentHealth - hpAmount);
+    }
+
+    public virtual void HealthRestored(float hpAmount)
+    {
+        if (UnitCurrentHealth + hpAmount > unitMaxHealth)
+        {
+            OnHealthChanged(UnitCurrentHealth, unitMaxHealth);
+        }
+        else
+        {
+            OnHealthChanged(UnitCurrentHealth, UnitCurrentHealth + hpAmount);
+        }
     }
 
     private void OnHealthChanged(float oldHP, float newHP)

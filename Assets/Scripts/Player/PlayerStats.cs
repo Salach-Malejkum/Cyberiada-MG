@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerStats : UnitStats
@@ -17,6 +18,11 @@ public class PlayerStats : UnitStats
     {
         get { return this.timeBtwCombos; }
     }
+    [SerializeField] protected float timeToRespowen = 0.5f;
+    public float TimeToRespowen
+    {
+        get { return this.timeToRespowen; }
+    }
 
     private void Awake()
     {
@@ -26,6 +32,7 @@ public class PlayerStats : UnitStats
     private void Start()
     {
         this.unitCurrentHealth = this.unitMaxHealth;
+        this.unitRespownCcoordinates = transform.position;
     }
 
     private void OnDestroy()
@@ -38,8 +45,25 @@ public class PlayerStats : UnitStats
         base.RemoveHealthOnAttack(damageAmount, aggressor);
     }
 
+    public void UpdateRespownCoordinates(Vector3 newCoordinates)
+    {
+        unitRespownCcoordinates = newCoordinates;
+    }
+
     public void HandlePlayerDeath()
     {
-        //metoda do respownu
+        StartCoroutine(Respown());
+    }
+
+    private IEnumerator Respown()
+    {
+        SpriteRenderer renderer = this.gameObject.GetComponent<SpriteRenderer>();
+        renderer.enabled = false;
+        //fade in
+        yield return new WaitForSeconds(timeToRespowen);
+        //fade out
+        transform.position = unitRespownCcoordinates;
+        HealthRestored(this.unitMaxHealth);
+        renderer.enabled = true;
     }
 }
