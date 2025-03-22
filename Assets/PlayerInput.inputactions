@@ -15,18 +15,9 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "jump",
+                    "name": "ExitPlatform",
                     "type": "Button",
-                    "id": "3539b885-af3b-4683-af22-b2da452b62ae",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "dash",
-                    "type": "Button",
-                    "id": "269bb0d7-a1fa-403d-a533-d2e8bf356f66",
+                    "id": "67345d36-5b16-4032-b637-365d6b22e867",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -45,6 +36,24 @@
                     "name": "meleeAttack",
                     "type": "Button",
                     "id": "e72fbb55-ed30-4642-9233-33bfeec03a24",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "jump",
+                    "type": "Button",
+                    "id": "3539b885-af3b-4683-af22-b2da452b62ae",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "dash",
+                    "type": "Button",
+                    "id": "269bb0d7-a1fa-403d-a533-d2e8bf356f66",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -86,9 +95,53 @@
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "2D Vector",
+                    "id": "feda79e0-373c-4ba4-87b1-d84ec45712a5",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "left",
+                    "id": "ce1b4a9f-3865-40a8-acf9-965026d9180c",
+                    "path": "<Gamepad>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "34a49e89-e6a2-4c0e-bd83-1eca19f6288b",
+                    "path": "<Gamepad>/leftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "",
                     "id": "30aec7b0-578e-43a2-8abe-8ee46b1b5bc2",
                     "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "77d15e0d-b28a-4184-b268-5e02fad88507",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -109,8 +162,30 @@
                 },
                 {
                     "name": "",
+                    "id": "4cfe912d-4811-4340-ae49-709a74874c2c",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "7dc1804e-fa99-4f0e-b9ae-b4302a421f0b",
                     "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "talk",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8e574551-8feb-43d3-bfd4-96036580f257",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -128,6 +203,61 @@
                     "action": "meleeAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "efe12562-12a0-40cc-b3f2-4ea4757b55b0",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "meleeAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "47fa7ddc-0855-4285-90b7-91b692911884",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ExitPlatform",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Gamepad - Stick down + South",
+                    "id": "76cb9f18-8667-4c62-a315-b1ec11ab0424",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ExitPlatform",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "c649cbc0-a9f0-4d86-8f47-6c756a78bfb2",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ExitPlatform",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "ff90dbde-b9fd-4763-a311-52779d661a4e",
+                    "path": "<Gamepad>/leftStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ExitPlatform",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         },
@@ -200,6 +330,17 @@
                     "name": "",
                     "id": "37de16c1-ebff-4862-9c8d-e21a302f00ce",
                     "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8ad3d2a0-33ea-45f9-bc89-01192478b141",
+                    "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
