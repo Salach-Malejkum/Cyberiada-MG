@@ -5,17 +5,22 @@ public class EnemyPatrol : MonoBehaviour
 {
     [Header("Statstics")]
     [SerializeField] private float speed;
+
     [Header("Patrol")]
     [SerializeField] private GameObject leftEdge;
     [SerializeField] private GameObject rightEdge;
     [SerializeField] private float patrolEdgeSize = 0.5f;
     [SerializeField] private float patrolPauseTime = 2f;
     private int moveDirection;
+
     [Header("Field of vision")]
     [SerializeField] private float fieldOfVisionVerticalRange;
     [SerializeField] private float fieldOfVisionHorisontalRange;
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private Transform transformer;
+
+    [Header("Attack zone")]
+    [SerializeField] private Transform attackPosition;
 
     private Transform currentDestination;
     private Rigidbody enemyRb;
@@ -23,14 +28,18 @@ public class EnemyPatrol : MonoBehaviour
     private Transform player;
 
     private bool chasingPlayer = false;
+    private IPlayerInAttackRange playerInAttackRange;
     private bool patrolWaitCancel = false;
     private bool isWaiting = false;
+    private SpriteRenderer renderer;
 
     void Start()
     {
         enemyRb = GetComponent<Rigidbody>();
         currentDestination = rightEdge.transform;
         moveDirection = 1;
+        playerInAttackRange = GetComponent<IPlayerInAttackRange>();
+        renderer = this.GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -106,9 +115,17 @@ public class EnemyPatrol : MonoBehaviour
 
         if (hasGroundAhead)
         {
-            enemyRb.linearVelocity = new Vector3(direction.x * speed, 0f, 0f);
+            if (playerInAttackRange.PlayerInAttackRange() || playerInAttackRange.EnemyAttacking())
+            {
+                enemyRb.linearVelocity = new Vector3(0f, 0f, 0f);
+                playerInAttackRange.EnemyReadyToAttack();
+            }
+            else
+            {
+                enemyRb.linearVelocity = new Vector3(direction.x * speed, 0f, 0f);
+            }
 
-            if ((direction.x > 0 && transform.localScale.x < 0) || (direction.x < 0 && transform.localScale.x > 0))
+            if ((direction.x > 0 && renderer.flipX) || (direction.x < 0 && !renderer.flipX))
             {
                 Flip();
             }
@@ -128,16 +145,21 @@ public class EnemyPatrol : MonoBehaviour
 
     private void Flip()
     {
-        Vector3 localScale = transform.localScale;
-        localScale.x *= -1;
+        renderer.flipX = !renderer.flipX;
+
+        Vector3 visionPosition = this.transformer.localPosition;
+        visionPosition.x *= -1;
+        this.transformer.localPosition = visionPosition;
+        Vector3 attackPosition = this.attackPosition.localPosition;
+        attackPosition.x *= -1;
+        this.attackPosition.localPosition = attackPosition;
         moveDirection *= -1;
-        transform.localScale = localScale;
     }
 
     private bool PlayerInSight()
     {
         Vector3 fieldOfVisionSize = new Vector3(fieldOfVisionHorisontalRange, fieldOfVisionVerticalRange, 5f);
-        RaycastHit[] hits = Physics.BoxCastAll(transformer.position, fieldOfVisionSize/2, transform.right * transform.localScale.x, Quaternion.identity, 0f, playerLayer);
+        RaycastHit[] hits = Physics.BoxCastAll(transformer.position, fieldOfVisionSize/2, transform.right, Quaternion.identity, 0f, playerLayer);
 
         if (hits.Length > 0)
         {
@@ -152,7 +174,7 @@ public class EnemyPatrol : MonoBehaviour
         chasingPlayer = false;
         currentDestination = (Vector3.Distance(transform.position, leftEdge.transform.position) < Vector3.Distance(transform.position, rightEdge.transform.position))
             ? rightEdge.transform : leftEdge.transform;
-        if ((currentDestination.position.x > transform.position.x) ^ (transform.localScale.x > 0))
+        if ((currentDestination.position.x > transform.position.x) ^ (!renderer.flipX))
         {
             Flip();
         }

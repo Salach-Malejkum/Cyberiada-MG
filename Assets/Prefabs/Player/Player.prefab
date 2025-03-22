@@ -363,9 +363,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitMaxHealth: 100
   unitCurrentHealth: 0
-  unitAttackDamage: 0
+  unitAttackDamage: 1
   lastAggressor: {fileID: 0}
-  unitAttackBuff: 0
+  unitAttackBuff: 1
   timeBtwAttacks: 0.15
   timeBtwCombos: 0.7
 --- !u!114 &375121196797254552
