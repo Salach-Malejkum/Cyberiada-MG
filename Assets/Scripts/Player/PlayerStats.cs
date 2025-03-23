@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -45,7 +44,7 @@ public class PlayerStats : UnitStats
     private void Start()
     {
         this.unitCurrentHealth = this.unitMaxHealth;
-        this.unitRespownCoordinates = transform.position;
+        this.unitRespawnCoordinates = transform.position;
     }
 
     private void OnDestroy()
@@ -58,9 +57,9 @@ public class PlayerStats : UnitStats
         base.RemoveHealthOnAttack(damageAmount, aggressor);
     }
 
-    public void UpdateRespownCoordinates(Vector3 newCoordinates)
+    public void UpdateRespawnCoordinates(Vector3 newCoordinates)
     {
-        unitRespownCoordinates = newCoordinates;
+        unitRespawnCoordinates = newCoordinates;
     }
 
     public void UpdateFallCheckPointCoordinates(Vector3 newCoordinates)
@@ -82,7 +81,7 @@ public class PlayerStats : UnitStats
         //fade out
         if (isPlayerDead)
         {
-            transform.position = unitRespownCoordinates;
+            transform.position = unitRespawnCoordinates;
             HealthRestored(this.unitMaxHealth);
         }
         else

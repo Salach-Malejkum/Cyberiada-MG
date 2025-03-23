@@ -39,7 +39,7 @@ public class CheckPoint : MonoBehaviour
     {
         if (playerInRangeOfCheckPoint)
         {
-            playerStats.UpdateRespownCoordinates(new Vector3(transform.position.x, playerYPosition, 0f));
+            playerStats.UpdateRespawnCoordinates(new Vector3(transform.position.x, playerYPosition, 0f));
             //start animation of checkpoint if not started
         }
     }

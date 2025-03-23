@@ -10,7 +10,7 @@ public class EnemyStats : UnitStats
     private void Start()
     {
         this.unitCurrentHealth = this.unitMaxHealth;
-        this.unitRespownCoordinates = transform.position;
+        this.unitRespawnCoordinates = transform.position;
     }
 
     private void OnDestroy()

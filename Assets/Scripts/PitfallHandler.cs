@@ -6,7 +6,6 @@ public class PitfallHandler : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("pitfall enter");
             PlayerStats stats = other.gameObject.GetComponent<PlayerStats>();
             stats.handlePlayerFall(this.gameObject);
         }
