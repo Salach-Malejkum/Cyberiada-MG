@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -18,10 +19,22 @@ public class PlayerStats : UnitStats
     {
         get { return this.timeBtwCombos; }
     }
-    [SerializeField] protected float timeToRespowen = 0.5f;
-    public float TimeToRespowen
+    [SerializeField] protected float timeToRespawn = 0.5f;
+    public float TimeToRespawn
     {
-        get { return this.timeToRespowen; }
+        get { return this.timeToRespawn; }
+    }
+
+    [SerializeField] protected Vector3 fallCheckPoint;
+    public Vector3 FallCheckPoint
+    {
+        get { return this.fallCheckPoint; }
+    }
+
+    [SerializeField] protected float pitfallDamage;
+    public float PitfallDamage
+    {
+        get { return this.pitfallDamage; }
     }
 
     private void Awake()
@@ -32,7 +45,7 @@ public class PlayerStats : UnitStats
     private void Start()
     {
         this.unitCurrentHealth = this.unitMaxHealth;
-        this.unitRespownCcoordinates = transform.position;
+        this.unitRespownCoordinates = transform.position;
     }
 
     private void OnDestroy()
@@ -47,23 +60,44 @@ public class PlayerStats : UnitStats
 
     public void UpdateRespownCoordinates(Vector3 newCoordinates)
     {
-        unitRespownCcoordinates = newCoordinates;
+        unitRespownCoordinates = newCoordinates;
+    }
+
+    public void UpdateFallCheckPointCoordinates(Vector3 newCoordinates)
+    {
+        fallCheckPoint = newCoordinates;
     }
 
     public void HandlePlayerDeath()
     {
-        StartCoroutine(Respown());
+        StartCoroutine(Respawn(true));
     }
 
-    private IEnumerator Respown()
+    private IEnumerator Respawn(bool isPlayerDead)
     {
         SpriteRenderer renderer = this.gameObject.GetComponent<SpriteRenderer>();
         renderer.enabled = false;
         //fade in
-        yield return new WaitForSeconds(timeToRespowen);
+        yield return new WaitForSeconds(timeToRespawn);
         //fade out
-        transform.position = unitRespownCcoordinates;
-        HealthRestored(this.unitMaxHealth);
+        if (isPlayerDead)
+        {
+            transform.position = unitRespownCoordinates;
+            HealthRestored(this.unitMaxHealth);
+        }
+        else
+        {
+            transform.position = fallCheckPoint;
+        }
         renderer.enabled = true;
+    }
+
+    public void handlePlayerFall(GameObject obj)
+    {
+        if (UnitCurrentHealth > pitfallDamage)
+        {
+            StartCoroutine(Respawn(false));
+        }
+        RemoveHealthOnAttack(pitfallDamage, obj);
     }
 }

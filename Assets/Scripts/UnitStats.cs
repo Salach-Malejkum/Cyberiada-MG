@@ -20,10 +20,10 @@ public abstract class UnitStats : MonoBehaviour
     {
         get { return this.unitAttackDamage; }
     }
-    [SerializeField] protected Vector3 unitRespownCcoordinates;
-    public Vector3 UnitRespownCcoordinates
+    [SerializeField] protected Vector3 unitRespownCoordinates;
+    public Vector3 UnitRespownCoordinates
     {
-        get { return this.unitRespownCcoordinates; }
+        get { return this.unitRespownCoordinates; }
     }
 
     public event Action onUnitDeath;
