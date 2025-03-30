@@ -252,6 +252,7 @@ public class PlayerMove : MonoBehaviour
         this.attackPosition.localPosition = attackPosition;
     }
 
+    //todo move or rename
     private void FallCheckPoint()
     {
         if (isGrounded)
