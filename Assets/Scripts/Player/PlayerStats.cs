@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerStats : UnitStats
@@ -17,6 +18,23 @@ public class PlayerStats : UnitStats
     {
         get { return this.timeBtwCombos; }
     }
+    [SerializeField] protected float timeToRespawn = 0.5f;
+    public float TimeToRespawn
+    {
+        get { return this.timeToRespawn; }
+    }
+
+    [SerializeField] protected Vector3 fallCheckPoint;
+    public Vector3 FallCheckPoint
+    {
+        get { return this.fallCheckPoint; }
+    }
+
+    [SerializeField] protected float pitfallDamage;
+    public float PitfallDamage
+    {
+        get { return this.pitfallDamage; }
+    }
 
     private void Awake()
     {
@@ -26,6 +44,7 @@ public class PlayerStats : UnitStats
     private void Start()
     {
         this.unitCurrentHealth = this.unitMaxHealth;
+        this.unitRespawnCoordinates = transform.position;
     }
 
     private void OnDestroy()
@@ -38,8 +57,46 @@ public class PlayerStats : UnitStats
         base.RemoveHealthOnAttack(damageAmount, aggressor);
     }
 
+    public void UpdateRespawnCoordinates(Vector3 newCoordinates)
+    {
+        unitRespawnCoordinates = newCoordinates;
+    }
+
+    public void UpdateFallCheckPointCoordinates(Vector3 newCoordinates)
+    {
+        fallCheckPoint = newCoordinates;
+    }
+
     public void HandlePlayerDeath()
     {
-        //metoda do respownu
+        StartCoroutine(Respawn(true));
+    }
+
+    private IEnumerator Respawn(bool isPlayerDead)
+    {
+        SpriteRenderer renderer = this.gameObject.GetComponent<SpriteRenderer>();
+        renderer.enabled = false;
+        //fade in
+        yield return new WaitForSeconds(timeToRespawn);
+        //fade out
+        if (isPlayerDead)
+        {
+            transform.position = unitRespawnCoordinates;
+            HealthRestored(this.unitMaxHealth);
+        }
+        else
+        {
+            transform.position = fallCheckPoint;
+        }
+        renderer.enabled = true;
+    }
+
+    public void handlePlayerFall(GameObject obj)
+    {
+        if (UnitCurrentHealth > pitfallDamage)
+        {
+            StartCoroutine(Respawn(false));
+        }
+        RemoveHealthOnAttack(pitfallDamage, obj);
     }
 }

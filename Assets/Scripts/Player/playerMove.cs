@@ -46,6 +46,7 @@ public class PlayerMove : MonoBehaviour
 
     private Animator anim;
     private SpriteRenderer renderer;
+    private PlayerStats stats;
     [Header("Attack zone")]
     [SerializeField] private Transform attackPosition;
 
@@ -63,6 +64,7 @@ public class PlayerMove : MonoBehaviour
         anim = this.GetComponentInChildren<Animator>();
         renderer = this.GetComponent<SpriteRenderer>();
         capsuleCollider = this.GetComponent<CapsuleCollider>();
+        stats = GetComponent<PlayerStats>();
     }
 
     void FixedUpdate()
@@ -81,8 +83,9 @@ public class PlayerMove : MonoBehaviour
             Sprint();
         }
         
-        Move();
         CheckGrounded();
+        Move();
+        FallCheckPoint();
     }
 
     void Move()
@@ -328,5 +331,13 @@ public class PlayerMove : MonoBehaviour
         }
 
         return false;
+    }
+    //todo move or rename
+    private void FallCheckPoint()
+    {
+        if (isGrounded)
+        {
+            stats.UpdateFallCheckPointCoordinates(transform.position);
+        }
     }
 }
