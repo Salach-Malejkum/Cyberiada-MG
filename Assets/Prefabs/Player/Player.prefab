@@ -179,9 +179,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 2.5
-  m_Height: 10
+  m_Height: 8
   m_Direction: 1
-  m_Center: {x: 0, y: -2.7, z: 0}
+  m_Center: {x: 0, y: -3.7, z: 0}
 --- !u!54 &8161054478729318305
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -222,12 +222,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseMoveSpeed: 5
-  airSpeedChange: 0.05
-  jumpForce: 10
+  jumpForce: 16
   wallJumpForce: 5
-  jumpCancelMulti: 0.5
-  maxHorisontalAirSpeed: 5
-  airDragMovementModifier: 30
+  jumpCancelMulti: 0.3
+  airDragMovementModifier: 26
   isAttacking: 0
   maxDistanceToGround: 1.6
   dashPower: 30
@@ -239,6 +237,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  enterablePlatform:
+    serializedVersion: 2
+    m_Bits: 512
   wallLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -271,7 +272,7 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5885516389553774366}
-        m_TargetAssemblyTypeName: playerMove, Assembly-CSharp
+        m_TargetAssemblyTypeName: PlayerMove, Assembly-CSharp
         m_MethodName: OnMove
         m_Mode: 0
         m_Arguments:
@@ -283,12 +284,12 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: b23fcfdd-4c9b-4c8b-9938-76ef42a0cf8b
-    m_ActionName: 'Player/move[/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
+    m_ActionName: 'Player/move[/Keyboard/a,/Keyboard/d,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/leftStick/right]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5885516389553774366}
-        m_TargetAssemblyTypeName: playerMove, Assembly-CSharp
-        m_MethodName: OnJump
+        m_TargetAssemblyTypeName: PlayerMove, Assembly-CSharp
+        m_MethodName: OnExitPlatform
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -298,36 +299,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 3539b885-af3b-4683-af22-b2da452b62ae
-    m_ActionName: 'Player/jump[/Keyboard/space]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 34600b2b-7214-4640-9792-261dac72d8c9
-    m_ActionName: 'Camera/look[/Keyboard/s,/Keyboard/w]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5885516389553774366}
-        m_TargetAssemblyTypeName: playerMove, Assembly-CSharp
-        m_MethodName: OnDash
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 269bb0d7-a1fa-403d-a533-d2e8bf356f66
-    m_ActionName: 'Player/dash[/Keyboard/shift]'
+    m_ActionId: 67345d36-5b16-4032-b637-365d6b22e867
+    m_ActionName: 'Player/ExitPlatform[/Keyboard/s,/XInputControllerWindows/buttonSouth,/XInputControllerWindows/leftStick/down]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: f42d8d86-c807-41a4-bc43-9247fdc3cb33
-    m_ActionName: 'Player/talk[/Keyboard/f]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 09bfa58d-9ee3-4aae-9b78-212369e92799
-    m_ActionName: 'UI/pause[/Keyboard/escape]'
+    m_ActionName: 'Player/talk[/Keyboard/f,/XInputControllerWindows/buttonNorth]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 375121196797254552}
@@ -343,7 +320,47 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: e72fbb55-ed30-4642-9233-33bfeec03a24
-    m_ActionName: 'Player/attack[/Mouse/leftButton]'
+    m_ActionName: 'Player/meleeAttack[/XInputControllerWindows/buttonWest]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5885516389553774366}
+        m_TargetAssemblyTypeName: PlayerMove, Assembly-CSharp
+        m_MethodName: OnJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3539b885-af3b-4683-af22-b2da452b62ae
+    m_ActionName: 'Player/jump[/Keyboard/space,/XInputControllerWindows/buttonSouth]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5885516389553774366}
+        m_TargetAssemblyTypeName: PlayerMove, Assembly-CSharp
+        m_MethodName: OnDash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 269bb0d7-a1fa-403d-a533-d2e8bf356f66
+    m_ActionName: 'Player/dash[/Keyboard/shift,/XInputControllerWindows/rightTrigger]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 34600b2b-7214-4640-9792-261dac72d8c9
+    m_ActionName: 'Camera/look[/Keyboard/s,/Keyboard/w]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 09bfa58d-9ee3-4aae-9b78-212369e92799
+    m_ActionName: 'UI/pause[/Keyboard/escape,/XInputControllerWindows/start]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

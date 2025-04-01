@@ -11,7 +11,7 @@ public class PlayerMove : MonoBehaviour
     [Header("Jump")]
     [SerializeField] private float jumpForce = 10f;
     [SerializeField] private float wallJumpForce = 5f;
-    [SerializeField] private float jumpCancelMulti = 0.5f;
+    [SerializeField] [Range(0, 1)] private float jumpCancelMulti = 0.5f;
     [SerializeField] private float airDragMovementModifier = 400f;
     [Header("Attacking")]
     public bool isAttacking = false;
@@ -83,7 +83,6 @@ public class PlayerMove : MonoBehaviour
         
         Move();
         CheckGrounded();
-        CheckWall();
     }
 
     void Move()
@@ -113,7 +112,6 @@ public class PlayerMove : MonoBehaviour
             Vector3 move = new Vector3(moveInput.x, 0f, 0f) * moveSpeed;
             if (isGrounded)
             {
-                Debug.Log("jestem tutaj");
                 rb.linearVelocity = new Vector3(move.x, rb.linearVelocity.y, 0f);
             }
             else
@@ -126,6 +124,12 @@ public class PlayerMove : MonoBehaviour
 
     void Jump()
     {
+        if (isDashing)
+        {
+            rb.linearVelocity = new Vector3(moveSpeed, jumpForce, 0f);
+            DashCancel();
+        }
+
         if (isGrounded)
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, 0f);
@@ -152,12 +156,6 @@ public class PlayerMove : MonoBehaviour
             int sign = isWallLeft ? 1 : -1;
             rb.linearVelocity = new Vector3(sign * wallJumpForce, jumpForce, 0f);
         }
-
-        if (isDashing)
-        {
-            rb.linearVelocity = new Vector3(moveSpeed, jumpForce, 0f);
-            DashCancel();
-        }
     }
 
     private bool IsSameSign(float a, float b)
@@ -180,22 +178,6 @@ public class PlayerMove : MonoBehaviour
         RaycastHit hit;
         isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, maxDistanceToGround, groundLayer | enterablePlatform);
         anim.SetBool("isGrouded", isGrounded);
-    }
-
-    void CheckWall()
-    {
-        if (!isGrounded)
-        {
-            RaycastHit hit;
-            isWalled = Physics.Raycast(transform.position, Vector3.right, out hit, 1.1f, wallLayer);
-            isWallLeft = false;
-            if (!isWalled)
-            {
-                isWalled = Physics.Raycast(transform.position, Vector3.left, out hit, 1.1f, wallLayer);
-                isWallLeft = true;
-            }
-        }
-
     }
 
     void Sprint()
@@ -284,8 +266,15 @@ public class PlayerMove : MonoBehaviour
     {
         if (IsEnterablePlatform(collision.gameObject))
         {
+            Debug.Log("No way");
             isOnEnterablePlatform = true;
             platformCollider = collision.gameObject.GetComponent<MeshCollider>();
+        }
+
+        if (IsWall(collision.gameObject))
+        {
+            isWalled = true;
+            isWallLeft = collision.contacts[0].point.x <= transform.position.x;
         }
     }
 
@@ -294,9 +283,15 @@ public class PlayerMove : MonoBehaviour
     {
         if (IsEnterablePlatform(collision.gameObject))
         {
+            Debug.Log("1!!!");
             isOnEnterablePlatform = false;
             Physics.IgnoreCollision(capsuleCollider, platformCollider, false);
             platformCollider = null;
+        }
+
+        if (IsWall(collision.gameObject))
+        {
+            isWalled = false;
         }
     }
 
@@ -304,6 +299,11 @@ public class PlayerMove : MonoBehaviour
     private bool IsEnterablePlatform(GameObject gameObject)
     {
         return enterablePlatform == (enterablePlatform | (1 << gameObject.layer));
+    }
+
+    private bool IsWall(GameObject gameObject)
+    {
+        return wallLayer == (wallLayer | (1 << gameObject.layer)); 
     }
 
 
@@ -322,7 +322,7 @@ public class PlayerMove : MonoBehaviour
         if (gamepad == null) return false;
         
         // Check if left stick is down
-        if (isOnEnterablePlatform && gamepad.leftStick.down.ReadValue() > 0.1f)
+        if (isOnEnterablePlatform && gamepad.leftStick.down.ReadValue() > 0.9f)
         {
             return true;
         }

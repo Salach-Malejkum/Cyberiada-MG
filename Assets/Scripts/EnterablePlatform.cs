@@ -22,7 +22,8 @@ public class EnterablePlatform : MonoBehaviour
             CapsuleCollider playerCollider = other.GetComponent<CapsuleCollider>();
             if (playerCollider.bounds.min.y < yMaxPos)
             {
-                Physics.IgnoreCollision(playerCollider, meshCollider, true);
+                Debug.Log("XDD");
+                Physics.IgnoreCollision(other, meshCollider, true);
             }
         }
     }
@@ -32,7 +33,8 @@ public class EnterablePlatform : MonoBehaviour
     {
         if (IsPlayer(other.gameObject))
         {
-            Physics.IgnoreCollision(other.GetComponent<Collider>(), meshCollider, false);
+            Debug.Log("huh");
+            Physics.IgnoreCollision(other, meshCollider, false);
         }
     }
 
