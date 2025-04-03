@@ -156,7 +156,7 @@ public class EnemyPatrol : MonoBehaviour
         moveDirection *= -1;
     }
 
-    private bool PlayerInSight()
+    public bool PlayerInSight()
     {
         Vector3 fieldOfVisionSize = new Vector3(fieldOfVisionHorisontalRange, fieldOfVisionVerticalRange, 5f);
         RaycastHit[] hits = Physics.BoxCastAll(transformer.position, fieldOfVisionSize/2, transform.right, Quaternion.identity, 0f, playerLayer);
