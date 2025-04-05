@@ -77,7 +77,6 @@ public class EnemyPatrol : MonoBehaviour
 
         if (Vector3.Distance(transform.position, currentDestination.position) < patrolEdgeSize)
         {
-            Debug.Log(Vector3.Distance(transform.position, currentDestination.position));
             StartCoroutine(PatrolPause());
         }
     }
