@@ -32,6 +32,7 @@ public class EnemyPatrol : MonoBehaviour
     private bool patrolWaitCancel = false;
     private bool isWaiting = false;
     private SpriteRenderer renderer;
+    public Animator anim;
 
     void Start()
     {
@@ -40,6 +41,7 @@ public class EnemyPatrol : MonoBehaviour
         moveDirection = 1;
         playerInAttackRange = GetComponent<IPlayerInAttackRange>();
         renderer = this.GetComponent<SpriteRenderer>();
+        anim = this.GetComponent<Animator>();
     }
 
     void Update()
@@ -70,6 +72,8 @@ public class EnemyPatrol : MonoBehaviour
         if (isWaiting) return;
 
         enemyRb.linearVelocity = new Vector3(moveDirection * speed, 0f, 0f);
+        anim.SetFloat("Speed", enemyRb.linearVelocity.magnitude);
+
 
         if (Vector3.Distance(transform.position, currentDestination.position) < patrolEdgeSize)
         {
@@ -81,6 +85,7 @@ public class EnemyPatrol : MonoBehaviour
     {
         isWaiting = true;
         enemyRb.linearVelocity = Vector3.zero;
+        anim.SetFloat("Speed", enemyRb.linearVelocity.magnitude);
         yield return new WaitForSeconds(patrolPauseTime);
         if (patrolWaitCancel)
         {
@@ -118,14 +123,16 @@ public class EnemyPatrol : MonoBehaviour
             if (playerInAttackRange.PlayerInAttackRange() || playerInAttackRange.EnemyAttacking())
             {
                 enemyRb.linearVelocity = new Vector3(0f, 0f, 0f);
+                anim.SetFloat("Speed", enemyRb.linearVelocity.magnitude);
                 playerInAttackRange.EnemyReadyToAttack();
             }
             else
             {
                 enemyRb.linearVelocity = new Vector3(direction.x * speed, 0f, 0f);
+                anim.SetFloat("Speed", enemyRb.linearVelocity.magnitude);
             }
 
-            if ((direction.x > 0 && renderer.flipX) || (direction.x < 0 && !renderer.flipX))
+            if ((direction.x > 0 && !renderer.flipX) || (direction.x < 0 && renderer.flipX))
             {
                 Flip();
             }
@@ -139,7 +146,7 @@ public class EnemyPatrol : MonoBehaviour
     private bool CheckGroundAhead(float directionX)
     {
         Vector3 rayOrigin = transform.position + new Vector3(directionX * patrolEdgeSize, 0f, 0f);
-        float rayLength = 1.5f;
+        float rayLength = 2.5f;
         return Physics.Raycast(rayOrigin, Vector3.down, rayLength, LayerMask.GetMask("Ground"));
     }
 
@@ -156,7 +163,7 @@ public class EnemyPatrol : MonoBehaviour
         moveDirection *= -1;
     }
 
-    private bool PlayerInSight()
+    public bool PlayerInSight()
     {
         Vector3 fieldOfVisionSize = new Vector3(fieldOfVisionHorisontalRange, fieldOfVisionVerticalRange, 5f);
         RaycastHit[] hits = Physics.BoxCastAll(transformer.position, fieldOfVisionSize/2, transform.right, Quaternion.identity, 0f, playerLayer);
@@ -174,7 +181,7 @@ public class EnemyPatrol : MonoBehaviour
         chasingPlayer = false;
         currentDestination = (Vector3.Distance(transform.position, leftEdge.transform.position) < Vector3.Distance(transform.position, rightEdge.transform.position))
             ? rightEdge.transform : leftEdge.transform;
-        if ((currentDestination.position.x > transform.position.x) ^ (!renderer.flipX))
+        if ((currentDestination.position.x > transform.position.x) ^ (renderer.flipX))
         {
             Flip();
         }

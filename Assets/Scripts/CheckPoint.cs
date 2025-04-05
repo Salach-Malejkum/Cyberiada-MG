@@ -8,10 +8,13 @@ public class CheckPoint : MonoBehaviour
     private float playerYPosition;
     [SerializeField] private SpriteRenderer interactionMarker;
     private Animator anim;
+    private bool interacted;
 
     private void Start()
     {
         interactionMarker.enabled = false;
+        interacted = false;
+        anim = GetComponent<Animator>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -40,7 +43,12 @@ public class CheckPoint : MonoBehaviour
         if (playerInRangeOfCheckPoint)
         {
             playerStats.UpdateRespawnCoordinates(new Vector3(transform.position.x, playerYPosition, 0f));
-            //start animation of checkpoint if not started
+            if (!interacted)
+            {
+                interacted = true;
+                anim.SetBool("interacted", interacted);
+                transform.position = transform.position + new Vector3(0, 0.5f, 0);
+            }
         }
     }
 }

@@ -364,10 +364,14 @@ MonoBehaviour:
   unitMaxHealth: 100
   unitCurrentHealth: 0
   unitAttackDamage: 1
+  unitRespawnCoordinates: {x: 0, y: 0, z: 0}
   lastAggressor: {fileID: 0}
   unitAttackBuff: 1
   timeBtwAttacks: 0.15
   timeBtwCombos: 0.7
+  timeToRespawn: 0.5
+  fallCheckPoint: {x: 0, y: 0, z: 0}
+  pitfallDamage: 50
 --- !u!114 &375121196797254552
 MonoBehaviour:
   m_ObjectHideFlags: 0
