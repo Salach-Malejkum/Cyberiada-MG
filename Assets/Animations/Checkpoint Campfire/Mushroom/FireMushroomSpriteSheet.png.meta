@@ -6,7 +6,7 @@ TextureImporter:
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -37,24 +37,24 @@ TextureImporter:
     filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
+    wrapU: 1
+    wrapV: 1
     wrapW: 0
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 900
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -95,12 +95,232 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: FireMushroomSpriteSheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2302
+        width: 694
+        height: 1151
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e527c41afdd387a4b88580fa99b30c79
+      internalID: 548286319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireMushroomSpriteSheet_1
+      rect:
+        serializedVersion: 2
+        x: 694
+        y: 2302
+        width: 694
+        height: 1151
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4bd85670065b441429524b9a402aa4d2
+      internalID: -944015958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireMushroomSpriteSheet_2
+      rect:
+        serializedVersion: 2
+        x: 1388
+        y: 2302
+        width: 694
+        height: 1151
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc9588acd51df3749a4a4e168d3a22a8
+      internalID: 201148411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireMushroomSpriteSheet_3
+      rect:
+        serializedVersion: 2
+        x: 2082
+        y: 2302
+        width: 694
+        height: 1151
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bc86016efbf37646b3cf41c9cc30661
+      internalID: -793920975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireMushroomSpriteSheet_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1151
+        width: 694
+        height: 1151
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8af606712d8a81b448e48038ed248982
+      internalID: -6070080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireMushroomSpriteSheet_5
+      rect:
+        serializedVersion: 2
+        x: 694
+        y: 1151
+        width: 694
+        height: 1151
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf66f690d535b4b45b6965f2eca612d9
+      internalID: 356879693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireMushroomSpriteSheet_6
+      rect:
+        serializedVersion: 2
+        x: 1388
+        y: 1151
+        width: 694
+        height: 1151
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96294980f0bc0fe4fb384d4fdcd69f43
+      internalID: 506908548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireMushroomSpriteSheet_7
+      rect:
+        serializedVersion: 2
+        x: 2082
+        y: 1151
+        width: 694
+        height: 1151
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c1f58badda0df74cb8c508c07371ee7
+      internalID: 1800878476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireMushroomSpriteSheet_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 694
+        height: 1151
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f10d3c954f900b4ab1c87a0cd8122e5
+      internalID: 622748253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireMushroomSpriteSheet_9
+      rect:
+        serializedVersion: 2
+        x: 694
+        y: 0
+        width: 694
+        height: 1151
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0527afcd56568c64eaabf4e45f18dd45
+      internalID: -1571658202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 3d54733e6360d41499b8b7ced662b7c4
     internalID: 0
     vertices: []
     indices: 
@@ -109,7 +329,17 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      FireMushroomSpriteSheet_0: 548286319
+      FireMushroomSpriteSheet_1: -944015958
+      FireMushroomSpriteSheet_2: 201148411
+      FireMushroomSpriteSheet_3: -793920975
+      FireMushroomSpriteSheet_4: -6070080
+      FireMushroomSpriteSheet_5: 356879693
+      FireMushroomSpriteSheet_6: 506908548
+      FireMushroomSpriteSheet_7: 1800878476
+      FireMushroomSpriteSheet_8: 622748253
+      FireMushroomSpriteSheet_9: -1571658202
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
