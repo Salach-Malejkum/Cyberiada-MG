@@ -2117,10 +2117,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PatrolingEnemy
       objectReference: {fileID: 0}
-    - target: {fileID: 8920913877592544062, guid: aec99fcf4ea53bc4192fa5505fc515b3, type: 3}
-      propertyPath: unitAttackDamage
-      value: 100
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

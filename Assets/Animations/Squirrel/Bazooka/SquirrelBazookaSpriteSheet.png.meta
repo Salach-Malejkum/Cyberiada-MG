@@ -1,0 +1,393 @@
+fileFormatVersion: 2
+guid: 26ea56746e874ab4c89f5072b824037e
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 500
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SquirrelBazookaSpriteSheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2856
+        width: 2425
+        height: 1317
+      alignment: 9
+      pivot: {x: 0.25, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f3b732fac718834da607644eaef21c4
+      internalID: -1276147467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquirrelBazookaSpriteSheet_1
+      rect:
+        serializedVersion: 2
+        x: 2425
+        y: 2856
+        width: 2425
+        height: 1317
+      alignment: 9
+      pivot: {x: 0.25, y: 0.5277866}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 330ac83f7bc810944978930bb94b516f
+      internalID: -571040833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquirrelBazookaSpriteSheet_2
+      rect:
+        serializedVersion: 2
+        x: 4850
+        y: 2856
+        width: 2425
+        height: 1317
+      alignment: 9
+      pivot: {x: 0.25, y: 0.49999982}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ad3e130a6356344692a8796cb221e56
+      internalID: 1752214604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquirrelBazookaSpriteSheet_3
+      rect:
+        serializedVersion: 2
+        x: 7275
+        y: 2856
+        width: 2425
+        height: 1317
+      alignment: 9
+      pivot: {x: 0.25, y: 0.49999982}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: afacad73297e5e4408f7ba903177d1a6
+      internalID: -700267853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquirrelBazookaSpriteSheet_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1464
+        width: 2425
+        height: 1317
+      alignment: 9
+      pivot: {x: 0.25, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6376a4891f7c5d42958708ca2337279
+      internalID: -819829789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquirrelBazookaSpriteSheet_5
+      rect:
+        serializedVersion: 2
+        x: 2425
+        y: 1464
+        width: 2425
+        height: 1317
+      alignment: 9
+      pivot: {x: 0.25, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 303c6a5b1976b3041b0e025befd97b09
+      internalID: -128464963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquirrelBazookaSpriteSheet_6
+      rect:
+        serializedVersion: 2
+        x: 4850
+        y: 1464
+        width: 2425
+        height: 1317
+      alignment: 9
+      pivot: {x: 0.25, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2fd604637b034734e8d67c88158924f2
+      internalID: 1589003834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquirrelBazookaSpriteSheet_7
+      rect:
+        serializedVersion: 2
+        x: 7275
+        y: 1464
+        width: 2425
+        height: 1317
+      alignment: 9
+      pivot: {x: 0.25, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bfa879bfebfcbc4091ca84a0fcd358b
+      internalID: 2106372335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquirrelBazookaSpriteSheet_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 72
+        width: 2425
+        height: 1317
+      alignment: 9
+      pivot: {x: 0.25, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a5063ae230e15a43a30a3f5d25936d4
+      internalID: 1714612181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquirrelBazookaSpriteSheet_9
+      rect:
+        serializedVersion: 2
+        x: 2425
+        y: 72
+        width: 2425
+        height: 1317
+      alignment: 9
+      pivot: {x: 0.25, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5276de60be09784b86563c7876b0d48
+      internalID: -2064445340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquirrelBazookaSpriteSheet_10
+      rect:
+        serializedVersion: 2
+        x: 4850
+        y: 72
+        width: 2425
+        height: 1317
+      alignment: 9
+      pivot: {x: 0.25, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c50c34ef82a5e44fb9c4c12f0934b24
+      internalID: 1461432816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquirrelBazookaSpriteSheet_11
+      rect:
+        serializedVersion: 2
+        x: 7275
+        y: 72
+        width: 2425
+        height: 1317
+      alignment: 9
+      pivot: {x: 0.25, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ce5de96e757cc64a867a1ea09b51e6e
+      internalID: 2104246975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 42b44ccf59b571348acea216c0fcc3fb
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      SquirrelBazookaSpriteSheet_0: -1276147467
+      SquirrelBazookaSpriteSheet_1: -571040833
+      SquirrelBazookaSpriteSheet_10: 1461432816
+      SquirrelBazookaSpriteSheet_11: 2104246975
+      SquirrelBazookaSpriteSheet_2: 1752214604
+      SquirrelBazookaSpriteSheet_3: -700267853
+      SquirrelBazookaSpriteSheet_4: -819829789
+      SquirrelBazookaSpriteSheet_5: -128464963
+      SquirrelBazookaSpriteSheet_6: 1589003834
+      SquirrelBazookaSpriteSheet_7: 2106372335
+      SquirrelBazookaSpriteSheet_8: 1714612181
+      SquirrelBazookaSpriteSheet_9: -2064445340
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

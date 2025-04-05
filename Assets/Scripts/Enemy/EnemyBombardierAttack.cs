@@ -11,12 +11,10 @@ public class EnemyBombardierAttack : MonoBehaviour, IPlayerInAttackRange
     private int attackMapIndex;
     private EnemyStats stats;
     private EnemyPatrol patrol;
-    private Animator anim;
     
     void Start()
     {
         attackMapIndex = 0;
-        anim = this.GetComponent<Animator>();
         MusicManager.Instance.Subscribe(AttackToBeat);
         stats = this.GetComponent<EnemyStats>();
         patrol = this.GetComponent<EnemyPatrol>();
@@ -28,8 +26,7 @@ public class EnemyBombardierAttack : MonoBehaviour, IPlayerInAttackRange
         {
             if (rangeComboAttackMap[attackMapIndex] == 1)
             {
-                //start animation
-                CreateProjectile(); // temp until animations ready then called by animation events
+                patrol.anim.SetBool("attack", true);
                 attackMapIndex++;
             }
             else
@@ -54,7 +51,7 @@ public class EnemyBombardierAttack : MonoBehaviour, IPlayerInAttackRange
         BombardierProjectile projectileScript = projectileInstance.GetComponent<BombardierProjectile>();
         if (projectileScript != null)
         {
-            projectileScript.SetShooter(this.gameObject, firePoint.localPosition.x);
+            projectileScript.SetShooter(stats.UnitAttackDamage, firePoint.localPosition.x);
         }
         EnemyFinishedAttack();
     }
@@ -67,6 +64,7 @@ public class EnemyBombardierAttack : MonoBehaviour, IPlayerInAttackRange
     public void EnemyFinishedAttack()
     {
         enemyReadyToAttack = false;
+        patrol.anim.SetBool("attack", false);
     }
 
     public bool EnemyAttacking()

@@ -27,17 +27,16 @@ public class BombardierProjectile : MonoBehaviour
             PlayerStats player = other.GetComponent<PlayerStats>();
             if (player != null)
             {
-                player.RemoveHealthOnAttack(damageAmount, shooter);
+                player.RemoveHealthOnAttack(damageAmount, this.gameObject);
             }
         }
 
         Destroy(this.gameObject);
     }
 
-    public void SetShooter(GameObject shooter, float shootingDirection)
+    public void SetShooter(float damageAmount, float shootingDirection)
     {
-        this.shooter = shooter;
         this.shootingDirection = shootingDirection;
-        damageAmount = shooter.GetComponent<EnemyStats>().UnitAttackDamage;
+        this.damageAmount = damageAmount;
     }
 }
