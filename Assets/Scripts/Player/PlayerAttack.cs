@@ -46,8 +46,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void OnMeleeAttack(InputAction.CallbackContext inputAction)
     {
-        Debug.Log("TESST");
-        if (inputAction.started && attackTimeCounter >= stats.TimeBtwAttacks)
+        if (inputAction.started && attackTimeCounter >= stats.TimeBtwAttacks && playerMove.isGrounded)
         {
             playerMove.isAttacking = true;
             anim.SetBool("isAttacking", true);

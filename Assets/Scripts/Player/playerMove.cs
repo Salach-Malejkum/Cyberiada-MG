@@ -17,7 +17,7 @@ public class PlayerMove : MonoBehaviour
     public bool isAttacking = false;
     [Header("Raycast Length")]
     [SerializeField] private float maxDistanceToGround = 1.2f;
-    private bool isGrounded;
+    public bool isGrounded;
     private bool isWalled = false;
     private bool doubleJumped = false;
     public bool isFacingRight { get; private set; }
@@ -130,6 +130,8 @@ public class PlayerMove : MonoBehaviour
         if (isDashing)
         {
             rb.linearVelocity = new Vector3(moveSpeed, jumpForce, 0f);
+            anim.SetBool("justJumped", true);
+            anim.SetFloat("jumpSpeed", rb.linearVelocity.y);
             DashCancel();
         }
 
@@ -137,6 +139,8 @@ public class PlayerMove : MonoBehaviour
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, 0f);
             doubleJumped = false;
+            anim.SetBool("justJumped", true);
+            anim.SetFloat("jumpSpeed", rb.linearVelocity.y);
             return;
         }
 
@@ -158,6 +162,8 @@ public class PlayerMove : MonoBehaviour
         {
             int sign = isWallLeft ? 1 : -1;
             rb.linearVelocity = new Vector3(sign * wallJumpForce, jumpForce, 0f);
+            anim.SetBool("justJumped", true);
+            anim.SetFloat("jumpSpeed", rb.linearVelocity.y);
         }
     }
 
@@ -169,11 +175,20 @@ public class PlayerMove : MonoBehaviour
     private void SecondJumpSameDirection()
     {
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, 0f);
+        anim.SetBool("justJumped", true);
+        anim.SetFloat("jumpSpeed", rb.linearVelocity.y);
     }
 
     private void SecondJumpOtherDirection()
     {
         rb.linearVelocity = new Vector3(0, jumpForce, 0f);
+        anim.SetBool("justJumped", true);
+        anim.SetFloat("jumpSpeed", rb.linearVelocity.y);
+    }
+
+    void JumpTakeOfEnd()
+    {
+        anim.SetBool("justJumped", false);
     }
 
     void CheckGrounded()
@@ -188,15 +203,18 @@ public class PlayerMove : MonoBehaviour
         if (moveSpeed < maxSprintSpeed)
         {
             moveSpeed += sprintSpeedIncrement;
+            anim.SetBool("isRunning", true);
         }
         else
         {
             moveSpeed = maxSprintSpeed;
+            anim.SetBool("isRunning", true);
         }
     }
 
     void ResetTimer()
     {
+        anim.SetBool("isRunning", false);
         sprintTimer = timeToSprint;
         moveSpeed = baseMoveSpeed;
     }

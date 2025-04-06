@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 8920913877592544062}
   - component: {fileID: 3252824202349428678}
   - component: {fileID: 7733829802356613861}
+  - component: {fileID: 8613923561900352412}
   m_Layer: 8
   m_Name: Enemy1
   m_TagString: Untagged
@@ -251,7 +252,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitMaxHealth: 100
   unitCurrentHealth: 0
-  unitAttackDamage: 1
+  unitAttackDamage: 100
+  unitRespawnCoordinates: {x: 0, y: 0, z: 0}
   lastAggressor: {fileID: 0}
 --- !u!114 &3252824202349428678
 MonoBehaviour:
@@ -327,6 +329,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &8613923561900352412
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7391265441507225753}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8910591283942566989
 GameObject:
   m_ObjectHideFlags: 0
