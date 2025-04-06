@@ -26,7 +26,8 @@ public class EnemyBombardierAttack : MonoBehaviour, IPlayerInAttackRange
         {
             if (rangeComboAttackMap[attackMapIndex] == 1)
             {
-                patrol.anim.SetBool("attack", true);
+                if (patrol.anim != null)
+                    patrol.anim.SetBool("attack", true);
                 attackMapIndex++;
             }
             else
@@ -64,7 +65,8 @@ public class EnemyBombardierAttack : MonoBehaviour, IPlayerInAttackRange
     public void EnemyFinishedAttack()
     {
         enemyReadyToAttack = false;
-        patrol.anim.SetBool("attack", false);
+        if (patrol.anim != null)
+            patrol.anim.SetBool("attack", false);
     }
 
     public bool EnemyAttacking()
