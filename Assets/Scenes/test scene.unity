@@ -2198,30 +2198,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4462462218039777408, guid: 5dcc49758217db3428b6f62453f7190a, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: e6b1aa9684b25ec43a815e9955422837, type: 3}
-    - target: {fileID: 4462462218039777408, guid: 5dcc49758217db3428b6f62453f7190a, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4462462218039777408, guid: 5dcc49758217db3428b6f62453f7190a, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4462462218039777408, guid: 5dcc49758217db3428b6f62453f7190a, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4462462218039777408, guid: 5dcc49758217db3428b6f62453f7190a, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4462462218039777408, guid: 5dcc49758217db3428b6f62453f7190a, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5311535790030846904, guid: 5dcc49758217db3428b6f62453f7190a, type: 3}
       propertyPath: m_Camera
       value: 
@@ -2229,10 +2205,6 @@ PrefabInstance:
     - target: {fileID: 7861595452502434213, guid: 5dcc49758217db3428b6f62453f7190a, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 8462374842813184970, guid: 5dcc49758217db3428b6f62453f7190a, type: 3}
-      propertyPath: pitfallDamage
-      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
