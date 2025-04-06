@@ -17,7 +17,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float maxHorisontalAirSpeed = 5f;
     [SerializeField] private float airDragMovementModifier = 400f;
     [SerializeField] private float maxDistanceToGround = 1.2f;
-    private bool isGrounded;
+    public bool isGrounded;
     private bool isWalled = false;
     private bool doubleJumped = false;
     public bool isAttacking = false;
@@ -112,6 +112,7 @@ public class PlayerMove : MonoBehaviour
                 }
             }
             anim.SetFloat("speed", Mathf.Abs(rb.linearVelocity.x));
+            anim.SetFloat("jumpSpeed", rb.linearVelocity.y);
         }
         else
         {
@@ -126,6 +127,8 @@ public class PlayerMove : MonoBehaviour
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, 0f);
             doubleJumped = false;
+            anim.SetBool("justJumped", true);
+            anim.SetFloat("jumpSpeed", rb.linearVelocity.y);
         }
         else
         {
@@ -133,22 +136,35 @@ public class PlayerMove : MonoBehaviour
             {
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, 0f);
                 doubleJumped = true;
+                anim.SetBool("justJumped", true);
+                anim.SetFloat("jumpSpeed", rb.linearVelocity.y);
             }
             if (isWalled && isWallLeft)
             {
                 rb.linearVelocity = new Vector3(wallJumpForce, jumpForce, 0f);
+                anim.SetBool("justJumped", true);
+                anim.SetFloat("jumpSpeed", rb.linearVelocity.y);
             }
             if (isWalled && !isWallLeft)
             {
                 rb.linearVelocity = new Vector3(-wallJumpForce, jumpForce, 0f);
+                anim.SetBool("justJumped", true);
+                anim.SetFloat("jumpSpeed", rb.linearVelocity.y);
             }
         }
 
         if (isDashing)
         {
             rb.linearVelocity = new Vector3(moveSpeed, jumpForce, 0f);
+            anim.SetBool("justJumped", true);
+            anim.SetFloat("jumpSpeed", rb.linearVelocity.y);
             DashCancel();
         }
+    }
+
+    void JumpTakeOfEnd()
+    {
+        anim.SetBool("justJumped", false);
     }
 
     void CheckGrounded()
@@ -179,15 +195,18 @@ public class PlayerMove : MonoBehaviour
         if (moveSpeed < maxSprintSpeed)
         {
             moveSpeed += sprintSpeedIncrement;
+            anim.SetBool("isRunning", true);
         }
         else
         {
             moveSpeed = maxSprintSpeed;
+            anim.SetBool("isRunning", true);
         }
     }
 
     void ResetTimer()
     {
+        anim.SetBool("isRunning", false);
         sprintTimer = timeToSprint;
         moveSpeed = baseMoveSpeed;
     }
