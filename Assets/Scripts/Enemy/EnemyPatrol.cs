@@ -72,7 +72,8 @@ public class EnemyPatrol : MonoBehaviour
         if (isWaiting) return;
 
         enemyRb.linearVelocity = new Vector3(moveDirection * speed, 0f, 0f);
-        anim.SetFloat("Speed", enemyRb.linearVelocity.magnitude);
+        if (anim != null)
+            anim.SetFloat("Speed", enemyRb.linearVelocity.magnitude);
 
 
         if (Vector3.Distance(transform.position, currentDestination.position) < patrolEdgeSize)
@@ -85,7 +86,8 @@ public class EnemyPatrol : MonoBehaviour
     {
         isWaiting = true;
         enemyRb.linearVelocity = Vector3.zero;
-        anim.SetFloat("Speed", enemyRb.linearVelocity.magnitude);
+        if (anim != null)
+            anim.SetFloat("Speed", enemyRb.linearVelocity.magnitude);
         yield return new WaitForSeconds(patrolPauseTime);
         if (patrolWaitCancel)
         {
@@ -123,13 +125,15 @@ public class EnemyPatrol : MonoBehaviour
             if (playerInAttackRange.PlayerInAttackRange() || playerInAttackRange.EnemyAttacking())
             {
                 enemyRb.linearVelocity = new Vector3(0f, 0f, 0f);
-                anim.SetFloat("Speed", enemyRb.linearVelocity.magnitude);
+                if (anim != null)
+                    anim.SetFloat("Speed", enemyRb.linearVelocity.magnitude);
                 playerInAttackRange.EnemyReadyToAttack();
             }
             else
             {
                 enemyRb.linearVelocity = new Vector3(direction.x * speed, 0f, 0f);
-                anim.SetFloat("Speed", enemyRb.linearVelocity.magnitude);
+                if (anim != null)
+                    anim.SetFloat("Speed", enemyRb.linearVelocity.magnitude);
             }
 
             if ((direction.x > 0 && !renderer.flipX) || (direction.x < 0 && renderer.flipX))
