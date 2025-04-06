@@ -229,6 +229,7 @@ MonoBehaviour:
   maxHorisontalAirSpeed: 5
   airDragMovementModifier: 400
   maxDistanceToGround: 1.6
+  isGrounded: 0
   isAttacking: 0
   dashPower: 24
   dashTime: 0.2
@@ -364,10 +365,14 @@ MonoBehaviour:
   unitMaxHealth: 100
   unitCurrentHealth: 0
   unitAttackDamage: 1
+  unitRespawnCoordinates: {x: 0, y: 0, z: 0}
   lastAggressor: {fileID: 0}
   unitAttackBuff: 1
   timeBtwAttacks: 0.15
   timeBtwCombos: 0.7
+  timeToRespawn: 0.5
+  fallCheckPoint: {x: 0, y: 0, z: 0}
+  pitfallDamage: 50
 --- !u!114 &375121196797254552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -453,8 +458,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 91471129d69384444ab1335bdcc9cbda, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: e6b1aa9684b25ec43a815e9955422837, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
