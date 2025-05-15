@@ -4,14 +4,12 @@ using UnityEngine.ProBuilder;
 public class EnterablePlatform : MonoBehaviour
 {
     private MeshCollider meshCollider;
-    private ProBuilderMesh proBuilderMesh;
     private float yMaxPos;
 
     void Awake()
     {
         meshCollider = GetComponent<MeshCollider>();
-        proBuilderMesh = GetComponent<ProBuilderMesh>();
-        yMaxPos = proBuilderMesh.GetComponent<Renderer>().bounds.max.y;
+        yMaxPos = meshCollider.GetComponent<Renderer>().bounds.max.y;
     }
 
 

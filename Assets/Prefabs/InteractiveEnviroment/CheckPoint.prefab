@@ -109,15 +109,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d02e3f44eaf41f542856c34bd463c5cc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.17
+      value: 105
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d02e3f44eaf41f542856c34bd463c5cc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.21
+      value: 30.61
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d02e3f44eaf41f542856c34bd463c5cc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.29
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d02e3f44eaf41f542856c34bd463c5cc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -251,7 +251,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
+  m_DefaultActionMap: Checkpoint
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!212 &3824421241029456024

@@ -382,6 +382,45 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Checkpoint",
+            "id": "337db699-840e-41cc-8f32-4a675826b67b",
+            "actions": [
+                {
+                    "name": "Save",
+                    "type": "Button",
+                    "id": "7ace8378-de42-44c0-ae1d-a70973207b0d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "71d3639e-6a33-4d22-b35e-92ce95656bec",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";KeyboardMouse",
+                    "action": "Save",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2df300f4-ef94-4de9-8c25-45bd62facf85",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Save",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

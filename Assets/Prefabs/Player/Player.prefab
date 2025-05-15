@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 375121196797254552}
   - component: {fileID: 4971789382834725348}
   - component: {fileID: 4462462218039777408}
+  - component: {fileID: 4066598109728311535}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -179,9 +180,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 2.5
-  m_Height: 8
+  m_Height: 10
   m_Direction: 1
-  m_Center: {x: 0, y: -3.7, z: 0}
+  m_Center: {x: 0, y: -2.7, z: 0}
 --- !u!54 &8161054478729318305
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -228,6 +229,7 @@ MonoBehaviour:
   airDragMovementModifier: 26
   isAttacking: 0
   maxDistanceToGround: 1.6
+  isGrounded: 0
   dashPower: 30
   dashTime: 0.15
   dashCooldown: 1
@@ -362,7 +364,7 @@ MonoBehaviour:
     m_ActionId: 09bfa58d-9ee3-4aae-9b78-212369e92799
     m_ActionName: 'UI/pause[/Keyboard/escape,/XInputControllerWindows/start]'
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: KeyboardMouse
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -380,13 +382,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitMaxHealth: 100
   unitCurrentHealth: 0
-  unitAttackDamage: 1
+  unitAttackDamage: 20
   unitRespawnCoordinates: {x: 0, y: 0, z: 0}
   lastAggressor: {fileID: 0}
-  unitAttackBuff: 1
+  unitAttackBuff: 15
   timeBtwAttacks: 0.15
   timeBtwCombos: 0.7
-  timeToRespawn: 0.5
+  pitFallTimeToRespawn: 0.5
+  spikesTimeToRespawn: 0.1
   fallCheckPoint: {x: 0, y: 0, z: 0}
   pitfallDamage: 50
 --- !u!114 &375121196797254552
@@ -485,3 +488,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4066598109728311535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7861595452502434213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6216707829be76f4f95effd3b028f7fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

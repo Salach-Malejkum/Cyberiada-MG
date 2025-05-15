@@ -11,7 +11,7 @@ public class PlayerMove : MonoBehaviour
     [Header("Jump")]
     [SerializeField] private float jumpForce = 10f;
     [SerializeField] private float wallJumpForce = 5f;
-    [SerializeField] [Range(0, 1)] private float jumpCancelMulti = 0.5f;
+    [SerializeField][Range(0, 1)] private float jumpCancelMulti = 0.5f;
     [SerializeField] private float airDragMovementModifier = 400f;
     [Header("Attacking")]
     public bool isAttacking = false;
@@ -25,7 +25,6 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float dashPower = 24f;
     [SerializeField] private float dashTime = 0.2f;
     [SerializeField] private float dashCooldown = 2f;
-    private bool canDash = true;
     private bool isDashing;
 
     [Header("Sprint")]
@@ -38,6 +37,14 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask enterablePlatform;
     [SerializeField] private LayerMask wallLayer;
+
+    [Header("Unlocked Skills")]
+    [SerializeField] private bool canDoubleJump;
+    [SerializeField] private bool canDash = true;
+    [SerializeField] private bool canWallJump;
+    [SerializeField] private bool canBlock;
+    [SerializeField] private bool canAttack;
+
 
     private Rigidbody rb;
     private Vector2 moveInput;
@@ -82,7 +89,7 @@ public class PlayerMove : MonoBehaviour
         {
             Sprint();
         }
-        
+
         CheckGrounded();
         Move();
         FallCheckPoint();
@@ -123,6 +130,7 @@ public class PlayerMove : MonoBehaviour
             }
         }
         anim.SetFloat("speed", Mathf.Abs(rb.linearVelocity.x));
+        anim.SetFloat("jumpSpeed", rb.linearVelocity.y);
     }
 
     void Jump()
@@ -137,14 +145,14 @@ public class PlayerMove : MonoBehaviour
 
         if (isGrounded)
         {
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, 0f);
+            PerformJumpVelocityCalculation();
             doubleJumped = false;
             anim.SetBool("justJumped", true);
             anim.SetFloat("jumpSpeed", rb.linearVelocity.y);
             return;
         }
 
-        if (!doubleJumped && !isWalled)
+        if (canDoubleJump && !doubleJumped && !isWalled)
         {
             if (!IsSameSign(moveInput.x, rb.linearVelocity.x))
             {
@@ -156,15 +164,24 @@ public class PlayerMove : MonoBehaviour
             }
 
             doubleJumped = true;
+            anim.SetBool("justJumped", true);
+            anim.SetFloat("jumpSpeed", rb.linearVelocity.y);
         }
 
-        if (isWalled)
+        if (canWallJump && isWalled)
         {
             int sign = isWallLeft ? 1 : -1;
             rb.linearVelocity = new Vector3(sign * wallJumpForce, jumpForce, 0f);
             anim.SetBool("justJumped", true);
             anim.SetFloat("jumpSpeed", rb.linearVelocity.y);
         }
+    }
+
+    private void PerformJumpVelocityCalculation()
+    {
+        float kineticEnergy = Mathf.Lerp(0, jumpForce / 6, (moveSpeed - baseMoveSpeed) / (maxSprintSpeed - baseMoveSpeed));
+        rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce + kineticEnergy, 0f);
+        print(jumpForce + kineticEnergy);
     }
 
     private bool IsSameSign(float a, float b)
@@ -175,15 +192,11 @@ public class PlayerMove : MonoBehaviour
     private void SecondJumpSameDirection()
     {
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, 0f);
-        anim.SetBool("justJumped", true);
-        anim.SetFloat("jumpSpeed", rb.linearVelocity.y);
     }
 
     private void SecondJumpOtherDirection()
     {
         rb.linearVelocity = new Vector3(0, jumpForce, 0f);
-        anim.SetBool("justJumped", true);
-        anim.SetFloat("jumpSpeed", rb.linearVelocity.y);
     }
 
     void JumpTakeOfEnd()
@@ -287,7 +300,6 @@ public class PlayerMove : MonoBehaviour
     {
         if (IsEnterablePlatform(collision.gameObject))
         {
-            Debug.Log("No way");
             isOnEnterablePlatform = true;
             platformCollider = collision.gameObject.GetComponent<MeshCollider>();
         }
@@ -304,7 +316,6 @@ public class PlayerMove : MonoBehaviour
     {
         if (IsEnterablePlatform(collision.gameObject))
         {
-            Debug.Log("1!!!");
             isOnEnterablePlatform = false;
             Physics.IgnoreCollision(capsuleCollider, platformCollider, false);
             platformCollider = null;
@@ -324,7 +335,7 @@ public class PlayerMove : MonoBehaviour
 
     private bool IsWall(GameObject gameObject)
     {
-        return wallLayer == (wallLayer | (1 << gameObject.layer)); 
+        return wallLayer == (wallLayer | (1 << gameObject.layer));
     }
 
 
@@ -341,7 +352,7 @@ public class PlayerMove : MonoBehaviour
         // Get the current gamepad
         var gamepad = Gamepad.current;
         if (gamepad == null) return false;
-        
+
         // Check if left stick is down
         if (isOnEnterablePlatform && gamepad.leftStick.down.ReadValue() > 0.9f)
         {
@@ -357,5 +368,10 @@ public class PlayerMove : MonoBehaviour
         {
             stats.UpdateFallCheckPointCoordinates(transform.position);
         }
+    }
+
+    public bool GetCanAttack()
+    {
+        return canAttack;
     }
 }

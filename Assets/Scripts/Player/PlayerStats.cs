@@ -18,10 +18,17 @@ public class PlayerStats : UnitStats
     {
         get { return this.timeBtwCombos; }
     }
-    [SerializeField] protected float timeToRespawn = 0.5f;
-    public float TimeToRespawn
+
+    [Header("Respawns")]
+    [SerializeField] protected float pitFallTimeToRespawn = 0.5f;
+    public float PitFallTimeToRespawn
     {
-        get { return this.timeToRespawn; }
+        get { return this.pitFallTimeToRespawn; }
+    }
+    [SerializeField] protected float spikesTimeToRespawn = 0.1f;
+    public float SpikesTimeToRespawn
+    {
+        get { return this.spikesTimeToRespawn; }
     }
 
     [SerializeField] protected Vector3 fallCheckPoint;
@@ -69,10 +76,10 @@ public class PlayerStats : UnitStats
 
     public void HandlePlayerDeath()
     {
-        StartCoroutine(Respawn(true));
+        StartCoroutine(Respawn(true, spikesTimeToRespawn));
     }
 
-    private IEnumerator Respawn(bool isPlayerDead)
+    private IEnumerator Respawn(bool isPlayerDead, float timeToRespawn)
     {
         SpriteRenderer renderer = this.gameObject.GetComponent<SpriteRenderer>();
         renderer.enabled = false;
@@ -95,7 +102,16 @@ public class PlayerStats : UnitStats
     {
         if (UnitCurrentHealth > pitfallDamage)
         {
-            StartCoroutine(Respawn(false));
+            StartCoroutine(Respawn(false, pitFallTimeToRespawn));
+        }
+        RemoveHealthOnAttack(pitfallDamage, obj);
+    }
+
+    public void handleSpikes(GameObject obj)
+    {
+        if (UnitCurrentHealth > pitfallDamage)
+        {
+            StartCoroutine(Respawn(false, spikesTimeToRespawn));
         }
         RemoveHealthOnAttack(pitfallDamage, obj);
     }
