@@ -15,8 +15,8 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float airDragMovementModifier = 400f;
     [Header("Attacking")]
     public bool isAttacking = false;
-    [Header("Raycast Length")]
-    [SerializeField] private float maxDistanceToGround = 1.2f;
+    [Header("IsGrounded")]
+    [SerializeField] private GroundedManager groundedManager;
     public bool isGrounded;
     private bool isWalled = false;
     private bool doubleJumped = false;
@@ -62,6 +62,22 @@ public class PlayerMove : MonoBehaviour
     private Collider platformCollider;
     private CapsuleCollider capsuleCollider;
 
+    private void OnEnable()
+    {
+        if (groundedManager != null)
+        {
+            groundedManager.OnIsGroundedChanged +=  CheckGrounded;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (groundedManager != null)
+        {
+            groundedManager.OnIsGroundedChanged -= CheckGrounded;
+        }
+    }
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -90,7 +106,6 @@ public class PlayerMove : MonoBehaviour
             Sprint();
         }
 
-        CheckGrounded();
         Move();
         FallCheckPoint();
     }
@@ -204,10 +219,9 @@ public class PlayerMove : MonoBehaviour
         anim.SetBool("justJumped", false);
     }
 
-    void CheckGrounded()
+    void CheckGrounded(bool isGrouded)
     {
-        RaycastHit hit;
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, maxDistanceToGround, groundLayer | enterablePlatform);
+        this.isGrounded = isGrouded;
         anim.SetBool("isGrouded", isGrounded);
     }
 
