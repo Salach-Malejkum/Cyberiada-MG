@@ -38,10 +38,9 @@ public class PlayerUI : MonoBehaviour
     private void SetShortJumpText() => UpdateMessage("Press Space to jump");
     private void SetLongJumpText() => UpdateMessage("Hold Space to jump higher");
     private void SetRunningJumpText() => UpdateMessage("Run to one side and press and hold Space to jump even higher");
-
+    private void SetMovementext() => UpdateMessage("Use WASD to move");
     private void HandleMessages(string message)
     {
-        print("Message received: " + message);
         switch (message)
         {
             case "hint_short_jump":
@@ -52,6 +51,9 @@ public class PlayerUI : MonoBehaviour
                 break;
             case "hint_running_jump":
                 SetRunningJumpText();
+                break;
+            case "hint_movement":
+                SetMovementext();
                 break;
             default:
                 hintText.text = "";

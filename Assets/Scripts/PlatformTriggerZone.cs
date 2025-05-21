@@ -8,7 +8,6 @@ public class PlatformTriggerZone : MonoBehaviour
         if (IsPlayer(other.gameObject))
         {
             {
-                print("inside");
                 Physics.IgnoreCollision(other, platformCollider, true);
             }
         }
@@ -19,7 +18,6 @@ public class PlatformTriggerZone : MonoBehaviour
     {
         if (IsPlayer(other.gameObject))
         {
-            print("outside");
             Physics.IgnoreCollision(other, platformCollider, false);
         }
     }

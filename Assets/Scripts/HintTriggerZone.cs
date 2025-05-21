@@ -8,7 +8,6 @@ public class HintTriggerZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print("Trigger Entered");
         if (other.CompareTag("Player"))
         {
             OnMessageTriggered?.Invoke(messageIdentifier);
