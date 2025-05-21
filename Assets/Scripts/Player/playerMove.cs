@@ -196,7 +196,6 @@ public class PlayerMove : MonoBehaviour
     {
         float kineticEnergy = Mathf.Lerp(0, jumpForce / 6, (moveSpeed - baseMoveSpeed) / (maxSprintSpeed - baseMoveSpeed));
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce + kineticEnergy, 0f);
-        print(jumpForce + kineticEnergy);
     }
 
     private bool IsSameSign(float a, float b)
