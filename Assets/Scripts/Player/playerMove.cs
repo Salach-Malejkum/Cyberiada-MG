@@ -82,7 +82,6 @@ public class PlayerMove : MonoBehaviour
         CheckWall();
         FallCheckPoint();
         anim.SetFloat("JumpSpeed", rb.linearVelocity.y);
-        print(rb.linearVelocity.y);
     }
 
     void Move()
