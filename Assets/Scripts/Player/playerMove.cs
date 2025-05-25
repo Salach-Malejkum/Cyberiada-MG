@@ -39,7 +39,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private LayerMask wallLayer;
 
     [Header("Unlocked Skills")]
-    [SerializeField] private bool canDoubleJump;
+    [SerializeField] public bool canDoubleJump; //I changed this from private to public so I can turn it on after collecting specific item
     [SerializeField] private bool canDash = true;
     [SerializeField] private bool canWallJump;
     [SerializeField] private bool canBlock;
