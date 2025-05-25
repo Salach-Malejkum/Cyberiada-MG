@@ -76,11 +76,12 @@ public class PlayerMove : MonoBehaviour
         {
             Sprint();
         }
-        
+
         CheckGrounded();
         Move();
         CheckWall();
         FallCheckPoint();
+        anim.SetFloat("JumpSpeed", rb.linearVelocity.y);
     }
 
     void Move()
@@ -111,14 +112,12 @@ public class PlayerMove : MonoBehaviour
                     rb.linearVelocity = new Vector3(Mathf.Clamp(rb.linearVelocity.x + (move.x / airDragMovementModifier), -maxSprintSpeed, maxSprintSpeed), rb.linearVelocity.y, 0f);
                 }
             }
-            anim.SetFloat("speed", Mathf.Abs(rb.linearVelocity.x));
-            anim.SetFloat("jumpSpeed", rb.linearVelocity.y);
         }
         else
         {
             rb.linearVelocity = new Vector3(0f, 0f, 0f);
-            anim.SetFloat("speed", Mathf.Abs(rb.linearVelocity.x));
         }
+        anim.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
     }
 
     void Jump()
@@ -127,8 +126,6 @@ public class PlayerMove : MonoBehaviour
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, 0f);
             doubleJumped = false;
-            anim.SetBool("justJumped", true);
-            anim.SetFloat("jumpSpeed", rb.linearVelocity.y);
         }
         else
         {
@@ -136,42 +133,30 @@ public class PlayerMove : MonoBehaviour
             {
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, 0f);
                 doubleJumped = true;
-                anim.SetBool("justJumped", true);
-                anim.SetFloat("jumpSpeed", rb.linearVelocity.y);
             }
             if (isWalled && isWallLeft)
             {
                 rb.linearVelocity = new Vector3(wallJumpForce, jumpForce, 0f);
-                anim.SetBool("justJumped", true);
-                anim.SetFloat("jumpSpeed", rb.linearVelocity.y);
             }
             if (isWalled && !isWallLeft)
             {
                 rb.linearVelocity = new Vector3(-wallJumpForce, jumpForce, 0f);
-                anim.SetBool("justJumped", true);
-                anim.SetFloat("jumpSpeed", rb.linearVelocity.y);
             }
         }
 
         if (isDashing)
         {
             rb.linearVelocity = new Vector3(moveSpeed, jumpForce, 0f);
-            anim.SetBool("justJumped", true);
-            anim.SetFloat("jumpSpeed", rb.linearVelocity.y);
             DashCancel();
         }
-    }
-
-    void JumpTakeOfEnd()
-    {
-        anim.SetBool("justJumped", false);
+        anim.SetTrigger("JumpTrigger");
     }
 
     void CheckGrounded()
     {
         RaycastHit hit;
         isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, maxDistanceToGround, groundLayer);
-        anim.SetBool("isGrouded", isGrounded);
+        anim.SetBool("IsGrounded", isGrounded);
     }
 
     void CheckWall()
@@ -195,18 +180,17 @@ public class PlayerMove : MonoBehaviour
         if (moveSpeed < maxSprintSpeed)
         {
             moveSpeed += sprintSpeedIncrement;
-            anim.SetBool("isRunning", true);
         }
         else
         {
             moveSpeed = maxSprintSpeed;
-            anim.SetBool("isRunning", true);
         }
+        anim.SetBool("IsRunning", true);
     }
 
     void ResetTimer()
     {
-        anim.SetBool("isRunning", false);
+        anim.SetBool("IsRunning", false);
         sprintTimer = timeToSprint;
         moveSpeed = baseMoveSpeed;
     }
