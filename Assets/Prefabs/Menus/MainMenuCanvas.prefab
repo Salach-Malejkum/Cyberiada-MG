@@ -581,6 +581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14205ac6104fe634f904a7296bac34b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneName: Level1
   optionsPanel: {fileID: 512703897843564149}
 --- !u!1 &1986796157342584592
 GameObject:
