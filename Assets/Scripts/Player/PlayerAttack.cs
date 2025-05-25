@@ -107,6 +107,10 @@ public class PlayerAttack : MonoBehaviour
                     enemyStats.RemoveHealthOnAttack(stats.UnitAttackDamage, this.gameObject);
                 }
             }
+
+            DestroyHandler destroyHandler = hits[i].collider.gameObject.GetComponent<DestroyHandler>();
+            if (destroyHandler != null)
+                destroyHandler.OnHit();
         }
         anim.SetBool("isAttacking", false);
         playerMove.isAttacking = false;
