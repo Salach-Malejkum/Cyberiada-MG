@@ -265,7 +265,7 @@ MonoBehaviour:
   rightEdge: {fileID: 6157719253236502554}
   patrolEdgeSize: 0.5
   patrolPauseTime: 2
-  fieldOfVisionVerticalRange: 4
+  fieldOfVisionVerticalRange: 3
   fieldOfVisionHorisontalRange: 10
   playerLayer:
     serializedVersion: 2

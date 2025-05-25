@@ -9,24 +9,22 @@ public class PlayerMove : MonoBehaviour
     private float moveSpeed;
 
     [Header("Jump")]
-    [SerializeField] private float airSpeedChange = 1f;
     [SerializeField] private float jumpForce = 10f;
-    //[SerializeField] private float jumpMultiBase = 0.5f;
     [SerializeField] private float wallJumpForce = 5f;
-    [SerializeField] private float jumpCancelMulti = 0.5f;
-    [SerializeField] private float maxHorisontalAirSpeed = 5f;
+    [SerializeField][Range(0, 1)] private float jumpCancelMulti = 0.5f;
     [SerializeField] private float airDragMovementModifier = 400f;
-    [SerializeField] private float maxDistanceToGround = 1.2f;
+    [Header("Attacking")]
+    public bool isAttacking = false;
+    [Header("IsGrounded")]
+    [SerializeField] private GroundedManager groundedManager;
     public bool isGrounded;
     private bool isWalled = false;
     private bool doubleJumped = false;
-    public bool isAttacking = false;
     public bool isFacingRight { get; private set; }
     [Header("Dash")]
     [SerializeField] private float dashPower = 24f;
     [SerializeField] private float dashTime = 0.2f;
     [SerializeField] private float dashCooldown = 2f;
-    private bool canDash = true;
     private bool isDashing;
 
     [Header("Sprint")]
@@ -37,7 +35,16 @@ public class PlayerMove : MonoBehaviour
 
     [Header("Layers")]
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask enterablePlatform;
     [SerializeField] private LayerMask wallLayer;
+
+    [Header("Unlocked Skills")]
+    [SerializeField] private bool canDoubleJump;
+    [SerializeField] private bool canDash = true;
+    [SerializeField] private bool canWallJump;
+    [SerializeField] private bool canBlock;
+    [SerializeField] private bool canAttack;
+
 
     private Rigidbody rb;
     private Vector2 moveInput;
@@ -50,6 +57,27 @@ public class PlayerMove : MonoBehaviour
     [Header("Attack zone")]
     [SerializeField] private Transform attackPosition;
 
+    [Header("Enterable platforms")]
+    private bool isOnEnterablePlatform = false;
+    private Collider platformCollider;
+    private CapsuleCollider capsuleCollider;
+
+    private void OnEnable()
+    {
+        if (groundedManager != null)
+        {
+            groundedManager.OnIsGroundedChanged +=  CheckGrounded;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (groundedManager != null)
+        {
+            groundedManager.OnIsGroundedChanged -= CheckGrounded;
+        }
+    }
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -58,10 +86,11 @@ public class PlayerMove : MonoBehaviour
         isFacingRight = true;
         anim = this.GetComponentInChildren<Animator>();
         renderer = this.GetComponent<SpriteRenderer>();
+        capsuleCollider = this.GetComponent<CapsuleCollider>();
         stats = GetComponent<PlayerStats>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (rb.linearVelocity.x != 0f && isGrounded)
         {
@@ -77,16 +106,13 @@ public class PlayerMove : MonoBehaviour
             Sprint();
         }
 
-        CheckGrounded();
         Move();
-        CheckWall();
         FallCheckPoint();
         anim.SetFloat("JumpSpeed", rb.linearVelocity.y);
     }
 
     void Move()
     {
-        Vector3 move = new Vector3(moveInput.x, 0f, 0f) * moveSpeed;
         if (moveInput.x > 0 && !isFacingRight)
         {
             isFacingRight = true;
@@ -99,80 +125,90 @@ public class PlayerMove : MonoBehaviour
             ResetTimer();
             Flip();
         }
-        if (!isAttacking)
-        {
-            if (!isDashing)
-            {
-                if (isGrounded)
-                {
-                    rb.linearVelocity = new Vector3(move.x, rb.linearVelocity.y, 0f);
-                }
-                else
-                {
-                    rb.linearVelocity = new Vector3(Mathf.Clamp(rb.linearVelocity.x + (move.x / airDragMovementModifier), -maxSprintSpeed, maxSprintSpeed), rb.linearVelocity.y, 0f);
-                }
-            }
-        }
-        else
+
+        if (isAttacking)
         {
             rb.linearVelocity = new Vector3(0f, 0f, 0f);
+            return;
+        }
+
+        if (!isDashing)
+        {
+            Vector3 move = new Vector3(moveInput.x, 0f, 0f) * moveSpeed;
+            if (isGrounded)
+            {
+                rb.linearVelocity = new Vector3(move.x, rb.linearVelocity.y, 0f);
+            }
+            else
+            {
+                rb.linearVelocity = new Vector3(Mathf.Clamp(rb.linearVelocity.x + (move.x / airDragMovementModifier), -moveSpeed, moveSpeed), rb.linearVelocity.y, 0f);
+            }
         }
         anim.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
     }
 
     void Jump()
     {
-        if (isGrounded)
-        {
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, 0f);
-            doubleJumped = false;
-        }
-        else
-        {
-            if (!doubleJumped && !isWalled)
-            {
-                rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, 0f);
-                doubleJumped = true;
-            }
-            if (isWalled && isWallLeft)
-            {
-                rb.linearVelocity = new Vector3(wallJumpForce, jumpForce, 0f);
-            }
-            if (isWalled && !isWallLeft)
-            {
-                rb.linearVelocity = new Vector3(-wallJumpForce, jumpForce, 0f);
-            }
-        }
-
+        anim.SetTrigger("JumpTrigger");
         if (isDashing)
         {
             rb.linearVelocity = new Vector3(moveSpeed, jumpForce, 0f);
             DashCancel();
         }
-        anim.SetTrigger("JumpTrigger");
-    }
 
-    void CheckGrounded()
-    {
-        RaycastHit hit;
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, maxDistanceToGround, groundLayer);
-        anim.SetBool("IsGrounded", isGrounded);
-    }
-
-    void CheckWall()
-    {
-        if (!isGrounded)
+        if (isGrounded)
         {
-            RaycastHit hit;
-            isWalled = Physics.Raycast(transform.position, Vector3.right, out hit, 1.1f, wallLayer);
-            isWallLeft = false;
-            if (!isWalled)
-            {
-                isWalled = Physics.Raycast(transform.position, Vector3.left, out hit, 1.1f, wallLayer);
-                isWallLeft = true;
-            }
+            PerformJumpVelocityCalculation();
+            doubleJumped = false;
+            return;
         }
 
+        if (canDoubleJump && !doubleJumped && !isWalled)
+        {
+            if (!IsSameSign(moveInput.x, rb.linearVelocity.x))
+            {
+                SecondJumpOtherDirection();
+            }
+            else
+            {
+                SecondJumpSameDirection();
+            }
+
+            doubleJumped = true;
+        }
+
+        if (canWallJump && isWalled)
+        {
+            int sign = isWallLeft ? 1 : -1;
+            rb.linearVelocity = new Vector3(sign * wallJumpForce, jumpForce, 0f);
+        }
+    }
+
+    private void PerformJumpVelocityCalculation()
+    {
+        float kineticEnergy = Mathf.Lerp(0, jumpForce / 6, (moveSpeed - baseMoveSpeed) / (maxSprintSpeed - baseMoveSpeed));
+        rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce + kineticEnergy, 0f);
+    }
+
+    private bool IsSameSign(float a, float b)
+    {
+        return a * b > 0;
+    }
+
+    private void SecondJumpSameDirection()
+    {
+        rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, 0f);
+    }
+
+    private void SecondJumpOtherDirection()
+    {
+        rb.linearVelocity = new Vector3(0, jumpForce, 0f);
+    }
+
+    void CheckGrounded(bool isGrouded)
+    {
+        this.isGrounded = isGrouded;
+        anim.SetBool("IsGrounded", isGrounded);
     }
 
     void Sprint()
@@ -202,6 +238,9 @@ public class PlayerMove : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext inputAction)
     {
+        if (IsExitPlatformPerformed())
+            return;
+
         if (inputAction.started)
         {
             Jump();
@@ -255,6 +294,72 @@ public class PlayerMove : MonoBehaviour
         this.attackPosition.localPosition = attackPosition;
     }
 
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (IsEnterablePlatform(collision.gameObject))
+        {
+            isOnEnterablePlatform = true;
+            platformCollider = collision.gameObject.GetComponent<MeshCollider>();
+        }
+
+        if (IsWall(collision.gameObject))
+        {
+            isWalled = true;
+            isWallLeft = collision.contacts[0].point.x <= transform.position.x;
+        }
+    }
+
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (IsEnterablePlatform(collision.gameObject))
+        {
+            isOnEnterablePlatform = false;
+            Physics.IgnoreCollision(capsuleCollider, platformCollider, false);
+            platformCollider = null;
+        }
+
+        if (IsWall(collision.gameObject))
+        {
+            isWalled = false;
+        }
+    }
+
+
+    private bool IsEnterablePlatform(GameObject gameObject)
+    {
+        return enterablePlatform == (enterablePlatform | (1 << gameObject.layer));
+    }
+
+    private bool IsWall(GameObject gameObject)
+    {
+        return wallLayer == (wallLayer | (1 << gameObject.layer));
+    }
+
+
+    public void OnExitPlatform(InputAction.CallbackContext inputAction)
+    {
+        if (isOnEnterablePlatform)
+        {
+            Physics.IgnoreCollision(capsuleCollider, platformCollider, true);
+        }
+    }
+
+    public bool IsExitPlatformPerformed()
+    {
+        // Get the current gamepad
+        var gamepad = Gamepad.current;
+        if (gamepad == null) return false;
+
+        // Check if left stick is down
+        if (isOnEnterablePlatform && gamepad.leftStick.down.ReadValue() > 0.9f)
+        {
+            return true;
+        }
+
+        return false;
+    }
     //todo move or rename
     private void FallCheckPoint()
     {
@@ -262,5 +367,10 @@ public class PlayerMove : MonoBehaviour
         {
             stats.UpdateFallCheckPointCoordinates(transform.position);
         }
+    }
+
+    public bool GetCanAttack()
+    {
+        return canAttack;
     }
 }
