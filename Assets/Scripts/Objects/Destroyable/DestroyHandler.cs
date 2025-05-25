@@ -41,6 +41,5 @@ public class DestroyHandler : MonoBehaviour
                 Object.Destroy(parentObject);
             }
         }
-        else Debug.Log("ParentObject not found");
     }
 }

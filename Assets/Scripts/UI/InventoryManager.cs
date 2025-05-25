@@ -15,10 +15,8 @@ public class InventoryManager : MonoBehaviour
     {
         for (int i = 1; i <= 16; i++)
         {
-            inventorySlots[i-1] = transform.Find("itemSlot" + i).GetComponent<Image>();
+            inventorySlots[i - 1] = transform.Find("itemSlot" + i).GetComponent<Image>();
         }
-        
-        
     }
 
     // Update is called once per frame
@@ -38,15 +36,16 @@ public class InventoryManager : MonoBehaviour
             if (i == numberOfItems)
             {
                 inventorySlots[i].sprite = item;
-                if (item == doubleJumpItem)
-                    playerMove.canDoubleJump = true;
-                    
+                switch (item)
+                {
+                    default:
+                        break;
+                    case var _ when item == doubleJumpItem:
+                        playerMove.canDoubleJump = true;
+                        break;
+                }
             }
-            ///numberOfItems++;
         }
-    }
-    private void KeyItemsHeld()
-    {
-
+        numberOfItems++;
     }
 }
