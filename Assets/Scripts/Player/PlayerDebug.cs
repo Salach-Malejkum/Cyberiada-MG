@@ -1,8 +1,10 @@
 using UnityEngine;
 
+#if UNITY_EDITOR || DEBUG
 public class PlayerDebug : MonoBehaviour
 {
-    [SerializeField] private Vector3 [] teleportPositions = {
+    [SerializeField]
+    private Vector3[] teleportPositions = {
         // new Vector3(-10, 3, 0),
         // new Vector3(100, 19, 0),
         // new Vector3(46, 32, 0),
@@ -39,3 +41,9 @@ public class PlayerDebug : MonoBehaviour
         }
     }
 }
+
+#else
+{
+
+}
+#endif

@@ -6,10 +6,18 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private string sceneName;
     [SerializeField] private GameObject optionsPanel;
 
+    private void Awake()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+    
     public void StartGmae()
     {
         Debug.Log("start");
         SceneManager.LoadScene(sceneName);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void ExitGame()

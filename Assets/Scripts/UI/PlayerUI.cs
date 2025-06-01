@@ -38,7 +38,9 @@ public class PlayerUI : MonoBehaviour
     private void SetShortJumpText() => UpdateMessage("Press Space to jump");
     private void SetLongJumpText() => UpdateMessage("Hold Space to jump higher");
     private void SetRunningJumpText() => UpdateMessage("Run to one side and press and hold Space to jump even higher");
-    private void SetMovementext() => UpdateMessage("Use WASD to move");
+    private void SetMovemenText() => UpdateMessage("Use WASD to move");
+    private void SetEnterablePlatformText() => UpdateMessage("You can enter on <this> platform from below, press S to drop from it.");
+    private void SetSpikesText() => UpdateMessage("Be careful! Spikes deal damage when you touch them, better be safe.");
     private void HandleMessages(string message)
     {
         switch (message)
@@ -53,7 +55,13 @@ public class PlayerUI : MonoBehaviour
                 SetRunningJumpText();
                 break;
             case "hint_movement":
-                SetMovementext();
+                SetMovemenText();
+                break;
+            case "hint_enterable_platform":
+                SetEnterablePlatformText();
+                break;
+            case "hint_spikes":
+                SetSpikesText();
                 break;
             default:
                 hintText.text = "";
