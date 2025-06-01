@@ -107,12 +107,12 @@ public class PlayerStats : UnitStats
         RemoveHealthOnAttack(pitfallDamage, obj);
     }
 
-    public void handleSpikes(GameObject obj)
+    public void handleSpikes(GameObject obj, int damage)
     {
-        if (UnitCurrentHealth > pitfallDamage)
+        if (UnitCurrentHealth > damage)
         {
             StartCoroutine(Respawn(false, spikesTimeToRespawn));
         }
-        RemoveHealthOnAttack(pitfallDamage, obj);
+        RemoveHealthOnAttack(damage, obj);
     }
 }

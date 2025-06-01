@@ -118,6 +118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitStats: {fileID: 0}
   HealthBarImage: {fileID: 890497219100007267}
+  hintText: {fileID: 2174155237143823199}
 --- !u!1 &4893389450379161165
 GameObject:
   m_ObjectHideFlags: 0
