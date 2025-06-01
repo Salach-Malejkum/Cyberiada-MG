@@ -39,6 +39,11 @@ public class PlayerDebug : MonoBehaviour
         {
             transform.position = teleportPositions[4];
         }
+
+        if (Input.GetKeyDown(KeyCode.F6))
+        {
+            transform.position = teleportPositions[5];
+        }
     }
 }
 

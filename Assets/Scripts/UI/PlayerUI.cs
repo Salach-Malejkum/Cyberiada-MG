@@ -41,8 +41,8 @@ public class PlayerUI : MonoBehaviour
     private void SetMovementText() => UpdateMessage("Use WASD to move");
     private void SetEnterablePlatformText() => UpdateMessage("You can enter on <this> platform from below, press S to drop from it.");
     private void SetSpikesText() => UpdateMessage("Be careful! Spikes deal damage when you touch them, better be safe.");
-    private void SetWallJumpText() => UpdateMessage("Press Space to jump off walls, you can hold Space to jump higher.");
-    private void HandleMessages(string message)
+    private void SetWallJumpText() => UpdateMessage("When touching the wall press Space to jump off it, it will push you away from the wall.");
+    private void HandleMessages(GameObject gameObject, string message)
     {
         switch (message)
         {
@@ -66,6 +66,7 @@ public class PlayerUI : MonoBehaviour
                 break;
             case "hint_wall_jump":
                 SetWallJumpText();
+                gameObject.GetComponent<PlayerMove>().SetCanWallJump(true); // TODO: This is a temporary solution, should be removed later
                 break;
             default:
                 hintText.text = "";

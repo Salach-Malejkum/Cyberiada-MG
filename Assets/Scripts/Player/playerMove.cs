@@ -66,7 +66,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (groundedManager != null)
         {
-            groundedManager.OnIsGroundedChanged +=  CheckGrounded;
+            groundedManager.OnIsGroundedChanged += CheckGrounded;
         }
     }
 
@@ -113,15 +113,13 @@ public class PlayerMove : MonoBehaviour
 
     void Move()
     {
-        if (moveInput.x > 0 && !isFacingRight)
+        if (isDashing)
         {
-            isFacingRight = true;
-            ResetTimer();
-            Flip();
+            return;
         }
-        if (moveInput.x < 0 && isFacingRight)
+
+        if (ShouldFlip())
         {
-            isFacingRight = false;
             ResetTimer();
             Flip();
         }
@@ -132,19 +130,23 @@ public class PlayerMove : MonoBehaviour
             return;
         }
 
-        if (!isDashing)
+        Vector3 move = new Vector3(moveInput.x, 0f, 0f) * moveSpeed;
+        if (isGrounded)
         {
-            Vector3 move = new Vector3(moveInput.x, 0f, 0f) * moveSpeed;
-            if (isGrounded)
-            {
-                rb.linearVelocity = new Vector3(move.x, rb.linearVelocity.y, 0f);
-            }
-            else
-            {
-                rb.linearVelocity = new Vector3(Mathf.Clamp(rb.linearVelocity.x + (move.x / airDragMovementModifier), -moveSpeed, moveSpeed), rb.linearVelocity.y, 0f);
-            }
+            rb.linearVelocity = new Vector3(move.x, rb.linearVelocity.y, 0f);
         }
+        else
+        {
+            rb.linearVelocity = new Vector3(Mathf.Clamp(rb.linearVelocity.x + (move.x / airDragMovementModifier), -moveSpeed, moveSpeed), rb.linearVelocity.y, 0f);
+        }
+
+
         anim.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
+    }
+
+    private bool ShouldFlip()
+    {
+        return (moveInput.x > 0 && !isFacingRight) || (moveInput.x < 0 && isFacingRight);
     }
 
     void Jump()
@@ -177,10 +179,15 @@ public class PlayerMove : MonoBehaviour
             doubleJumped = true;
         }
 
+        WallJump();
+    }
+
+    private void WallJump()
+    {
         if (canWallJump && isWalled)
         {
             int sign = isWallLeft ? 1 : -1;
-            rb.linearVelocity = new Vector3(sign * wallJumpForce, jumpForce, 0f);
+            rb.AddForce(new Vector3(sign * wallJumpForce, wallJumpForce, 0f), ForceMode.Impulse);
         }
     }
 
@@ -288,6 +295,7 @@ public class PlayerMove : MonoBehaviour
     private void Flip()
     {
         renderer.flipX = !renderer.flipX;
+        isFacingRight = !isFacingRight;
 
         Vector3 attackPosition = this.attackPosition.localPosition;
         attackPosition.x *= -1;
@@ -372,5 +380,10 @@ public class PlayerMove : MonoBehaviour
     public bool GetCanAttack()
     {
         return canAttack;
+    }
+    
+    public void SetCanWallJump(bool canWallJump)
+    {
+        this.canWallJump = canWallJump;
     }
 }
