@@ -46,9 +46,4 @@ public class PlayerDebug : MonoBehaviour
         }
     }
 }
-
-#else
-{
-
-}
 #endif

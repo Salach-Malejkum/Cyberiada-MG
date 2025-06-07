@@ -467,7 +467,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 408363450732702949, guid: c33a39ad553fe0245bee842836c1cd32, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 500
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 408363450732702949, guid: c33a39ad553fe0245bee842836c1cd32, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -519,7 +519,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2780215132478652448, guid: c33a39ad553fe0245bee842836c1cd32, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 377.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2780215132478652448, guid: c33a39ad553fe0245bee842836c1cd32, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -539,7 +539,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3226213797571943608, guid: c33a39ad553fe0245bee842836c1cd32, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 300
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3226213797571943608, guid: c33a39ad553fe0245bee842836c1cd32, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -663,7 +663,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5278197210808301330, guid: c33a39ad553fe0245bee842836c1cd32, type: 3}
       propertyPath: sceneName
-      value: Tutorial1
+      value: 01_Tutorial_Cave
       objectReference: {fileID: 0}
     - target: {fileID: 7268262395852455917, guid: c33a39ad553fe0245bee842836c1cd32, type: 3}
       propertyPath: m_AnchorMax.y
@@ -675,7 +675,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7268262395852455917, guid: c33a39ad553fe0245bee842836c1cd32, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 127.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7268262395852455917, guid: c33a39ad553fe0245bee842836c1cd32, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -699,7 +699,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8582058646721269412, guid: c33a39ad553fe0245bee842836c1cd32, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8582058646721269412, guid: c33a39ad553fe0245bee842836c1cd32, type: 3}
       propertyPath: m_AnchoredPosition.x

@@ -8,12 +8,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 2d18c16eba8598440a2ef7ca80376a92
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Tutorial1.unity
     guid: 02cbac3cea6816445a9a2506957c250a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level1.unity
     guid: 13c90bc441c6dc94b8572f2a1cc016a5
+  - enabled: 1
+    path: Assets/Scenes/01_Tutorial_Cave.unity
+    guid: 03f643db1f5f1254c95bdbd0a2540ade
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: e0148d79197c9da4b9d8b33374191414, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 344a38994686e3d4fac20761bfa9e9d8, type: 3}
