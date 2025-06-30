@@ -95,7 +95,14 @@ public class PlayerAttack : MonoBehaviour
         hits = Physics.SphereCastAll(attackTransform.position, meleeAttackRadius, transform.right, 0f, enemyLayer);
         for (int i = 0; i < hits.Length; i++)
         {
+            EnemyPatrol enemyPatrol = hits[i].collider.gameObject.GetComponent<EnemyPatrol>();
             EnemyStats enemyStats = hits[i].collider.gameObject.GetComponent<EnemyStats>();
+
+            if (enemyPatrol != null)
+            {
+                enemyPatrol.anim.SetTrigger("Hit");
+            }
+
             if (enemyStats != null)
             {
                 if (isOnBeat)
