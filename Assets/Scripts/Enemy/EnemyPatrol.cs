@@ -72,12 +72,12 @@ public class EnemyPatrol : MonoBehaviour
         if (isWaiting) return;
 
         enemyRb.linearVelocity = new Vector3(moveDirection * speed, 0f, 0f);
-        if (anim != null)
-            anim.SetFloat("Speed", enemyRb.linearVelocity.magnitude);
+        anim.SetFloat("Speed", enemyRb.linearVelocity.magnitude);
 
-
+        Debug.Log(Vector3.Distance(transform.position, currentDestination.position));
         if (Vector3.Distance(transform.position, currentDestination.position) < patrolEdgeSize)
         {
+            Debug.Log("patrol edge");
             StartCoroutine(PatrolPause());
         }
     }
@@ -86,8 +86,7 @@ public class EnemyPatrol : MonoBehaviour
     {
         isWaiting = true;
         enemyRb.linearVelocity = Vector3.zero;
-        if (anim != null)
-            anim.SetFloat("Speed", enemyRb.linearVelocity.magnitude);
+        anim.SetFloat("Speed", enemyRb.linearVelocity.magnitude);
         yield return new WaitForSeconds(patrolPauseTime);
         if (patrolWaitCancel)
         {
@@ -120,20 +119,19 @@ public class EnemyPatrol : MonoBehaviour
             PatrolPauseCanceld();
         }
 
+
         if (hasGroundAhead)
         {
             if (playerInAttackRange.PlayerInAttackRange() || playerInAttackRange.EnemyAttacking())
             {
                 enemyRb.linearVelocity = new Vector3(0f, 0f, 0f);
-                if (anim != null)
-                    anim.SetFloat("Speed", enemyRb.linearVelocity.magnitude);
+                anim.SetFloat("Speed", enemyRb.linearVelocity.magnitude);
                 playerInAttackRange.EnemyReadyToAttack();
             }
             else
             {
                 enemyRb.linearVelocity = new Vector3(direction.x * speed, 0f, 0f);
-                if (anim != null)
-                    anim.SetFloat("Speed", enemyRb.linearVelocity.magnitude);
+                anim.SetFloat("Speed", enemyRb.linearVelocity.magnitude);
             }
 
             if ((direction.x > 0 && !renderer.flipX) || (direction.x < 0 && renderer.flipX))
@@ -171,6 +169,8 @@ public class EnemyPatrol : MonoBehaviour
     {
         Vector3 fieldOfVisionSize = new Vector3(fieldOfVisionHorisontalRange, fieldOfVisionVerticalRange, 5f);
         RaycastHit[] hits = Physics.BoxCastAll(transformer.position, fieldOfVisionSize/2, transform.right, Quaternion.identity, 0f, playerLayer);
+
+
 
         if (hits.Length > 0)
         {

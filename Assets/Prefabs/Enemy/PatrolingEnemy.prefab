@@ -238,6 +238,7 @@ MonoBehaviour:
     m_Bits: 128
   transformer: {fileID: 8933103828639999769}
   attackPosition: {fileID: 4860622856943817851}
+  anim: {fileID: 0}
 --- !u!114 &8920913877592544062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -320,7 +321,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
   m_Color: {r: 1, g: 0, b: 0.7904124, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 2}
