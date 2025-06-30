@@ -294,7 +294,14 @@ public class PlayerMove : MonoBehaviour
     }
     private void Flip()
     {
-        renderer.flipX = !renderer.flipX;
+        if (moveInput.x < 0f)
+        {
+            renderer.flipX = true;
+        }
+        else if (moveInput.x > 0f)
+        {
+            renderer.flipX = false;
+        }
         isFacingRight = !isFacingRight;
 
         Vector3 attackPosition = this.attackPosition.localPosition;
