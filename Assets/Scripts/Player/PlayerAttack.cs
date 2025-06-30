@@ -10,7 +10,6 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private Transform attackTransform;
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private float attackErrorMargin = 0.1f;
-    [SerializeField] SpriteRenderer rythmDebug;
     private float attackTimeCounter;
     private float comboEndCounter;
     private int meleeComboAttackNumber;
@@ -19,6 +18,11 @@ public class PlayerAttack : MonoBehaviour
     private float attackTime;
     private PlayerMove playerMove;
     private Animator anim;
+
+    [Header("Material Renderer")]
+    [SerializeField] private Renderer mat_renderer;
+    [SerializeField] private Color onBeatColor;
+    [SerializeField] private Color offBeatColor;
 
     void Start()
     {
@@ -36,11 +40,11 @@ public class PlayerAttack : MonoBehaviour
 
         if (Mathf.Abs(Time.time - beatTime) <= attackErrorMargin)
         {
-            rythmDebug.color = Color.blue;
+            mat_renderer.material.SetColor("_OutlineColor", onBeatColor);
         }
         else
         {
-            rythmDebug.color = Color.red;
+            mat_renderer.material.SetColor("_OutlineColor", offBeatColor);
         }
     }
 
@@ -100,7 +104,7 @@ public class PlayerAttack : MonoBehaviour
 
             if (enemyPatrol != null)
             {
-                enemyPatrol.anim.SetTrigger("Hit");
+                enemyPatrol.onHitChangeColor();
             }
 
             if (enemyStats != null)
