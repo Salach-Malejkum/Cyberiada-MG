@@ -463,6 +463,20 @@
             },
             "m_InputSlot": {
                 "m_Node": {
+                    "m_Id": "b6289e1f4ad449f4a107928f17d5d65a"
+                },
+                "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "a151917f83a94fb9aa5e33d1ece01eca"
+                },
+                "m_SlotId": 1
+            },
+            "m_InputSlot": {
+                "m_Node": {
                     "m_Id": "ef0bf1c05ebf4066b49b1d16b42e0e9d"
                 },
                 "m_SlotId": 0
@@ -562,20 +576,6 @@
             "m_InputSlot": {
                 "m_Node": {
                     "m_Id": "27cd1889b49d45a68441a29011cbcc56"
-                },
-                "m_SlotId": 0
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
-                    "m_Id": "ef0bf1c05ebf4066b49b1d16b42e0e9d"
-                },
-                "m_SlotId": 3
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "b6289e1f4ad449f4a107928f17d5d65a"
                 },
                 "m_SlotId": 0
             }
@@ -1438,9 +1438,9 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "r": 0.04846031218767166,
-        "g": 0.9339622855186462,
-        "b": 0.5426939725875855,
+        "r": 0.0,
+        "g": 0.25471699237823489,
+        "b": 0.14201034605503083,
         "a": 1.0
     },
     "isMainColor": false,
@@ -2989,8 +2989,8 @@
     "m_Hidden": false,
     "m_Value": {
         "r": 0.0,
-        "g": 0.4716981053352356,
-        "b": 0.2629821002483368,
+        "g": 0.07547169923782349,
+        "b": 0.042138371616601947,
         "a": 1.0
     },
     "isMainColor": false,
@@ -3990,9 +3990,9 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -55.00008010864258,
-            "y": -202.00001525878907,
-            "width": 208.0000457763672,
+            "x": -89.99993896484375,
+            "y": -9.000041007995606,
+            "width": 207.9999542236328,
             "height": 326.0000305175781
         }
     },
