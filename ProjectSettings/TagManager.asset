@@ -8,6 +8,9 @@ TagManager:
   - SpawnLeft
   - SpawnRight
   - DestructibleObject
+  - inputSystem
+  - CheckPoint
+  - checkPointManager
   layers:
   - Default
   - TransparentFX
