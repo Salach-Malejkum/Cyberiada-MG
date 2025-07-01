@@ -115,6 +115,7 @@ GameObject:
   - component: {fileID: 4971789382834725348}
   - component: {fileID: 4462462218039777408}
   - component: {fileID: 8867169589589101275}
+  - component: {fileID: 6728154399439355548}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -400,6 +401,8 @@ MonoBehaviour:
     m_Bits: 256
   attackErrorMargin: 0.3
   mat_renderer: {fileID: 4462462218039777408}
+  onBeatColor: {r: 0, g: 0, b: 0, a: 0}
+  offBeatColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!95 &4971789382834725348
 Animator:
   serializedVersion: 7
@@ -496,6 +499,88 @@ MonoBehaviour:
   - {x: 104, y: 32, z: 0}
   - {x: 70, y: 30, z: 0}
   - {x: 15, y: 30, z: 0}
+--- !u!114 &6728154399439355548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7861595452502434213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86d5a937176333e4cabd183eda2a708e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walk_1:
+    Guid:
+      Data1: -947913903
+      Data2: 1151636210
+      Data3: -880811859
+      Data4: 292278679
+    Path: event:/PlayerWalk1
+  walk_2:
+    Guid:
+      Data1: -2077683269
+      Data2: 1190689209
+      Data3: 79811203
+      Data4: 1028567933
+    Path: event:/PlayerWalk2
+  walk_3:
+    Guid:
+      Data1: 1696669421
+      Data2: 1336094876
+      Data3: 1227400839
+      Data4: 1884068009
+    Path: event:/PlayerWalk3
+  atk_1:
+    Guid:
+      Data1: 557571121
+      Data2: 1240548332
+      Data3: -741650244
+      Data4: -372049066
+    Path: event:/PlayerAtk1
+  atk_2:
+    Guid:
+      Data1: -76191544
+      Data2: 1260655764
+      Data3: -1348332141
+      Data4: -616596298
+    Path: event:/PlayerAtk2
+  run_1:
+    Guid:
+      Data1: -1471031477
+      Data2: 1317645214
+      Data3: -1960864640
+      Data4: -279589921
+    Path: event:/PlayerRun1
+  run_2:
+    Guid:
+      Data1: -1735729678
+      Data2: 1111138643
+      Data3: -970433093
+      Data4: 444300687
+    Path: event:/PlayerRun2
+  run_3:
+    Guid:
+      Data1: -2083349257
+      Data2: 1164751669
+      Data3: -255125852
+      Data4: 2106385132
+    Path: event:/PlayerRun3
+  jump:
+    Guid:
+      Data1: -1641943791
+      Data2: 1258986426
+      Data3: -818057074
+      Data4: -1131409071
+    Path: event:/PlayerJump
+  land:
+    Guid:
+      Data1: 13479249
+      Data2: 1199538814
+      Data3: -442977858
+      Data4: 1284012077
+    Path: event:/PlayerLand
 --- !u!1 &8522084363792166637
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,6 +592,7 @@ GameObject:
   - component: {fileID: 4477065710372479622}
   - component: {fileID: 6086347515701926388}
   - component: {fileID: 2823920806652547633}
+  - component: {fileID: 279343792579723431}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -593,4 +679,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nonRigidbodyVelocity: 0
-  attenuationObject: {fileID: 0}
+  attenuationObject: {fileID: 7861595452502434213}
+--- !u!114 &279343792579723431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8522084363792166637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
