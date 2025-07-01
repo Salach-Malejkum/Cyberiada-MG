@@ -108,6 +108,7 @@ public class PlayerMove : MonoBehaviour
 
         Move();
         FallCheckPoint();
+        anim.SetFloat("JumpSpeed", rb.linearVelocity.y);
     }
 
     void Move()
@@ -153,8 +154,6 @@ public class PlayerMove : MonoBehaviour
         if (isDashing)
         {
             rb.linearVelocity = new Vector3(moveSpeed, jumpForce, 0f);
-            anim.SetBool("justJumped", true);
-            anim.SetFloat("jumpSpeed", rb.linearVelocity.y);
             DashCancel();
         }
 
@@ -229,18 +228,17 @@ public class PlayerMove : MonoBehaviour
         if (moveSpeed < maxSprintSpeed)
         {
             moveSpeed += sprintSpeedIncrement;
-            anim.SetBool("isRunning", true);
         }
         else
         {
             moveSpeed = maxSprintSpeed;
-            anim.SetBool("isRunning", true);
         }
+        anim.SetBool("IsRunning", true);
     }
 
     void ResetTimer()
     {
-        anim.SetBool("isRunning", false);
+        anim.SetBool("IsRunning", false);
         sprintTimer = timeToSprint;
         moveSpeed = baseMoveSpeed;
     }
