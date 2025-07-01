@@ -1,8 +1,11 @@
 using System.Collections;
 using UnityEngine;
+using FMODUnity;
 
 public class EnemyStats : UnitStats
 {
+    [SerializeField] private EventReference hitSound;
+
     private void Awake()
     {
         this.onUnitDeath += HandleEnemyDeath;
@@ -22,6 +25,7 @@ public class EnemyStats : UnitStats
     public override void RemoveHealthOnAttack(float damageAmount, GameObject aggressor)
     {
         base.RemoveHealthOnAttack(damageAmount, aggressor);
+        SFXManager.instance.PlayOneShot(hitSound, this.transform.position);
     }
 
     protected virtual void HandleEnemyDeath()

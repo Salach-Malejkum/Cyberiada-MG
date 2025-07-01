@@ -517,70 +517,70 @@ MonoBehaviour:
       Data2: 1151636210
       Data3: -880811859
       Data4: 292278679
-    Path: event:/PlayerWalk1
+    Path: event:/Player/PlayerWalk1
   walk_2:
     Guid:
       Data1: -2077683269
       Data2: 1190689209
       Data3: 79811203
       Data4: 1028567933
-    Path: event:/PlayerWalk2
+    Path: event:/Player/PlayerWalk2
   walk_3:
     Guid:
       Data1: 1696669421
       Data2: 1336094876
       Data3: 1227400839
       Data4: 1884068009
-    Path: event:/PlayerWalk3
+    Path: event:/Player/PlayerWalk3
   atk_1:
     Guid:
       Data1: 557571121
       Data2: 1240548332
       Data3: -741650244
       Data4: -372049066
-    Path: event:/PlayerAtk1
+    Path: event:/Player/PlayerAtk1
   atk_2:
     Guid:
       Data1: -76191544
       Data2: 1260655764
       Data3: -1348332141
       Data4: -616596298
-    Path: event:/PlayerAtk2
+    Path: event:/Player/PlayerAtk2
   run_1:
     Guid:
       Data1: -1471031477
       Data2: 1317645214
       Data3: -1960864640
       Data4: -279589921
-    Path: event:/PlayerRun1
+    Path: event:/Player/PlayerRun1
   run_2:
     Guid:
       Data1: -1735729678
       Data2: 1111138643
       Data3: -970433093
       Data4: 444300687
-    Path: event:/PlayerRun2
+    Path: event:/Player/PlayerRun2
   run_3:
     Guid:
       Data1: -2083349257
       Data2: 1164751669
       Data3: -255125852
       Data4: 2106385132
-    Path: event:/PlayerRun3
+    Path: event:/Player/PlayerRun3
   jump:
     Guid:
       Data1: -1641943791
       Data2: 1258986426
       Data3: -818057074
       Data4: -1131409071
-    Path: event:/PlayerJump
+    Path: event:/Player/PlayerJump
   land:
     Guid:
       Data1: 13479249
       Data2: 1199538814
       Data3: -442977858
       Data4: 1284012077
-    Path: event:/PlayerLand
+    Path: event:/Player/PlayerLand
 --- !u!1 &8522084363792166637
 GameObject:
   m_ObjectHideFlags: 0
