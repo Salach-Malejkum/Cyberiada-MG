@@ -14,6 +14,7 @@ public class ChangeLevel : MonoBehaviour
     {
         if (IsPlayer(other.gameObject))
         {
+            GameManager.instance.SaveAbilityState();
             GameManager.instance.nextSpawn = nextSpawn.ToString();
             StartCoroutine(LoadLevel());
         }

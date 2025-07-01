@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using FMODUnity;
 
 public class PlayerStats : UnitStats
 {
@@ -43,6 +44,9 @@ public class PlayerStats : UnitStats
         get { return this.pitfallDamage; }
     }
 
+    [SerializeField] private Renderer matRenderer;
+    [SerializeField] private EventReference hitSound;
+
     private void Awake()
     {
         this.onUnitDeath += HandlePlayerDeath;
@@ -62,6 +66,8 @@ public class PlayerStats : UnitStats
     public override void RemoveHealthOnAttack(float damageAmount, GameObject aggressor)
     {
         base.RemoveHealthOnAttack(damageAmount, aggressor);
+        onHitChangeColor();
+        SFXManager.instance.PlayOneShot(hitSound, this.transform.position);
     }
 
     public void UpdateRespawnCoordinates(Vector3 newCoordinates)
@@ -114,5 +120,17 @@ public class PlayerStats : UnitStats
             StartCoroutine(Respawn(false, spikesTimeToRespawn));
         }
         RemoveHealthOnAttack(damage, obj);
+    }
+
+    public void onHitChangeColor()
+    {
+        StartCoroutine(changeColor());
+    }
+
+    IEnumerator changeColor()
+    {
+        matRenderer.material.SetColor("_OnHitColor", Color.white);
+        yield return new WaitForSeconds(0.2f);
+        matRenderer.material.SetColor("_OnHitColor", new Color(0.0f, 0.0f, 0.0f, 0.0f));
     }
 }

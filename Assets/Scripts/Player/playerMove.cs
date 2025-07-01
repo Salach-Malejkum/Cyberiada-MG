@@ -39,11 +39,11 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private LayerMask wallLayer;
 
     [Header("Unlocked Skills")]
-    [SerializeField] private bool canDoubleJump;
-    [SerializeField] private bool canDash = true;
-    [SerializeField] private bool canWallJump;
-    [SerializeField] private bool canBlock;
-    [SerializeField] private bool canAttack;
+    [SerializeField] public bool canDoubleJump;
+    [SerializeField] public bool canDash = true;
+    [SerializeField] public bool canWallJump;
+    [SerializeField] public bool canBlock;
+    [SerializeField] public bool canAttack;
 
 
     private Rigidbody rb;
@@ -92,11 +92,11 @@ public class PlayerMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (rb.linearVelocity.x != 0f && isGrounded)
+        if ((rb.linearVelocity.x >= 0.001f || rb.linearVelocity.x <= -0.001f) && isGrounded)
         {
             sprintTimer -= Time.deltaTime;
         }
-        else if (rb.linearVelocity.x == 0f)
+        else if (rb.linearVelocity.x <= 0.001f && rb.linearVelocity.x >= -0.001f)
         {
             ResetTimer();
         }
