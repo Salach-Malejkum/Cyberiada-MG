@@ -1,10 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using FMODUnity;
 
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private string sceneName;
     [SerializeField] private GameObject optionsPanel;
+    [SerializeField] private EventReference switchButton;
+    [SerializeField] private EventReference clickButton;
 
     private void Awake()
     {
@@ -31,5 +34,15 @@ public class MainMenu : MonoBehaviour
         optionsPanel.SetActive(true);
         this.gameObject.SetActive(false);
         Debug.Log("options");
+    }
+
+    public void PlayOnClick()
+    {
+        SFXManager.instance.PlayOneShot(clickButton, this.transform.position);
+    }
+
+    public void PlayOnFocus()
+    {
+        SFXManager.instance.PlayOneShot(switchButton, this.transform.position);
     }
 }
