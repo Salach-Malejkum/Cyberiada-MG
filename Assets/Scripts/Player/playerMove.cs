@@ -92,11 +92,11 @@ public class PlayerMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (rb.linearVelocity.x != 0f && isGrounded)
+        if ((rb.linearVelocity.x >= 0.001f || rb.linearVelocity.x <= -0.001f) && isGrounded)
         {
             sprintTimer -= Time.deltaTime;
         }
-        else if (rb.linearVelocity.x == 0f)
+        else if (rb.linearVelocity.x <= 0.001f && rb.linearVelocity.x >= -0.001f)
         {
             ResetTimer();
         }
