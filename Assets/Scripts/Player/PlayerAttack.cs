@@ -102,6 +102,7 @@ public class PlayerAttack : MonoBehaviour
             EnemyPatrol enemyPatrol = hits[i].collider.gameObject.GetComponent<EnemyPatrol>();
             EnemyStats enemyStats = hits[i].collider.gameObject.GetComponent<EnemyStats>();
             DestructibleObject destructibleObject = hits[i].collider.gameObject.GetComponent<DestructibleObject>();
+            ObjectStats objectStats = hits[i].collider.gameObject.GetComponent<ObjectStats>();
 
             if (enemyPatrol != null)
             {
@@ -124,6 +125,12 @@ public class PlayerAttack : MonoBehaviour
                     enemyStats.RemoveHealthOnAttack(stats.UnitAttackDamage, this.gameObject);
                 }
             }
+
+            if (objectStats != null)
+            {
+                objectStats.RemoveHealthOnAttack(stats.UnitAttackDamage, this.gameObject);
+            }
+
         }
         playerMove.isAttacking = false;
     }

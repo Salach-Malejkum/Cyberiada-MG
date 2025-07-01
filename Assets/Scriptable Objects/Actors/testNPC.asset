@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: testNPC
   m_EditorClassIdentifier: 
   actorName: testNPC
-  actorPortrait: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  actorPortrait: {fileID: -2031461355, guid: b12f8de53e874f24cacc7db51f494d60, type: 3}
