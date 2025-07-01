@@ -49,7 +49,7 @@ public class PlayerAttack : MonoBehaviour
         if (playerMove.GetCanAttack() && inputAction.started && attackTimeCounter >= stats.TimeBtwAttacks && playerMove.isGrounded)
         {
             playerMove.isAttacking = true;
-            anim.SetTrigger("AttackTrigger");
+            anim.SetTrigger("attackTrigger");
             attackTime = Time.time;
             if (comboEndCounter > stats.TimeBtwCombos)
             {
@@ -59,11 +59,11 @@ public class PlayerAttack : MonoBehaviour
             switch (meleeComboAttackNumber)
             {
                 case 1:
-                    anim.SetInteger("AttackNum", meleeComboAttackNumber);
+                    anim.SetInteger("attackNum", meleeComboAttackNumber);
                     meleeComboAttackNumber++;
                     break;
                 case 2:
-                    anim.SetInteger("AttackNum", meleeComboAttackNumber);
+                    anim.SetInteger("attackNum", meleeComboAttackNumber);
                     meleeComboAttackNumber = 1;
                     break;
             }

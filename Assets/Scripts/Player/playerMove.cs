@@ -108,7 +108,7 @@ public class PlayerMove : MonoBehaviour
 
         Move();
         FallCheckPoint();
-        anim.SetFloat("JumpSpeed", rb.linearVelocity.y);
+        anim.SetFloat("jumpSpeed", rb.linearVelocity.y);
     }
 
     void Move()
@@ -161,7 +161,7 @@ public class PlayerMove : MonoBehaviour
         {
             PerformJumpVelocityCalculation();
             doubleJumped = false;
-            anim.SetBool("justJumped", true);
+            anim.SetTrigger("jumpTrigger");
             anim.SetFloat("jumpSpeed", rb.linearVelocity.y);
             return;
         }
@@ -178,7 +178,7 @@ public class PlayerMove : MonoBehaviour
             }
 
             doubleJumped = true;
-            anim.SetBool("justJumped", true);
+            anim.SetTrigger("jumpTrigger");
             anim.SetFloat("jumpSpeed", rb.linearVelocity.y);
         }
 
@@ -186,7 +186,7 @@ public class PlayerMove : MonoBehaviour
         {
             int sign = isWallLeft ? 1 : -1;
             rb.linearVelocity = new Vector3(sign * wallJumpForce, jumpForce, 0f);
-            anim.SetBool("justJumped", true);
+            anim.SetTrigger("jumpTrigger");
             anim.SetFloat("jumpSpeed", rb.linearVelocity.y);
         }
     }
@@ -212,15 +212,10 @@ public class PlayerMove : MonoBehaviour
         rb.linearVelocity = new Vector3(0, jumpForce, 0f);
     }
 
-    void JumpTakeOfEnd()
-    {
-        anim.SetBool("justJumped", false);
-    }
-
     void CheckGrounded(bool isGrouded)
     {
         this.isGrounded = isGrouded;
-        anim.SetBool("isGrouded", isGrounded);
+        anim.SetBool("isGrounded", isGrounded);
     }
 
     void Sprint()
@@ -233,12 +228,12 @@ public class PlayerMove : MonoBehaviour
         {
             moveSpeed = maxSprintSpeed;
         }
-        anim.SetBool("IsRunning", true);
+        anim.SetBool("isRunning", true);
     }
 
     void ResetTimer()
     {
-        anim.SetBool("IsRunning", false);
+        anim.SetBool("isRunning", false);
         sprintTimer = timeToSprint;
         moveSpeed = baseMoveSpeed;
     }
