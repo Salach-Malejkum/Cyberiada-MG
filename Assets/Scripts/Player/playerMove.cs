@@ -39,7 +39,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private LayerMask wallLayer;
 
     [Header("Unlocked Skills")]
-    [SerializeField] private bool canDoubleJump;
+    [SerializeField] public bool canDoubleJump; //I changed this from private to public so I can turn it on after collecting specific item
     [SerializeField] private bool canDash = true;
     [SerializeField] private bool canWallJump;
     [SerializeField] private bool canBlock;
@@ -108,7 +108,7 @@ public class PlayerMove : MonoBehaviour
 
         Move();
         FallCheckPoint();
-        anim.SetFloat("JumpSpeed", rb.linearVelocity.y);
+        anim.SetFloat("jumpSpeed", rb.linearVelocity.y);
     }
 
     void Move()
@@ -129,6 +129,7 @@ public class PlayerMove : MonoBehaviour
         if (isAttacking)
         {
             rb.linearVelocity = new Vector3(0f, 0f, 0f);
+            anim.SetFloat("speed", Mathf.Abs(rb.linearVelocity.x));
             return;
         }
 
@@ -144,12 +145,12 @@ public class PlayerMove : MonoBehaviour
                 rb.linearVelocity = new Vector3(Mathf.Clamp(rb.linearVelocity.x + (move.x / airDragMovementModifier), -moveSpeed, moveSpeed), rb.linearVelocity.y, 0f);
             }
         }
-        anim.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
+        anim.SetFloat("speed", Mathf.Abs(rb.linearVelocity.x));
+        anim.SetFloat("jumpSpeed", rb.linearVelocity.y);
     }
 
     void Jump()
     {
-        anim.SetTrigger("JumpTrigger");
         if (isDashing)
         {
             rb.linearVelocity = new Vector3(moveSpeed, jumpForce, 0f);
@@ -160,6 +161,8 @@ public class PlayerMove : MonoBehaviour
         {
             PerformJumpVelocityCalculation();
             doubleJumped = false;
+            anim.SetTrigger("jumpTrigger");
+            anim.SetFloat("jumpSpeed", rb.linearVelocity.y);
             return;
         }
 
@@ -175,12 +178,16 @@ public class PlayerMove : MonoBehaviour
             }
 
             doubleJumped = true;
+            anim.SetTrigger("jumpTrigger");
+            anim.SetFloat("jumpSpeed", rb.linearVelocity.y);
         }
 
         if (canWallJump && isWalled)
         {
             int sign = isWallLeft ? 1 : -1;
             rb.linearVelocity = new Vector3(sign * wallJumpForce, jumpForce, 0f);
+            anim.SetTrigger("jumpTrigger");
+            anim.SetFloat("jumpSpeed", rb.linearVelocity.y);
         }
     }
 
@@ -208,7 +215,7 @@ public class PlayerMove : MonoBehaviour
     void CheckGrounded(bool isGrouded)
     {
         this.isGrounded = isGrouded;
-        anim.SetBool("IsGrounded", isGrounded);
+        anim.SetBool("isGrounded", isGrounded);
     }
 
     void Sprint()
@@ -221,12 +228,12 @@ public class PlayerMove : MonoBehaviour
         {
             moveSpeed = maxSprintSpeed;
         }
-        anim.SetBool("IsRunning", true);
+        anim.SetBool("isRunning", true);
     }
 
     void ResetTimer()
     {
-        anim.SetBool("IsRunning", false);
+        anim.SetBool("isRunning", false);
         sprintTimer = timeToSprint;
         moveSpeed = baseMoveSpeed;
     }
