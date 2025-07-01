@@ -101,10 +101,16 @@ public class PlayerAttack : MonoBehaviour
         {
             EnemyPatrol enemyPatrol = hits[i].collider.gameObject.GetComponent<EnemyPatrol>();
             EnemyStats enemyStats = hits[i].collider.gameObject.GetComponent<EnemyStats>();
+            DestructibleObject destructibleObject = hits[i].collider.gameObject.GetComponent<DestructibleObject>();
 
             if (enemyPatrol != null)
             {
                 enemyPatrol.onHitChangeColor();
+            }
+
+            if (destructibleObject != null)
+            {
+                destructibleObject.TakeDamage();
             }
 
             if (enemyStats != null)
