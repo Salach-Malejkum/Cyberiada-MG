@@ -68,22 +68,30 @@ public class DialogueManager : MonoBehaviour
         optionsPanel.SetActive(false);
     }
 
-    void OnTalk(InputValue inputValue)
+    public void OnTalk(InputAction.CallbackContext inputAction)
     {
-        if (dialogueActivated)
+        if (inputAction.started)
         {
-            if (stepNum >= currentConversation.actors.Length)
+            if (dialogueActivated)
             {
-                currentNpcDialog.RemoveConversationsHeld();
-                CheckForEvents();
-                //currentConversation.wasHeld = true;
-                TurnOffDialogue();
-            } 
-            else
-            {
-
-                PlayDialogue();
+                ManageDialogue();
             }
+        }
+    }
+
+    private void ManageDialogue()
+    {
+        if (stepNum >= currentConversation.actors.Length)
+        {
+            currentNpcDialog.RemoveConversationsHeld();
+            CheckForEvents();
+            //currentConversation.wasHeld = true;
+            TurnOffDialogue();
+        }
+        else
+        {
+
+            PlayDialogue();
         }
     }
 
@@ -165,7 +173,7 @@ public class DialogueManager : MonoBehaviour
         }
         CheckForEvents();
         stepNum = 0;
-        OnTalk(null);
+        ManageDialogue();
     }
 
     private void CheckForEvents()
@@ -182,7 +190,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    void OnClickButton0(InputValue inputValue)
+    public void OnClickButton0(InputAction.CallbackContext inputAction)
     {
         if (dialogueActivated)
         {
@@ -194,7 +202,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    void OnClickButton1(InputValue inputValue)
+    public void OnClickButton1(InputAction.CallbackContext inputAction)
     {
         if (dialogueActivated)
         {
@@ -206,7 +214,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    void OnClickButton2(InputValue inputValue)
+    public void OnClickButton2(InputAction.CallbackContext inputAction)
     {
         if (dialogueActivated)
         {
@@ -218,7 +226,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    void OnClickButton3(InputValue inputValue)
+    public void OnClickButton3(InputAction.CallbackContext inputAction)
     {
         if (dialogueActivated)
         {
@@ -229,7 +237,7 @@ public class DialogueManager : MonoBehaviour
             }
         }
     }
-    void OnClickButton4(InputValue inputValue)
+    public void OnClickButton4(InputAction.CallbackContext inputAction)
     {
         if (dialogueActivated)
         {
