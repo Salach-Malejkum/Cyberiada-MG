@@ -384,6 +384,11 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    public void UnlockDoubleJump()
+    {
+        canDoubleJump = true;
+    }
+
     public bool GetCanAttack()
     {
         return canAttack;

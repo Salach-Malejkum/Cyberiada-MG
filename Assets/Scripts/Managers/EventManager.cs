@@ -4,6 +4,7 @@ using UnityEngine;
 public class EventManager : MonoBehaviour
 {
     private bool[] events;
+    [SerializeField] private PlayerMove playerMove;
 
     private void Start()
     {
@@ -18,6 +19,14 @@ public class EventManager : MonoBehaviour
         if ((int)e != -1)
         {
             events[(int)e] = true;
+            Debug.Log("event occured " + (int)e);
+            switch ((int)e)
+            {
+                case 0:
+                    UnlockDoubleJump();
+                    break;
+            }
+
         }
     }
 
@@ -36,12 +45,18 @@ public class EventManager : MonoBehaviour
         }
         return true;
     }
+
+    private void UnlockDoubleJump()
+    {
+        playerMove.UnlockDoubleJump();
+    }
+
 }
 
 public enum DialogueEvents
 {
     NoEvent = -1,
-    Event1 = 0,
+    UnlockDoubleJump = 0,
     Event2 = 1,
     Event3 = 2,
     Event4 = 3,

@@ -56,7 +56,7 @@ public class DialogueManager : MonoBehaviour
     {
         currentNpcDialog = npcDialogue;
         currentConversation = npcDialogue.conversation;
-        CheckForEvents();
+        //CheckForEvents();
         dialogueActivated = true;
     }
 
@@ -75,6 +75,7 @@ public class DialogueManager : MonoBehaviour
             if (stepNum >= currentConversation.actors.Length)
             {
                 currentNpcDialog.RemoveConversationsHeld();
+                CheckForEvents();
                 //currentConversation.wasHeld = true;
                 TurnOffDialogue();
             } 
@@ -133,7 +134,7 @@ public class DialogueManager : MonoBehaviour
 
     public void Option(int optionNum)
     {
-        //Debug.Log("OptionSelected");
+        Debug.Log("OptionSelected");
         foreach (GameObject button in optionButton)
         {
             button.SetActive(false);
@@ -164,6 +165,7 @@ public class DialogueManager : MonoBehaviour
         }
         CheckForEvents();
         stepNum = 0;
+        OnTalk(null);
     }
 
     private void CheckForEvents()
@@ -176,6 +178,65 @@ public class DialogueManager : MonoBehaviour
                 {
                     eventManager.EventOccured(e);
                 }
+            }
+        }
+    }
+
+    void OnClickButton0(InputValue inputValue)
+    {
+        if (dialogueActivated)
+        {
+            if (optionButton[0].activeSelf)
+            {
+                Debug.Log("button 1 entered");
+                Option(0);
+            }
+        }
+    }
+
+    void OnClickButton1(InputValue inputValue)
+    {
+        if (dialogueActivated)
+        {
+            if (optionButton[1].activeSelf)
+            {
+                Debug.Log("button 2 entered");
+                Option(1);
+            }
+        }
+    }
+
+    void OnClickButton2(InputValue inputValue)
+    {
+        if (dialogueActivated)
+        {
+            if (optionButton[2].activeSelf)
+            {
+                Debug.Log("button 3 entered");
+                Option(2);
+            }
+        }
+    }
+
+    void OnClickButton3(InputValue inputValue)
+    {
+        if (dialogueActivated)
+        {
+            if (optionButton[3].activeSelf)
+            {
+                Debug.Log("button 4 entered");
+                Option(3);
+            }
+        }
+    }
+    void OnClickButton4(InputValue inputValue)
+    {
+        if (dialogueActivated)
+        {
+            if (optionButton[4].activeSelf)
+            {
+                Debug.Log("button 5 entered");
+                Option(4);
             }
         }
     }
