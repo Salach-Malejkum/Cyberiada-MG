@@ -42389,6 +42389,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8462374842813184970, guid: 5dcc49758217db3428b6f62453f7190a, type: 3}
+      propertyPath: matRenderer
+      value: 
+      objectReference: {fileID: 2016463550}
+    - target: {fileID: 8462374842813184970, guid: 5dcc49758217db3428b6f62453f7190a, type: 3}
+      propertyPath: mat_renderer
+      value: 
+      objectReference: {fileID: 2016463550}
+    - target: {fileID: 8462374842813184970, guid: 5dcc49758217db3428b6f62453f7190a, type: 3}
+      propertyPath: hitSound.Path
+      value: event:/Player/PlayerHit
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462374842813184970, guid: 5dcc49758217db3428b6f62453f7190a, type: 3}
+      propertyPath: hitSound.Guid.Data1
+      value: 632003916
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462374842813184970, guid: 5dcc49758217db3428b6f62453f7190a, type: 3}
+      propertyPath: hitSound.Guid.Data2
+      value: 1149431216
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462374842813184970, guid: 5dcc49758217db3428b6f62453f7190a, type: 3}
+      propertyPath: hitSound.Guid.Data3
+      value: 1667762850
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462374842813184970, guid: 5dcc49758217db3428b6f62453f7190a, type: 3}
+      propertyPath: hitSound.Guid.Data4
+      value: -1972597378
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -48118,6 +48146,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!212 &2016463550 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 4462462218039777408, guid: 5dcc49758217db3428b6f62453f7190a, type: 3}
+  m_PrefabInstance: {fileID: 1850995790}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &2018991469
 Mesh:
   m_ObjectHideFlags: 0
