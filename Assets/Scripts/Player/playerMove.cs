@@ -39,11 +39,11 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private LayerMask wallLayer;
 
     [Header("Unlocked Skills")]
-    [SerializeField] private bool canDoubleJump;
-    [SerializeField] private bool canDash = true;
-    [SerializeField] private bool canWallJump;
-    [SerializeField] private bool canBlock;
-    [SerializeField] private bool canAttack;
+    [SerializeField] public bool canDoubleJump;
+    [SerializeField] public bool canDash = true;
+    [SerializeField] public bool canWallJump;
+    [SerializeField] public bool canBlock;
+    [SerializeField] public bool canAttack;
 
 
     private Rigidbody rb;
