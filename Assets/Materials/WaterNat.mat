@@ -48,9 +48,9 @@ Material:
     - _Wave_Frequency: 0.005
     - _Wave_Speed: 1.25
     m_Colors:
-    - _Deep: {r: 0.21698111, g: 0.037869345, b: 0.19043683, a: 0}
-    - _Shallow: {r: 0.57994, g: 0, b: 0.735849, a: 0}
-    - _Specular_Color: {r: 0.20754716, g: 0.0068529765, b: 0.19875285, a: 0}
+    - _Deep: {r: 0.086863644, g: 0.3018868, b: 0.21453364, a: 0}
+    - _Shallow: {r: 0.23028658, g: 0.7075472, b: 0.45430687, a: 0}
+    - _Specular_Color: {r: 0.25832146, g: 0.4056604, b: 0.34713763, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &8178304463286289969
