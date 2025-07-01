@@ -156,3 +156,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectHP: 2
   hitParticles: {fileID: 780332428428896173, guid: 21a0fb4ea2ed29c4cbba94d479d81579, type: 3}
+  hitSound:
+    Guid:
+      Data1: -372136078
+      Data2: 1089888906
+      Data3: 383117470
+      Data4: -1988176949
+    Path: event:/Enviro/GrassHit
