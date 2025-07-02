@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1547181002691720834}
   - component: {fileID: 6992138961924440029}
   m_Layer: 8
-  m_Name: Grass1
+  m_Name: Grass1 1
   m_TagString: DestructibleObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -153,7 +153,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3a717c24e83d67044a34013832da8473, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9528302, g: 0.52534884, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
