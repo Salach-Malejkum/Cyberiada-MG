@@ -37,6 +37,7 @@ public class PlayerStats : UnitStats
     {
         get { return this.fallCheckPoint; }
     }
+    [SerializeField] protected float fallCheckPointOffset;
 
     [SerializeField] protected float pitfallDamage;
     public float PitfallDamage
@@ -99,6 +100,14 @@ public class PlayerStats : UnitStats
         }
         else
         {
+            if(transform.position.x - fallCheckPoint.x < 0)
+            {
+                fallCheckPoint = new Vector3(fallCheckPoint.x + fallCheckPointOffset, fallCheckPoint.y, fallCheckPoint.z);
+            }
+            else
+            {
+                fallCheckPoint = new Vector3(fallCheckPoint.x - fallCheckPointOffset, fallCheckPoint.y, fallCheckPoint.z);
+            }
             transform.position = fallCheckPoint;
         }
         renderer.enabled = true;

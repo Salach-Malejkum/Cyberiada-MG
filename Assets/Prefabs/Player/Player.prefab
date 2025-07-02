@@ -867,6 +867,7 @@ MonoBehaviour:
   pitFallTimeToRespawn: 0.5
   spikesTimeToRespawn: 0.1
   fallCheckPoint: {x: 0, y: 0, z: 0}
+  fallCheckPointOffset: 0.5
   pitfallDamage: 50
   matRenderer: {fileID: 5722249797344147198}
   hitSound:
@@ -1736,8 +1737,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 0.5, z: 1}
-  m_Center: {x: 0.3, y: -7.5, z: 0}
+  m_Size: {x: 0.05, y: 0.5, z: 1}
+  m_Center: {x: 0, y: -7.7, z: 0}
 --- !u!114 &4053845027304592057
 MonoBehaviour:
   m_ObjectHideFlags: 0
