@@ -155,7 +155,7 @@ public class EnemyPatrol : MonoBehaviour
     {
         Vector3 rayOrigin = transform.position + new Vector3(directionX * patrolEdgeSize, 0f, 0f);
         float rayLength = 2.5f;
-        return Physics.Raycast(rayOrigin, Vector3.down, rayLength, LayerMask.GetMask("Ground"));
+        return Physics.Raycast(rayOrigin, Vector3.down, rayLength, LayerMask.GetMask("Ground", "EnterablePlatform"));
     }
 
     private void Flip()
