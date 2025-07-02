@@ -11,7 +11,6 @@ public class PauseMenu : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("pauseStart");
         isGamePaused = false;
         pauseMenuPanel.gameObject.SetActive(false);
         menuBackGround.gameObject.SetActive(false);
@@ -22,12 +21,10 @@ public class PauseMenu : MonoBehaviour
     {
         if (isGamePaused)
         {
-            Debug.Log("unpause");
             Resume();
         }
         else
         {
-            Debug.Log("pause");
             EnablePanels();
             Time.timeScale = 0;
         }
@@ -35,7 +32,6 @@ public class PauseMenu : MonoBehaviour
 
     private void DisablePanels()
     {
-        Debug.Log("disable");
         isGamePaused = false;
         pauseMenuPanel.gameObject.SetActive(false);
         menuBackGround.gameObject.SetActive(false);
@@ -44,7 +40,6 @@ public class PauseMenu : MonoBehaviour
 
     private void EnablePanels()
     {
-        Debug.Log("enable");
         isGamePaused = true;
         pauseMenuPanel.gameObject.SetActive(true);
         menuBackGround.gameObject.SetActive(true);

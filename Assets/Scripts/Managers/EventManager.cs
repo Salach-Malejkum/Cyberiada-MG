@@ -5,6 +5,7 @@ public class EventManager : MonoBehaviour
 {
     private bool[] events;
     [SerializeField] private PlayerMove playerMove;
+    [SerializeField] private PlayerStats playerStats;
 
     private void Start()
     {
@@ -19,11 +20,13 @@ public class EventManager : MonoBehaviour
         if ((int)e != -1)
         {
             events[(int)e] = true;
-            Debug.Log("event occured " + (int)e);
             switch ((int)e)
             {
                 case 0:
-                    UnlockDoubleJump();
+                    DrinkInitialPotion();
+                    break;
+                case 1:
+                    HealPlayer();
                     break;
             }
 
@@ -46,18 +49,22 @@ public class EventManager : MonoBehaviour
         return true;
     }
 
-    private void UnlockDoubleJump()
+    private void DrinkInitialPotion()
     {
-        playerMove.UnlockDoubleJump();
+        playerMove.DrinkInitialPotion();
     }
 
+    private void HealPlayer()
+    {
+        playerStats.HealthRestored(playerStats.UnitMaxHealth);
+    }
 }
 
 public enum DialogueEvents
 {
     NoEvent = -1,
-    UnlockDoubleJump = 0,
-    Event2 = 1,
+    DrinkInitialPotion = 0,
+    HealPlayer = 1,
     Event3 = 2,
     Event4 = 3,
 };

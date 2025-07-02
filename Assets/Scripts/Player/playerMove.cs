@@ -383,9 +383,10 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    public void UnlockDoubleJump()
+    public void DrinkInitialPotion()
     {
         canDoubleJump = true;
+        canAttack = true;
     }
 
     public bool GetCanAttack()

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,6 +8,9 @@ public class GameManager : MonoBehaviour
 
     public string nextSpawn;
     private GameObject player;
+
+    [Header("Dialogues Finished")]
+    [SerializeField] public List<DialogueSO> dialogues {  get; private set; }
 
     [Header("Move")]
     [SerializeField] private float baseMoveSpeed;
@@ -51,6 +55,7 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
         }
+        dialogues = new List<DialogueSO>();
         DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoad;
     }
@@ -70,28 +75,28 @@ public class GameManager : MonoBehaviour
 
         if (pSkills != null)
         {
-            playerHP = pStats.UnitCurrentHealth;
-            baseMoveSpeed = pSkills.baseMoveSpeed;
+            instance.playerHP = pStats.UnitCurrentHealth;
+            instance.baseMoveSpeed = pSkills.baseMoveSpeed;
 
-            jumpForce = pSkills.jumpForce;
-            wallJumpForce = pSkills.wallJumpForce;
-            jumpCancelMulti = pSkills.jumpCancelMulti;
-            airDragMovementModifier = pSkills.airDragMovementModifier;
+            instance.jumpForce = pSkills.jumpForce;
+            instance.wallJumpForce = pSkills.wallJumpForce;
+            instance.jumpCancelMulti = pSkills.jumpCancelMulti;
+            instance.airDragMovementModifier = pSkills.airDragMovementModifier;
 
-            dashPower = pSkills.dashPower;
-            dashTime = pSkills.dashTime;
-            dashCooldown = pSkills.dashCooldown;
+            instance.dashPower = pSkills.dashPower;
+            instance.dashTime = pSkills.dashTime;
+            instance.dashCooldown = pSkills.dashCooldown;
             
-            timeToSprint = pSkills.timeToSprint;
-            maxSprintSpeed = pSkills.maxSprintSpeed;
-            sprintSpeedIncrement = pSkills.sprintSpeedIncrement;
+            instance.timeToSprint = pSkills.timeToSprint;
+            instance.maxSprintSpeed = pSkills.maxSprintSpeed;
+            instance.sprintSpeedIncrement = pSkills.sprintSpeedIncrement;
             
-            canDoubleJump = pSkills.canDoubleJump;
-            canDash = pSkills.canDash;
-            canWallJump = pSkills.canWallJump;
-            canBlock = pSkills.canBlock;
-            canAttack = pSkills.canAttack;
-            canRangeAttack = pSkills.canRangeAttack;
+            instance.canDoubleJump = pSkills.canDoubleJump;
+            instance.canDash = pSkills.canDash;
+            instance.canWallJump = pSkills.canWallJump;
+            instance.canBlock = pSkills.canBlock;
+            instance.canAttack = pSkills.canAttack;
+            instance.canRangeAttack = pSkills.canRangeAttack;
         }
     }
 
@@ -106,25 +111,25 @@ public class GameManager : MonoBehaviour
         {
             pStats.RemoveHealthOnAttack(pStats.UnitMaxHealth - playerHP, this.gameObject);
 
-            pSkills.jumpForce = jumpForce;
-            pSkills.wallJumpForce = wallJumpForce;
-            pSkills.jumpCancelMulti = jumpCancelMulti;
-            pSkills.airDragMovementModifier = airDragMovementModifier;
+            pSkills.jumpForce = instance.jumpForce;
+            pSkills.wallJumpForce = instance.wallJumpForce;
+            pSkills.jumpCancelMulti = instance.jumpCancelMulti;
+            pSkills.airDragMovementModifier = instance.airDragMovementModifier;
 
-            pSkills.dashPower = dashPower;
-            pSkills.dashTime = dashTime;
-            pSkills.dashCooldown = dashCooldown;
+            pSkills.dashPower = instance.dashPower;
+            pSkills.dashTime = instance.dashTime;
+            pSkills.dashCooldown = instance.dashCooldown;
 
-            pSkills.timeToSprint = timeToSprint;
-            pSkills.maxSprintSpeed = maxSprintSpeed;
-            pSkills.sprintSpeedIncrement = sprintSpeedIncrement;
+            pSkills.timeToSprint = instance.timeToSprint;
+            pSkills.maxSprintSpeed = instance.maxSprintSpeed;
+            pSkills.sprintSpeedIncrement = instance.sprintSpeedIncrement;
 
-            pSkills.canDoubleJump = canDoubleJump;
-            pSkills.canDash = canDash;
-            pSkills.canWallJump = canWallJump;
-            pSkills.canBlock = canBlock;
-            pSkills.canAttack = canAttack;
-            pSkills.canRangeAttack = canRangeAttack;
+            pSkills.canDoubleJump = instance.canDoubleJump;
+            pSkills.canDash = instance.canDash;
+            pSkills.canWallJump = instance.canWallJump;
+            pSkills.canBlock = instance.canBlock;
+            pSkills.canAttack = instance.canAttack;
+            pSkills.canRangeAttack = instance.canRangeAttack;
         }
     }
 
@@ -148,6 +153,11 @@ public class GameManager : MonoBehaviour
             }
             LoadAbilityState();
         }
+    }
+
+    public void AddFinishedDialogue(DialogueSO dialogue)
+    {
+        instance.dialogues.Add(dialogue);
     }
 
 }

@@ -8738,16 +8738,16 @@ PrefabInstance:
       objectReference: {fileID: 69265471}
     - target: {fileID: 7611557247642287112, guid: 8fb3da6ed0acdc64d94294995c5801d7, type: 3}
       propertyPath: conversations.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7611557247642287112, guid: 8fb3da6ed0acdc64d94294995c5801d7, type: 3}
       propertyPath: 'conversations.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: 5e753fb0ec77c98488d2bd815bf94a51, type: 2}
+      objectReference: {fileID: 11400000, guid: 5633e7383ea0f844f8c97df3517eb9c2, type: 2}
     - target: {fileID: 7611557247642287112, guid: 8fb3da6ed0acdc64d94294995c5801d7, type: 3}
       propertyPath: 'conversations.Array.data[1]'
       value: 
-      objectReference: {fileID: 11400000, guid: 5633e7383ea0f844f8c97df3517eb9c2, type: 2}
+      objectReference: {fileID: 11400000, guid: 9fd714bae6ae225418e67f100a695048, type: 2}
     - target: {fileID: 7611557247642287112, guid: 8fb3da6ed0acdc64d94294995c5801d7, type: 3}
       propertyPath: 'conversations.Array.data[2]'
       value: 

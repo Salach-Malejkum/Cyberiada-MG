@@ -142,7 +142,6 @@ public class DialogueManager : MonoBehaviour
 
     public void Option(int optionNum)
     {
-        Debug.Log("OptionSelected");
         foreach (GameObject button in optionButton)
         {
             button.SetActive(false);

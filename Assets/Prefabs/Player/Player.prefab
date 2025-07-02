@@ -6344,6 +6344,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMove: {fileID: 5866265159398939553}
+  playerStats: {fileID: 6545984004989396839}
 --- !u!1 &9180614333174814976
 GameObject:
   m_ObjectHideFlags: 0

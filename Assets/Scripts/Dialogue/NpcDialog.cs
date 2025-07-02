@@ -25,6 +25,14 @@ public class NpcDialog : MonoBehaviour
         dialogueManager = GameObject.Find("DialogueManager").GetComponent<DialogueManager>();
         speechBubbleRenderer = GetComponent<SpriteRenderer>();
         speechBubbleRenderer.enabled = false;
+
+        for (int i = 0; i < conversations.Length; i++)
+        {
+            if (GameManager.instance.dialogues.Contains(conversations[i]))
+            {
+                conversations[i] = null;
+            }
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -104,6 +112,7 @@ public class NpcDialog : MonoBehaviour
                 if (!conversations[i].isRepeatable && conversations[i] == conversation)
                 {
                     conversations[i] = null;
+                    GameManager.instance.AddFinishedDialogue(conversation);
                 }
         }
         conversation = null;
