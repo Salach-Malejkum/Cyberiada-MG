@@ -865,7 +865,7 @@ MonoBehaviour:
   canAttack: 1
   canRangeAttack: 1
   attackPosition: {fileID: 8004490164030886986}
-  firePoint: {fileID: 0}
+  firePoint: {fileID: 8347091120211506341}
 --- !u!114 &6545984004989396839
 MonoBehaviour:
   m_ObjectHideFlags: 0
