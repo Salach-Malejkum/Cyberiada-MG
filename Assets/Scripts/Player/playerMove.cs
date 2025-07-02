@@ -18,7 +18,7 @@ public class PlayerMove : MonoBehaviour
     [Header("IsGrounded")]
     [SerializeField] private GroundedManager groundedManager;
     public bool isGrounded;
-    private bool isWalled = false;
+    [SerializeField] private bool isWalled = false;
     private bool doubleJumped = false;
     public bool isFacingRight { get; private set; }
     [Header("Dash")]
@@ -148,7 +148,9 @@ public class PlayerMove : MonoBehaviour
 
     private bool ShouldFlip()
     {
-        return (moveInput.x > 0 && !isFacingRight) || (moveInput.x < 0 && isFacingRight);
+        bool moveCheck = (moveInput.x > 0 && !isFacingRight) || (moveInput.x < 0 && isFacingRight);
+        bool wallCheck = (isWallLeft && isFacingRight && isWalled) || (!isWallLeft && !isFacingRight && isWalled);
+        return moveCheck || wallCheck;
     }
 
     void Jump()
@@ -319,6 +321,7 @@ public class PlayerMove : MonoBehaviour
 
         if (IsWall(collision.gameObject))
         {
+            anim.SetBool("IsWalled", true);
             isWalled = true;
             isWallLeft = collision.contacts[0].point.x <= transform.position.x;
         }
@@ -336,6 +339,7 @@ public class PlayerMove : MonoBehaviour
 
         if (IsWall(collision.gameObject))
         {
+            anim.SetBool("IsWalled", false);
             isWalled = false;
         }
     }
