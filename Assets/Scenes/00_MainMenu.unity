@@ -906,7 +906,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5278197210808301330, guid: c33a39ad553fe0245bee842836c1cd32, type: 3}
       propertyPath: sceneName
-      value: 02_Tutorial_Cave
+      value: 01_Opening
       objectReference: {fileID: 0}
     - target: {fileID: 5278197210808301330, guid: c33a39ad553fe0245bee842836c1cd32, type: 3}
       propertyPath: firstButton
