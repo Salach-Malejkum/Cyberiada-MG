@@ -49,6 +49,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenuPanel.gameObject.SetActive(true);
         menuBackGround.gameObject.SetActive(true);
         pauseOptionsPanel.gameObject.SetActive(false);
+        pauseMenuPanel.GetComponent<MainMenu>().firstMainMenuButton.Select();
     }
 
     public void Resume()

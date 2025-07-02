@@ -9,19 +9,27 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject optionsPanel;
     [SerializeField] private EventReference switchButton;
     [SerializeField] private EventReference clickButton;
-    [SerializeField] private Button firstButton;
+    [SerializeField] public Button firstMainMenuButton;
+    [SerializeField] private Button firstOptionsButton;
 
-    private void Awake()
+    /*private void Awake()
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        firstButton.Select();
+    }*/
+
+    private void Start()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        firstMainMenuButton.Select();
     }
-    
+
     public void StartGmae()
     {
         Debug.Log("start");
         SceneManager.LoadScene(sceneName);
-        firstButton.Select();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -35,6 +43,7 @@ public class MainMenu : MonoBehaviour
     public void ShowOptions()
     {
         optionsPanel.SetActive(true);
+        firstOptionsButton.Select();
         this.gameObject.SetActive(false);
         Debug.Log("options");
     }

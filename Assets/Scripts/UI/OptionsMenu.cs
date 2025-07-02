@@ -7,6 +7,7 @@ public class OptionsMenu : MonoBehaviour
     [SerializeField] private Slider musicVolumeSlider;
     [SerializeField] private Slider sfxVolumeSlider;
     [SerializeField] private GameObject mainPanel;
+    [SerializeField] private Button firstMainMenuButton;
 
 
 
@@ -21,7 +22,6 @@ public class OptionsMenu : MonoBehaviour
         musicVolumeSlider.onValueChanged.AddListener(delegate { MusicVolumeCheck(); });
         sfxVolumeSlider.onValueChanged.AddListener(delegate { SFXVolumeCheck(); });
 
-        masterVolumeSlider.Select();
         this.gameObject.SetActive(false);
     }
 
@@ -42,5 +42,6 @@ public class OptionsMenu : MonoBehaviour
     {
         this.gameObject.SetActive(false);
         mainPanel.SetActive(true);
+        firstMainMenuButton.Select();
     }
 }
