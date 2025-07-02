@@ -51,11 +51,11 @@ public class PlayerStats : UnitStats
     private void Awake()
     {
         this.onUnitDeath += HandlePlayerDeath;
+        this.unitCurrentHealth = this.unitMaxHealth;
     }
 
     private void Start()
     {
-        this.unitCurrentHealth = this.unitMaxHealth;
         this.unitRespawnCoordinates = transform.position;
     }
 
@@ -67,6 +67,7 @@ public class PlayerStats : UnitStats
     public override void RemoveHealthOnAttack(float damageAmount, GameObject aggressor)
     {
         base.RemoveHealthOnAttack(damageAmount, aggressor);
+        if (aggressor == GameManager.instance.gameObject) return;
         onHitChangeColor();
         SFXManager.instance.PlayOneShot(hitSound, this.transform.position);
     }

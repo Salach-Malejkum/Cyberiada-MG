@@ -5,14 +5,14 @@ using UnityEngine.InputSystem;
 public class PlayerMove : MonoBehaviour
 {
     [Header("Move")]
-    [SerializeField] private float baseMoveSpeed = 5f;
+    [SerializeField] public float baseMoveSpeed = 5f;
     private float moveSpeed;
 
     [Header("Jump")]
-    [SerializeField] private float jumpForce = 10f;
-    [SerializeField] private float wallJumpForce = 5f;
-    [SerializeField][Range(0, 1)] private float jumpCancelMulti = 0.5f;
-    [SerializeField] private float airDragMovementModifier = 400f;
+    [SerializeField] public float jumpForce = 10f;
+    [SerializeField] public float wallJumpForce = 5f;
+    [SerializeField][Range(0, 1)] public float jumpCancelMulti = 0.5f;
+    [SerializeField] public float airDragMovementModifier = 400f;
     [Header("Attacking")]
     public bool isAttacking = false;
     [Header("IsGrounded")]
@@ -22,15 +22,15 @@ public class PlayerMove : MonoBehaviour
     private bool doubleJumped = false;
     public bool isFacingRight { get; private set; }
     [Header("Dash")]
-    [SerializeField] private float dashPower = 24f;
-    [SerializeField] private float dashTime = 0.2f;
-    [SerializeField] private float dashCooldown = 2f;
+    [SerializeField] public float dashPower = 24f;
+    [SerializeField] public float dashTime = 0.2f;
+    [SerializeField] public float dashCooldown = 2f;
     private bool isDashing;
 
     [Header("Sprint")]
-    [SerializeField] private float timeToSprint = 0.5f;
-    [SerializeField] private float maxSprintSpeed = 10f;
-    [SerializeField] private float sprintSpeedIncrement = 0.1f;
+    [SerializeField] public float timeToSprint = 0.5f;
+    [SerializeField] public float maxSprintSpeed = 10f;
+    [SerializeField] public float sprintSpeedIncrement = 0.1f;
     private float sprintTimer;
 
     [Header("Layers")]
@@ -292,16 +292,9 @@ public class PlayerMove : MonoBehaviour
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
     }
-    private void Flip()
+    public void Flip()
     {
-        if (moveInput.x < 0f)
-        {
-            renderer.flipX = true;
-        }
-        else if (moveInput.x > 0f)
-        {
-            renderer.flipX = false;
-        }
+        renderer.flipX = !renderer.flipX;
         isFacingRight = !isFacingRight;
 
         Vector3 attackPosition = this.attackPosition.localPosition;
