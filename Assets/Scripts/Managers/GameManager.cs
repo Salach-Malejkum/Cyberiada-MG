@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool canWallJump = false;
     [SerializeField] private bool canBlock = false;
     [SerializeField] private bool canAttack = false;
+    [SerializeField] private bool canRangeAttack = false;
 
     [Header("Stats")]
     [SerializeField] private float playerHP;
@@ -90,7 +91,7 @@ public class GameManager : MonoBehaviour
             canWallJump = pSkills.canWallJump;
             canBlock = pSkills.canBlock;
             canAttack = pSkills.canAttack;
-
+            canRangeAttack = pSkills.canRangeAttack;
         }
     }
 
@@ -123,6 +124,7 @@ public class GameManager : MonoBehaviour
             pSkills.canWallJump = canWallJump;
             pSkills.canBlock = canBlock;
             pSkills.canAttack = canAttack;
+            pSkills.canRangeAttack = canRangeAttack;
         }
     }
 

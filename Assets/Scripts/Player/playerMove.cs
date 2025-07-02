@@ -44,6 +44,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] public bool canWallJump;
     [SerializeField] public bool canBlock;
     [SerializeField] public bool canAttack;
+    [SerializeField] public bool canRangeAttack;
 
 
     private Rigidbody rb;
@@ -56,6 +57,7 @@ public class PlayerMove : MonoBehaviour
     private PlayerStats stats;
     [Header("Attack zone")]
     [SerializeField] private Transform attackPosition;
+    [SerializeField] private Transform firePoint;
 
     [Header("Enterable platforms")]
     private bool isOnEnterablePlatform = false;
@@ -300,6 +302,10 @@ public class PlayerMove : MonoBehaviour
         Vector3 attackPosition = this.attackPosition.localPosition;
         attackPosition.x *= -1;
         this.attackPosition.localPosition = attackPosition;
+
+        Vector3 firePosition = this.firePoint.localPosition;
+        firePosition.x *= -1;
+        this.firePoint.localPosition = firePosition;
     }
 
 

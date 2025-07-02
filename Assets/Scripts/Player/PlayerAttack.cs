@@ -11,7 +11,11 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private Transform attackTransform;
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private float attackErrorMargin = 0.1f;
+    [SerializeField] private float rangedAttackDelayMultiplier = 30f;
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private Transform firePoint;
     private float attackTimeCounter;
+    private float rangedAttackTimeCounter;
     private float comboEndCounter;
     private int meleeComboAttackNumber;
     private bool isOnBeat = false;
@@ -29,6 +33,7 @@ public class PlayerAttack : MonoBehaviour
     {
         this.stats = GetComponent<PlayerStats>();
         attackTimeCounter = stats.TimeBtwAttacks;
+        rangedAttackTimeCounter = stats.TimeBtwAttacks * rangedAttackDelayMultiplier;
         MusicManager.Instance.Subscribe(CheckBeatChange);
         playerMove = GetComponent<PlayerMove>();
         anim = this.GetComponentInChildren<Animator>();
@@ -36,7 +41,8 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
-        attackTimeCounter += Time.deltaTime;
+        attackTimeCounter += Mathf.Clamp(attackTimeCounter + Time.deltaTime, 0f, stats.TimeBtwAttacks + 1f);
+        rangedAttackTimeCounter += Mathf.Clamp(attackTimeCounter + Time.deltaTime, 0f, stats.TimeBtwAttacks * rangedAttackDelayMultiplier + 1f);
         comboEndCounter += Time.deltaTime;
 
         if (Mathf.Abs(Time.time - beatTime) <= attackErrorMargin)
@@ -49,9 +55,32 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+    public void OnRangedAttack(InputAction.CallbackContext inputAction)
+    {
+        if (playerMove.canRangeAttack && inputAction.started && rangedAttackTimeCounter >= stats.TimeBtwAttacks * rangedAttackDelayMultiplier)
+        {
+            playerMove.isAttacking = true;
+            anim.SetTrigger("RangedAttack");
+            attackTime = Time.time;
+
+            rangedAttackTimeCounter = 0;
+        }
+    }
+
+    private void ShootRangedProjectile()
+    {
+        playerMove.isAttacking = false;
+        GameObject projectileInstance = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+        PlayerProjectile projectileScript = projectileInstance.GetComponent<PlayerProjectile>();
+        if (projectileScript != null)
+        {
+            projectileScript.SetShooter(stats.UnitAttackDamage, firePoint.localPosition.x);
+        }
+    }
+
     public void OnMeleeAttack(InputAction.CallbackContext inputAction)
     {
-        if (playerMove.GetCanAttack() && inputAction.started && attackTimeCounter >= stats.TimeBtwAttacks && playerMove.isGrounded)
+        if (playerMove.GetCanAttack() && inputAction.started && attackTimeCounter >= stats.TimeBtwAttacks)
         {
             playerMove.isAttacking = true;
             anim.SetTrigger("AttackTrigger");

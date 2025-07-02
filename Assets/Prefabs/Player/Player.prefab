@@ -702,6 +702,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 7ace8378-de42-44c0-ae1d-a70973207b0d
     m_ActionName: 'Checkpoint/Save[/Keyboard/f]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2481915105478388511}
+        m_TargetAssemblyTypeName: PlayerAttack, Assembly-CSharp
+        m_MethodName: OnRangedAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 11ba312b-8157-44e2-9182-176da3d53748
+    m_ActionName: 'Player/rangedAttack[/Mouse/rightButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -754,6 +770,7 @@ Transform:
   - {fileID: 4164016188253486305}
   - {fileID: 8937831243047885152}
   - {fileID: 8343168673348376654}
+  - {fileID: 8347091120211506341}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &7491644693829503385
@@ -846,7 +863,9 @@ MonoBehaviour:
   canWallJump: 1
   canBlock: 0
   canAttack: 1
+  canRangeAttack: 1
   attackPosition: {fileID: 8004490164030886986}
+  firePoint: {fileID: 0}
 --- !u!114 &6545984004989396839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -865,7 +884,7 @@ MonoBehaviour:
   unitRespawnCoordinates: {x: 0, y: 0, z: 0}
   lastAggressor: {fileID: 0}
   unitAttackBuff: 15
-  timeBtwAttacks: 0.15
+  timeBtwAttacks: 0.4
   timeBtwCombos: 0.7
   pitFallTimeToRespawn: 0.5
   spikesTimeToRespawn: 0.1
@@ -898,6 +917,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   attackErrorMargin: 0.3
+  rangedAttackDelayMultiplier: 3
+  projectilePrefab: {fileID: 7906856221530070190, guid: 515b9e910556c894dad3e3456ad09ce9, type: 3}
+  firePoint: {fileID: 8347091120211506341}
   mat_renderer: {fileID: 5722249797344147198}
   onBeatColor: {r: 1, g: 1, b: 1, a: 1}
   offBeatColor: {r: 1, g: 0, b: 0, a: 1}
@@ -1840,6 +1862,37 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1890918967448377966
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8347091120211506341}
+  m_Layer: 7
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8347091120211506341
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890918967448377966}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.53, y: -3.73, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2064779863224901363}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2292778904305421939
 GameObject:
   m_ObjectHideFlags: 0
