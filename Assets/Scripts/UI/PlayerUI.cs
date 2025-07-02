@@ -35,13 +35,13 @@ public class PlayerUI : MonoBehaviour
             hintText.text = message;
     }
 
-    private void SetShortJumpText() => UpdateMessage("Press Space to jump");
-    private void SetLongJumpText() => UpdateMessage("Hold Space to jump higher");
-    private void SetRunningJumpText() => UpdateMessage("Run to one side and press and hold Space to jump even higher and furhter.");
-    private void SetMovementText() => UpdateMessage("Use WASD to move");
-    private void SetEnterablePlatformText() => UpdateMessage("You can enter on <this> platform from below, press S to drop from it.");
+    private void SetShortJumpText() => UpdateMessage("Press [Space] to jump");
+    private void SetLongJumpText() => UpdateMessage("Hold [Space] to jump higher");
+    private void SetRunningJumpText() => UpdateMessage("Run to one side, then press and hold [Space] to jump even higher and furhter.");
+    private void SetMovementText() => UpdateMessage("Use [WASD] to move");
+    private void SetEnterablePlatformText() => UpdateMessage("You can enter wooden platforms from below and drop from them using [S]");
     private void SetSpikesText() => UpdateMessage("Be careful! Spikes deal damage when you touch them, better be safe.");
-    private void SetWallJumpText() => UpdateMessage("When touching the wall press Space to jump off it, it will push you away from the wall.");
+    private void SetWallJumpText() => UpdateMessage("When touching the wall, press [SPACE] to jump off it.");
     private void HandleMessages(GameObject gameObject, string message)
     {
         switch (message)
