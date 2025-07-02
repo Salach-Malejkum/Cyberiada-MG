@@ -20,9 +20,12 @@ public class GameManager : MonoBehaviour
     {
         if (instance != null && instance != this)
         {
-            Destroy(instance);
+            Destroy(this.gameObject);
         }
-        instance = this;
+        else
+        {
+            instance = this;
+        }
         DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoad;
     }

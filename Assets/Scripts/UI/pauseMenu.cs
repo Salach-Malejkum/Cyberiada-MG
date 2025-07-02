@@ -14,6 +14,7 @@ public class PauseMenu : MonoBehaviour
         isGamePaused = false;
         pauseMenuPanel.gameObject.SetActive(false);
         menuBackGround.gameObject.SetActive(false);
+        pauseOptionsPanel.gameObject.SetActive(false);
     }
 
     public void OnPause(InputAction.CallbackContext inputAction)
