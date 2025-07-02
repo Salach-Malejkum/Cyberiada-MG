@@ -21,6 +21,7 @@ public class OptionsMenu : MonoBehaviour
         musicVolumeSlider.onValueChanged.AddListener(delegate { MusicVolumeCheck(); });
         sfxVolumeSlider.onValueChanged.AddListener(delegate { SFXVolumeCheck(); });
 
+        masterVolumeSlider.Select();
         this.gameObject.SetActive(false);
     }
 

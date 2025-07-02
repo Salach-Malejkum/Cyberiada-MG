@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using FMODUnity;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject optionsPanel;
     [SerializeField] private EventReference switchButton;
     [SerializeField] private EventReference clickButton;
+    [SerializeField] private Button firstButton;
 
     private void Awake()
     {
@@ -19,6 +21,7 @@ public class MainMenu : MonoBehaviour
     {
         Debug.Log("start");
         SceneManager.LoadScene(sceneName);
+        firstButton.Select();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
