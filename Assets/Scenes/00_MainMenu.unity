@@ -302,11 +302,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   music:
     Guid:
-      Data1: 1382914397
-      Data2: 1218914953
-      Data3: -964934753
-      Data4: -1603575820
-    Path: event:/MainMenu
+      Data1: -953972447
+      Data2: 1126530516
+      Data3: -1705349709
+      Data4: -2041978518
+    Path: event:/MenuTheme
 --- !u!4 &761200237
 Transform:
   m_ObjectHideFlags: 0
