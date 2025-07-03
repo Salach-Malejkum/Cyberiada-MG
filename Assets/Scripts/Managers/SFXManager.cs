@@ -30,7 +30,7 @@ public class SFXManager : MonoBehaviour
             instance = this;
         }
         masterBus = RuntimeManager.GetBus("bus:/");
-        musicBus = RuntimeManager.GetBus("bus:/Music");
+        musicBus = RuntimeManager.GetBus("bus:/MusicBackup");
         sfxBus = RuntimeManager.GetBus("bus:/SFX");
 
         DontDestroyOnLoad(this);
