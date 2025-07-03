@@ -112,13 +112,13 @@
 	<object class="SpatialiserEffect" id="{15d083ac-57ac-43f0-966a-7fe4b5260d70}" />
 	<object class="MultibandEqEffect" id="{6573ba8f-9fa9-4233-bcaa-1a607351a437}">
 		<property name="frequencyA">
-			<value>943.399658</value>
+			<value>1830.78857</value>
 		</property>
 		<property name="frequencyB">
 			<value>81.8291092</value>
 		</property>
 		<property name="qualityA">
-			<value>1.82165527</value>
+			<value>1.95541382</value>
 		</property>
 		<property name="qualityB">
 			<value>0.751586199</value>
@@ -126,7 +126,7 @@
 	</object>
 	<object class="SFXReverbEffect" id="{60b0341d-f39c-4789-a52d-3c575ae8a4fc}">
 		<property name="decayTime">
-			<value>500</value>
+			<value>350</value>
 		</property>
 		<property name="HFDecayRatio">
 			<value>23.5</value>

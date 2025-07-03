@@ -11,6 +11,7 @@ TagManager:
   - inputSystem
   - CheckPoint
   - checkPointManager
+  - Enemy
   layers:
   - Default
   - TransparentFX

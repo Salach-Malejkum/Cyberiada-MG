@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using FMODUnity;
 
 public class EnemyPatrol : MonoBehaviour
 {
@@ -37,6 +38,7 @@ public class EnemyPatrol : MonoBehaviour
     [Header("Renderer")]
     [SerializeField] private Color onHitColor = Color.red;
     [SerializeField] private Renderer onHitRenderer;
+    [SerializeField] private EventReference hitSound;
 
     void Start()
     {
@@ -210,12 +212,18 @@ public class EnemyPatrol : MonoBehaviour
     public void onHitChangeColor()
     {
         StartCoroutine(changeColor());
+        SFXManager.instance.PlayOneShot(hitSound, this.transform.position);
+    }
+
+    public void onRespawnChangeColor()
+    {
+        onHitRenderer.material.SetColor("_OnHitColor", new Color(0.0f, 0.0f, 0.0f, 0.0f));
     }
 
     IEnumerator changeColor()
     {
-        onHitRenderer.material.SetColor("_SolidColor", onHitColor);
+        onHitRenderer.material.SetColor("_OnHitColor", onHitColor);
         yield return new WaitForSeconds(0.2f);
-        onHitRenderer.material.SetColor("_SolidColor", new Color(0.0f, 0.0f, 0.0f, 0.0f));
+        onHitRenderer.material.SetColor("_OnHitColor", new Color(0.0f, 0.0f, 0.0f, 0.0f));
     }
 }

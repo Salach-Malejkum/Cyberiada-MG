@@ -12,6 +12,8 @@ public class CheckPoint : MonoBehaviour
     private bool interacted;
     private CheckPointManager checkPointManager;
 
+    private GameObject[] enemies;
+
     public event Action player;
 
     private void Awake()
@@ -24,6 +26,7 @@ public class CheckPoint : MonoBehaviour
         interactionMarker.enabled = false;
         interacted = false;
         anim = GetComponent<Animator>();
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
     }
 
     private void OnTriggerEnter(Collider other)
@@ -56,12 +59,26 @@ public class CheckPoint : MonoBehaviour
         {
             playerStats.UpdateRespawnCoordinates(new Vector3(transform.position.x, playerYPosition, 0f));
             playerStats.HealthRestored(playerStats.UnitMaxHealth);
+            RespawnEnemies();
             if (!interacted)
             {
                 interacted = true;
                 anim.SetBool("interacted", interacted);
                 transform.position = transform.position + new Vector3(0, 0.5f, 0);
             }
+        }
+    }
+
+    private void RespawnEnemies()
+    {
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            EnemyStats enemyStats = enemies[i].GetComponent<EnemyStats>();
+            EnemyPatrol enemyPatrol = enemies[i].GetComponent<EnemyPatrol>();
+            enemies[i].SetActive(true);
+            enemyStats.HealthRestored(enemyStats.UnitMaxHealth);
+            enemyPatrol.onRespawnChangeColor();
+            print(enemies[i].name);
         }
     }
 }

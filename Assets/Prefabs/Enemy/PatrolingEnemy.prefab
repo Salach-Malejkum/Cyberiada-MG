@@ -140,9 +140,10 @@ GameObject:
   - component: {fileID: 3252824202349428678}
   - component: {fileID: 7733829802356613861}
   - component: {fileID: 8613923561900352412}
+  - component: {fileID: 926718815608053388}
   m_Layer: 8
-  m_Name: Enemy1
-  m_TagString: Untagged
+  m_Name: Szop
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -240,7 +241,14 @@ MonoBehaviour:
   attackPosition: {fileID: 4860622856943817851}
   anim: {fileID: 0}
   onHitColor: {r: 1, g: 0, b: 0, a: 1}
-  onHitRenderer: {fileID: 0}
+  onHitRenderer: {fileID: 7733829802356613861}
+  hitSound:
+    Guid:
+      Data1: -441983736
+      Data2: 1217383335
+      Data3: -1235807053
+      Data4: 2031550021
+    Path: event:/Enemy/EnemyHit
 --- !u!114 &8920913877592544062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,13 +266,6 @@ MonoBehaviour:
   unitAttackDamage: 20
   unitRespawnCoordinates: {x: 0, y: 0, z: 0}
   lastAggressor: {fileID: 0}
-  hitSound:
-    Guid:
-      Data1: -441983736
-      Data2: 1217383335
-      Data3: -1235807053
-      Data4: 2031550021
-    Path: event:/Enemy/EnemyHit
 --- !u!114 &3252824202349428678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361,6 +362,46 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &926718815608053388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7391265441507225753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e478a3db46c58d4ea0a753383a1e5c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walk_1:
+    Guid:
+      Data1: 311771452
+      Data2: 1119575265
+      Data3: -32654445
+      Data4: -130744461
+    Path: event:/Enemy/EnemyWalk1
+  walk_2:
+    Guid:
+      Data1: -1309359117
+      Data2: 1207820659
+      Data3: -2068751721
+      Data4: 588544865
+    Path: event:/Enemy/EnemyWalk2
+  walk_3:
+    Guid:
+      Data1: -1968837517
+      Data2: 1216772013
+      Data3: 1125905294
+      Data4: -365791586
+    Path: event:/Enemy/EnemyWalk3
+  atk_1:
+    Guid:
+      Data1: 557571121
+      Data2: 1240548332
+      Data3: -741650244
+      Data4: -372049066
+    Path: event:/Player/PlayerAtk1
 --- !u!1 &8910591283942566989
 GameObject:
   m_ObjectHideFlags: 0
