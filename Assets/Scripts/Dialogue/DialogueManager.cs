@@ -26,6 +26,7 @@ public class DialogueManager : MonoBehaviour
     private GameObject optionsPanel;
 
     private EventManager eventManager;
+    [SerializeField] private InputActionAsset playerInput;
 
     private void Start()
     {
@@ -67,6 +68,11 @@ public class DialogueManager : MonoBehaviour
         optionsPanel.SetActive(false);
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        //playerInput.SwitchCurrentActionMap("Player");
+        playerInput.FindActionMap("Player").Enable();
+        playerInput.FindActionMap("UI").Enable();
+        playerInput.FindActionMap("Camera").Enable();
+        playerInput.FindActionMap("CheckPoint").Enable();
     }
 
     public void OnTalk(InputAction.CallbackContext inputAction)
@@ -108,7 +114,7 @@ public class DialogueManager : MonoBehaviour
 
         actor.text = currentSpeaker;
         portrait.sprite = currentPortrait;
-        
+
         if (currentConversation.actors[stepNum] == DialogueActors.Branch)
         {
             for (int i = 0; i < currentConversation.optionText.Length; i++)
@@ -128,7 +134,7 @@ public class DialogueManager : MonoBehaviour
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
-        
+
         if (stepNum < currentConversation.dialogue.Length)
         {
             dialogueText.text = currentConversation.dialogue[stepNum];
@@ -138,6 +144,11 @@ public class DialogueManager : MonoBehaviour
             optionsPanel.SetActive(true);
         }
         dialogueCanvas.SetActive(true);
+        //playerInput.SwitchCurrentActionMap("Dialogue");
+        playerInput.FindActionMap("Player").Disable();
+        playerInput.FindActionMap("UI").Disable();
+        playerInput.FindActionMap("Camera").Disable();
+        playerInput.FindActionMap("CheckPoint").Disable();
         stepNum += 1;
     }
 
@@ -148,7 +159,7 @@ public class DialogueManager : MonoBehaviour
             button.SetActive(false);
         }
 
-        
+        CheckForEvents();
 
         if (optionNum == 0)
         {
@@ -185,7 +196,6 @@ public class DialogueManager : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
-        CheckForEvents();
         ManageDialogue();
     }
 
@@ -255,6 +265,40 @@ public class DialogueManager : MonoBehaviour
                 Option(4);
             }
         }
+    }
+    
+    // Handles up/down navigation on gamepad for dialogue options
+    private int selectedOptionIndex = 0;
+
+    public void OnUpDown(InputAction.CallbackContext inputAction)
+    {
+        if (!dialogueActivated || !optionsPanel.activeSelf)
+            return;
+
+        float move = inputAction.ReadValue<float>();
+        if (move > 0.5f)
+            MoveSelection(-1);
+        else if (move < -0.5f)
+            MoveSelection(1);
+    }
+
+    private void MoveSelection(int direction)
+    {
+        int optionsCount = 0;
+        for (int i = 0; i < optionButton.Length; i++)
+            if (optionButton[i].activeSelf) optionsCount++;
+
+        if (optionsCount == 0) return;
+
+        int newIndex = selectedOptionIndex;
+        do
+        {
+            newIndex = (newIndex + direction + optionButton.Length) % optionButton.Length;
+        }
+        while (!optionButton[newIndex].activeSelf);
+
+        selectedOptionIndex = newIndex;
+        optionButton[selectedOptionIndex].GetComponent<Button>().Select();
     }
 }
 

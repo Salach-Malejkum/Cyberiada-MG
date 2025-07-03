@@ -512,34 +512,6 @@ MonoBehaviour:
     m_ActionName: 'Player/ExitPlatform[/Keyboard/s]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2217169091162230311}
-        m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
-        m_MethodName: OnTalk
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 7705121139989666046}
-        m_TargetAssemblyTypeName: CheckPointManager, Assembly-CSharp
-        m_MethodName: OnTalk
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: f42d8d86-c807-41a4-bc43-9247fdc3cb33
-    m_ActionName: 'Player/talk[/Keyboard/f]'
-  - m_PersistentCalls:
-      m_Calls:
       - m_Target: {fileID: 2481915105478388511}
         m_TargetAssemblyTypeName: PlayerAttack, Assembly-CSharp
         m_MethodName: OnMeleeAttack
@@ -587,86 +559,6 @@ MonoBehaviour:
     m_ActionId: 269bb0d7-a1fa-403d-a533-d2e8bf356f66
     m_ActionName: 'Player/dash[/Keyboard/shift]'
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2217169091162230311}
-        m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
-        m_MethodName: OnClickButton0
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 658df462-fc7d-49ee-b30f-17658ac77ba3
-    m_ActionName: 'Player/ClickButton0[/Keyboard/1]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2217169091162230311}
-        m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
-        m_MethodName: OnClickButton1
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: f4345796-a54d-4a79-9f7d-b445de1d9412
-    m_ActionName: 'Player/ClickButton1[/Keyboard/2]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2217169091162230311}
-        m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
-        m_MethodName: OnClickButton2
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 90d0b8fc-527c-4707-b43b-d243d9ba7d6b
-    m_ActionName: 'Player/ClickButton2[/Keyboard/3]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2217169091162230311}
-        m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
-        m_MethodName: OnClickButton3
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 2b9e46eb-0829-4b03-955e-e79e9602bc2f
-    m_ActionName: 'Player/ClickButton3[/Keyboard/4]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2217169091162230311}
-        m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
-        m_MethodName: OnClickButton4
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: ca23f7bf-8fb1-4a2a-9b5e-80efa08a7f0a
-    m_ActionName: 'Player/ClickButton4[/Keyboard/5]'
-  - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 34600b2b-7214-4640-9792-261dac72d8c9
     m_ActionName: 'Camera/look[/Keyboard/s,/Keyboard/w]'
@@ -688,13 +580,13 @@ MonoBehaviour:
     m_ActionName: 'UI/pause[/Keyboard/escape]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 7705121139989666046}
+        m_TargetAssemblyTypeName: CheckPointManager, Assembly-CSharp
+        m_MethodName: OnTalk
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -718,6 +610,102 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 11ba312b-8157-44e2-9182-176da3d53748
     m_ActionName: 'Player/rangedAttack[/Mouse/rightButton]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2217169091162230311}
+        m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
+        m_MethodName: OnTalk
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5f48c501-cdb4-4870-b0c0-8cebe8f1bff8
+    m_ActionName: 'Dialogue/talk[/Keyboard/f]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2217169091162230311}
+        m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
+        m_MethodName: OnClickButton0
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 15966ddb-8b2d-43bb-8846-bb3d1c9df5d3
+    m_ActionName: 'Dialogue/DialogueOption1[/Keyboard/1]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2217169091162230311}
+        m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
+        m_MethodName: OnClickButton1
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c7d5b72d-a275-4aa5-a24b-db77fedca4ac
+    m_ActionName: 'Dialogue/DialogueOption2[/Keyboard/2]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2217169091162230311}
+        m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
+        m_MethodName: OnClickButton2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 42c60fc2-e393-40f3-9c41-07e3083a0499
+    m_ActionName: 'Dialogue/DialogueOption3[/Keyboard/3]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2217169091162230311}
+        m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
+        m_MethodName: OnClickButton3
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3a8fbc8e-63a6-451f-b637-f51e1886fc77
+    m_ActionName: 'Dialogue/DialogueOption4[/Keyboard/4]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2217169091162230311}
+        m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
+        m_MethodName: OnClickButton4
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 9a0bc6a3-367f-4014-88d7-fe8c5a1f7a2c
+    m_ActionName: 'Dialogue/DialogueOption5[/Keyboard/5]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -2998,6 +2986,7 @@ MonoBehaviour:
   - {fileID: 2833990705907394317}
   - {fileID: 4132118761037606298}
   - {fileID: 108785247357575366}
+  playerInput: {fileID: -944628639613478452, guid: 344a38994686e3d4fac20761bfa9e9d8, type: 3}
 --- !u!1 &4075651606169814741
 GameObject:
   m_ObjectHideFlags: 0
