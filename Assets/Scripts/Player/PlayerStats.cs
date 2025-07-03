@@ -57,6 +57,8 @@ public class PlayerStats : UnitStats
     private void Start()
     {
         this.unitRespawnCoordinates = transform.position;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void OnDestroy()

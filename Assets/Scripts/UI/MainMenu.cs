@@ -14,16 +14,12 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
         firstMainMenuButton.Select();
     }
 
     public void StartGmae()
     {
         SceneManager.LoadScene(sceneName);
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void ExitGame()
