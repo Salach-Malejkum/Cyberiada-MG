@@ -239,6 +239,8 @@ MonoBehaviour:
   transformer: {fileID: 8933103828639999769}
   attackPosition: {fileID: 4860622856943817851}
   anim: {fileID: 0}
+  onHitColor: {r: 1, g: 0, b: 0, a: 1}
+  onHitRenderer: {fileID: 0}
 --- !u!114 &8920913877592544062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,9 +255,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitMaxHealth: 100
   unitCurrentHealth: 0
-  unitAttackDamage: 100
+  unitAttackDamage: 20
   unitRespawnCoordinates: {x: 0, y: 0, z: 0}
   lastAggressor: {fileID: 0}
+  hitSound:
+    Guid:
+      Data1: -441983736
+      Data2: 1217383335
+      Data3: -1235807053
+      Data4: 2031550021
+    Path: event:/Enemy/EnemyHit
 --- !u!114 &3252824202349428678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,7 +307,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 001e40cf554beaa45959376c0a3acb35, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
