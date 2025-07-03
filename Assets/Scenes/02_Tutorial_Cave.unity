@@ -51208,6 +51208,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 804149600277409425, guid: 9719f1cb3c94f574c8f2c094b76360ed, type: 3}
+      propertyPath: m_fontSize
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 804149600277409425, guid: 9719f1cb3c94f574c8f2c094b76360ed, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 35
+      objectReference: {fileID: 0}
     - target: {fileID: 818604668644148243, guid: 9719f1cb3c94f574c8f2c094b76360ed, type: 3}
       propertyPath: m_Name
       value: Player
