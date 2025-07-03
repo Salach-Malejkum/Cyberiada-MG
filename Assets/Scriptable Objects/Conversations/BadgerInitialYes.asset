@@ -12,15 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9af1615386fa5048b74e827c6bbb1d7, type: 3}
   m_Name: BadgerInitialYes
   m_EditorClassIdentifier: 
-  actors: 0200000000000000
+  actors: 0300000001000000030000000300000001000000
   eventsRequired: 
   eventsStarted: 
   isRepeatable: 0
   dialogue:
   - Oh, is he well?
-  optionText:
   - He's infected
-  option0: {fileID: 11400000, guid: 5ded4d1736754ee48987b14b5269a493, type: 2}
+  - So, they also got him.
+  - Please, put him out of misery.
+  - I will.
+  optionText: []
+  option0: {fileID: 0}
   option1: {fileID: 0}
   option2: {fileID: 0}
   option3: {fileID: 0}

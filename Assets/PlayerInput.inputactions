@@ -24,15 +24,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "talk",
-                    "type": "Button",
-                    "id": "f42d8d86-c807-41a4-bc43-9247fdc3cb33",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "meleeAttack",
                     "type": "Button",
                     "id": "e72fbb55-ed30-4642-9233-33bfeec03a24",
@@ -54,51 +45,6 @@
                     "name": "dash",
                     "type": "Button",
                     "id": "269bb0d7-a1fa-403d-a533-d2e8bf356f66",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "ClickButton0",
-                    "type": "Button",
-                    "id": "658df462-fc7d-49ee-b30f-17658ac77ba3",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "ClickButton1",
-                    "type": "Button",
-                    "id": "f4345796-a54d-4a79-9f7d-b445de1d9412",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "ClickButton2",
-                    "type": "Button",
-                    "id": "90d0b8fc-527c-4707-b43b-d243d9ba7d6b",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "ClickButton3",
-                    "type": "Button",
-                    "id": "2b9e46eb-0829-4b03-955e-e79e9602bc2f",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "ClickButton4",
-                    "type": "Button",
-                    "id": "ca23f7bf-8fb1-4a2a-9b5e-80efa08a7f0a",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -227,28 +173,6 @@
                 },
                 {
                     "name": "",
-                    "id": "7dc1804e-fa99-4f0e-b9ae-b4302a421f0b",
-                    "path": "<Keyboard>/f",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "KeyboardMouse",
-                    "action": "talk",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "8e574551-8feb-43d3-bfd4-96036580f257",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "talk",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "c9bee1fd-3370-437f-acec-f4bb6d886862",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
@@ -312,61 +236,6 @@
                     "action": "ExitPlatform",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "977d378e-5a51-4273-a3dc-eb1121241464",
-                    "path": "<Keyboard>/1",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";KeyboardMouse",
-                    "action": "ClickButton0",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a8a5f93f-c8ee-452f-982b-e67b43dcf565",
-                    "path": "<Keyboard>/2",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ClickButton1",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "e68854b8-0123-4cba-a917-5da2249df5dc",
-                    "path": "<Keyboard>/3",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ClickButton2",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "03d1b0df-3d0b-4b26-8ffd-9ed070ef46a8",
-                    "path": "<Keyboard>/4",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ClickButton3",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "58ad8307-14ae-4d24-bc6b-6f60ce9b1290",
-                    "path": "<Keyboard>/5",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ClickButton4",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 },
                 {
                     "name": "",
@@ -537,6 +406,145 @@
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "Save",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Dialogue",
+            "id": "d10cd334-5487-4175-9a35-fc4191aadb62",
+            "actions": [
+                {
+                    "name": "talk",
+                    "type": "Button",
+                    "id": "5f48c501-cdb4-4870-b0c0-8cebe8f1bff8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DialogueOption1",
+                    "type": "Button",
+                    "id": "15966ddb-8b2d-43bb-8846-bb3d1c9df5d3",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DialogueOption2",
+                    "type": "Button",
+                    "id": "c7d5b72d-a275-4aa5-a24b-db77fedca4ac",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DialogueOption3",
+                    "type": "Button",
+                    "id": "42c60fc2-e393-40f3-9c41-07e3083a0499",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DialogueOption4",
+                    "type": "Button",
+                    "id": "3a8fbc8e-63a6-451f-b637-f51e1886fc77",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DialogueOption5",
+                    "type": "Button",
+                    "id": "9a0bc6a3-367f-4014-88d7-fe8c5a1f7a2c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "accd4e29-bc95-41d1-9194-57d6755b8a09",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "talk",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "de861f28-9c18-4dec-8972-d5a921e1eb14",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "talk",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e7c93e54-57af-4fd2-8f98-94aa637c2e1d",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";KeyboardMouse",
+                    "action": "DialogueOption1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "da0e8391-7dc9-4188-8f36-4bd49d7e39d9",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DialogueOption2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2404fbcf-5850-4473-bcf4-37bb7997ecb8",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DialogueOption3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1571b23e-5344-46ef-ab3e-8f91e97ea562",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DialogueOption4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ca0bc817-762a-4a11-902b-8f69a9ea1a5d",
+                    "path": "<Keyboard>/5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DialogueOption5",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

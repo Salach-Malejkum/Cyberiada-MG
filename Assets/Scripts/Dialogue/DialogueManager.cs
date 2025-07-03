@@ -26,6 +26,7 @@ public class DialogueManager : MonoBehaviour
     private GameObject optionsPanel;
 
     private EventManager eventManager;
+    [SerializeField] private InputActionAsset playerInput;
 
     private void Start()
     {
@@ -67,6 +68,11 @@ public class DialogueManager : MonoBehaviour
         optionsPanel.SetActive(false);
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        //playerInput.SwitchCurrentActionMap("Player");
+        playerInput.FindActionMap("Player").Enable();
+        playerInput.FindActionMap("UI").Enable();
+        playerInput.FindActionMap("Camera").Enable();
+        playerInput.FindActionMap("CheckPoint").Enable();
     }
 
     public void OnTalk(InputAction.CallbackContext inputAction)
@@ -138,6 +144,11 @@ public class DialogueManager : MonoBehaviour
             optionsPanel.SetActive(true);
         }
         dialogueCanvas.SetActive(true);
+        //playerInput.SwitchCurrentActionMap("Dialogue");
+        playerInput.FindActionMap("Player").Disable();
+        playerInput.FindActionMap("UI").Disable();
+        playerInput.FindActionMap("Camera").Disable();
+        playerInput.FindActionMap("CheckPoint").Disable();
         stepNum += 1;
     }
 
@@ -148,7 +159,7 @@ public class DialogueManager : MonoBehaviour
             button.SetActive(false);
         }
 
-        
+        CheckForEvents();
 
         if (optionNum == 0)
         {
@@ -185,7 +196,6 @@ public class DialogueManager : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
-        CheckForEvents();
         ManageDialogue();
     }
 
