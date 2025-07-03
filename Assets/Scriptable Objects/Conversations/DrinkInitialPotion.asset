@@ -19,7 +19,9 @@ MonoBehaviour:
   dialogue:
   - Look who finally decided to show up.
   - Here, drink this. It should make you feel better.
-  - Thanks!
+  - 'You can now attack using [LMB] and double jump by pressing [Space] twice.
+
+'
   optionText: []
   option0: {fileID: 0}
   option1: {fileID: 0}
