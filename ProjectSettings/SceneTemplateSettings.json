@@ -28,11 +28,6 @@
         },
         {
             "userAdded": false,
-            "type": "UnityEngine.Cubemap",
-            "defaultInstantiationMode": 0
-        },
-        {
-            "userAdded": false,
             "type": "UnityEngine.GameObject",
             "defaultInstantiationMode": 0
         },
@@ -109,6 +104,11 @@
         {
             "userAdded": false,
             "type": "UnityEngine.Timeline.TimelineAsset",
+            "defaultInstantiationMode": 0
+        },
+        {
+            "userAdded": true,
+            "type": "UnityEngine.Cubemap",
             "defaultInstantiationMode": 0
         }
     ],

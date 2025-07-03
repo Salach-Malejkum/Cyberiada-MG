@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d3cb7446a54fce4d9f591d7d98061c3, type: 3}
   m_Name: testNPC
   m_EditorClassIdentifier: 
-  actorName: testNPC
-  actorPortrait: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  actorName: Master Vitalis
+  actorPortrait: {fileID: 21300000, guid: 0146419f8de4404439a9f347b2d56857, type: 3}

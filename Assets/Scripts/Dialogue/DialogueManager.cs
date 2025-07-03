@@ -56,7 +56,7 @@ public class DialogueManager : MonoBehaviour
     {
         currentNpcDialog = npcDialogue;
         currentConversation = npcDialogue.conversation;
-        CheckForEvents();
+        //CheckForEvents();
         dialogueActivated = true;
     }
 
@@ -68,21 +68,30 @@ public class DialogueManager : MonoBehaviour
         optionsPanel.SetActive(false);
     }
 
-    void OnTalk(InputValue inputValue)
+    public void OnTalk(InputAction.CallbackContext inputAction)
     {
-        if (dialogueActivated)
+        if (inputAction.started)
         {
-            if (stepNum >= currentConversation.actors.Length)
+            if (dialogueActivated)
             {
-                currentNpcDialog.RemoveConversationsHeld();
-                //currentConversation.wasHeld = true;
-                TurnOffDialogue();
-            } 
-            else
-            {
-
-                PlayDialogue();
+                ManageDialogue();
             }
+        }
+    }
+
+    private void ManageDialogue()
+    {
+        if (stepNum >= currentConversation.actors.Length)
+        {
+            currentNpcDialog.RemoveConversationsHeld();
+            CheckForEvents();
+            //currentConversation.wasHeld = true;
+            TurnOffDialogue();
+        }
+        else
+        {
+
+            PlayDialogue();
         }
     }
 
@@ -133,7 +142,6 @@ public class DialogueManager : MonoBehaviour
 
     public void Option(int optionNum)
     {
-        //Debug.Log("OptionSelected");
         foreach (GameObject button in optionButton)
         {
             button.SetActive(false);
@@ -164,6 +172,7 @@ public class DialogueManager : MonoBehaviour
         }
         CheckForEvents();
         stepNum = 0;
+        ManageDialogue();
     }
 
     private void CheckForEvents()
@@ -176,6 +185,65 @@ public class DialogueManager : MonoBehaviour
                 {
                     eventManager.EventOccured(e);
                 }
+            }
+        }
+    }
+
+    public void OnClickButton0(InputAction.CallbackContext inputAction)
+    {
+        if (dialogueActivated)
+        {
+            if (optionButton[0].activeSelf)
+            {
+                Debug.Log("button 1 entered");
+                Option(0);
+            }
+        }
+    }
+
+    public void OnClickButton1(InputAction.CallbackContext inputAction)
+    {
+        if (dialogueActivated)
+        {
+            if (optionButton[1].activeSelf)
+            {
+                Debug.Log("button 2 entered");
+                Option(1);
+            }
+        }
+    }
+
+    public void OnClickButton2(InputAction.CallbackContext inputAction)
+    {
+        if (dialogueActivated)
+        {
+            if (optionButton[2].activeSelf)
+            {
+                Debug.Log("button 3 entered");
+                Option(2);
+            }
+        }
+    }
+
+    public void OnClickButton3(InputAction.CallbackContext inputAction)
+    {
+        if (dialogueActivated)
+        {
+            if (optionButton[3].activeSelf)
+            {
+                Debug.Log("button 4 entered");
+                Option(3);
+            }
+        }
+    }
+    public void OnClickButton4(InputAction.CallbackContext inputAction)
+    {
+        if (dialogueActivated)
+        {
+            if (optionButton[4].activeSelf)
+            {
+                Debug.Log("button 5 entered");
+                Option(4);
             }
         }
     }

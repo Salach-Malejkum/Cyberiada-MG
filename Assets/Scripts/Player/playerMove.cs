@@ -5,32 +5,34 @@ using UnityEngine.InputSystem;
 public class PlayerMove : MonoBehaviour
 {
     [Header("Move")]
-    [SerializeField] private float baseMoveSpeed = 5f;
+    [SerializeField] public float baseMoveSpeed = 5f;
     private float moveSpeed;
 
     [Header("Jump")]
-    [SerializeField] private float jumpForce = 10f;
-    [SerializeField] private float wallJumpForce = 5f;
-    [SerializeField][Range(0, 1)] private float jumpCancelMulti = 0.5f;
-    [SerializeField] private float airDragMovementModifier = 400f;
+    [SerializeField] public float jumpForce = 10f;
+    [SerializeField] public float wallJumpForce = 5f;
+    [SerializeField] public float wallJumpVerticalMultiplier = 1.05f;
+    [SerializeField][Range(0, 1)] public float jumpCancelMulti = 0.5f;
+    [SerializeField] public float airDragMovementModifier = 400f;
+    [SerializeField] private float wallGravity = 1f;
     [Header("Attacking")]
     public bool isAttacking = false;
     [Header("IsGrounded")]
     [SerializeField] private GroundedManager groundedManager;
     public bool isGrounded;
-    private bool isWalled = false;
+    [SerializeField] public bool isWalled {  get; private set; }
     private bool doubleJumped = false;
     public bool isFacingRight { get; private set; }
     [Header("Dash")]
-    [SerializeField] private float dashPower = 24f;
-    [SerializeField] private float dashTime = 0.2f;
-    [SerializeField] private float dashCooldown = 2f;
+    [SerializeField] public float dashPower = 24f;
+    [SerializeField] public float dashTime = 0.2f;
+    [SerializeField] public float dashCooldown = 2f;
     private bool isDashing;
 
     [Header("Sprint")]
-    [SerializeField] private float timeToSprint = 0.5f;
-    [SerializeField] private float maxSprintSpeed = 10f;
-    [SerializeField] private float sprintSpeedIncrement = 0.1f;
+    [SerializeField] public float timeToSprint = 0.5f;
+    [SerializeField] public float maxSprintSpeed = 10f;
+    [SerializeField] public float sprintSpeedIncrement = 0.1f;
     private float sprintTimer;
 
     [Header("Layers")]
@@ -39,11 +41,12 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private LayerMask wallLayer;
 
     [Header("Unlocked Skills")]
-    [SerializeField] private bool canDoubleJump;
-    [SerializeField] private bool canDash = true;
-    [SerializeField] private bool canWallJump;
-    [SerializeField] private bool canBlock;
-    [SerializeField] private bool canAttack;
+    [SerializeField] public bool canDoubleJump;
+    [SerializeField] public bool canDash = true;
+    [SerializeField] public bool canWallJump;
+    [SerializeField] public bool canBlock;
+    [SerializeField] public bool canAttack;
+    [SerializeField] public bool canRangeAttack;
 
 
     private Rigidbody rb;
@@ -56,6 +59,7 @@ public class PlayerMove : MonoBehaviour
     private PlayerStats stats;
     [Header("Attack zone")]
     [SerializeField] private Transform attackPosition;
+    [SerializeField] private Transform firePoint;
 
     [Header("Enterable platforms")]
     private bool isOnEnterablePlatform = false;
@@ -66,7 +70,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (groundedManager != null)
         {
-            groundedManager.OnIsGroundedChanged +=  CheckGrounded;
+            groundedManager.OnIsGroundedChanged += CheckGrounded;
         }
     }
 
@@ -92,11 +96,11 @@ public class PlayerMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (rb.linearVelocity.x != 0f && isGrounded)
+        if ((rb.linearVelocity.x >= 0.001f || rb.linearVelocity.x <= -0.001f) && isGrounded)
         {
             sprintTimer -= Time.deltaTime;
         }
-        else if (rb.linearVelocity.x == 0f)
+        else if (rb.linearVelocity.x <= 0.001f && rb.linearVelocity.x >= -0.001f)
         {
             ResetTimer();
         }
@@ -113,15 +117,13 @@ public class PlayerMove : MonoBehaviour
 
     void Move()
     {
-        if (moveInput.x > 0 && !isFacingRight)
+        if (isDashing)
         {
-            isFacingRight = true;
-            ResetTimer();
-            Flip();
+            return;
         }
-        if (moveInput.x < 0 && isFacingRight)
+
+        if (ShouldFlip())
         {
-            isFacingRight = false;
             ResetTimer();
             Flip();
         }
@@ -132,19 +134,25 @@ public class PlayerMove : MonoBehaviour
             return;
         }
 
-        if (!isDashing)
+        Vector3 move = new Vector3(moveInput.x, 0f, 0f) * moveSpeed;
+        if (isGrounded)
         {
-            Vector3 move = new Vector3(moveInput.x, 0f, 0f) * moveSpeed;
-            if (isGrounded)
-            {
-                rb.linearVelocity = new Vector3(move.x, rb.linearVelocity.y, 0f);
-            }
-            else
-            {
-                rb.linearVelocity = new Vector3(Mathf.Clamp(rb.linearVelocity.x + (move.x / airDragMovementModifier), -moveSpeed, moveSpeed), rb.linearVelocity.y, 0f);
-            }
+            rb.linearVelocity = new Vector3(move.x, rb.linearVelocity.y, 0f);
         }
+        else
+        {
+            rb.linearVelocity = new Vector3(Mathf.Clamp(rb.linearVelocity.x + (move.x / airDragMovementModifier), -moveSpeed, moveSpeed), rb.linearVelocity.y, 0f);
+        }
+
+
         anim.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
+    }
+
+    private bool ShouldFlip()
+    {
+        bool moveCheck = (moveInput.x > 0 && !isFacingRight) || (moveInput.x < 0 && isFacingRight);
+        bool wallCheck = (isWallLeft && isFacingRight && isWalled) || (!isWallLeft && !isFacingRight && isWalled);
+        return moveCheck || wallCheck;
     }
 
     void Jump()
@@ -177,10 +185,15 @@ public class PlayerMove : MonoBehaviour
             doubleJumped = true;
         }
 
+        WallJump();
+    }
+
+    private void WallJump()
+    {
         if (canWallJump && isWalled)
         {
             int sign = isWallLeft ? 1 : -1;
-            rb.linearVelocity = new Vector3(sign * wallJumpForce, jumpForce, 0f);
+            rb.AddForce(new Vector3(sign * wallJumpForce, wallJumpForce * wallJumpVerticalMultiplier, 0f), ForceMode.Impulse);
         }
     }
 
@@ -261,6 +274,7 @@ public class PlayerMove : MonoBehaviour
 
     public void DashCancel()
     {
+        anim.SetBool("IsDashing", false);
         isDashing = false;
         rb.useGravity = true;
     }
@@ -269,6 +283,7 @@ public class PlayerMove : MonoBehaviour
     {
         canDash = false;
         isDashing = true;
+        anim.SetBool("IsDashing", true);
         rb.useGravity = false;
         float speedBefourDash = rb.linearVelocity.x;
         rb.linearVelocity = new Vector3((isFacingRight ? 1f : -1f) * dashPower, 0f, 0f);
@@ -285,13 +300,18 @@ public class PlayerMove : MonoBehaviour
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
     }
-    private void Flip()
+    public void Flip()
     {
         renderer.flipX = !renderer.flipX;
+        isFacingRight = !isFacingRight;
 
         Vector3 attackPosition = this.attackPosition.localPosition;
         attackPosition.x *= -1;
         this.attackPosition.localPosition = attackPosition;
+
+        Vector3 firePosition = this.firePoint.localPosition;
+        firePosition.x *= -1;
+        this.firePoint.localPosition = firePosition;
     }
 
 
@@ -305,6 +325,7 @@ public class PlayerMove : MonoBehaviour
 
         if (IsWall(collision.gameObject))
         {
+            anim.SetBool("IsWalled", true);
             isWalled = true;
             isWallLeft = collision.contacts[0].point.x <= transform.position.x;
         }
@@ -322,6 +343,7 @@ public class PlayerMove : MonoBehaviour
 
         if (IsWall(collision.gameObject))
         {
+            anim.SetBool("IsWalled", false);
             isWalled = false;
         }
     }
@@ -369,8 +391,25 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    public void DrinkInitialPotion()
+    {
+        canDoubleJump = true;
+        canAttack = true;
+    }
+
+    public void DrinkTea()
+    {
+        canRangeAttack = true;
+        canDash = true;
+    }
+
     public bool GetCanAttack()
     {
         return canAttack;
+    }
+    
+    public void SetCanWallJump(bool canWallJump)
+    {
+        this.canWallJump = canWallJump;
     }
 }

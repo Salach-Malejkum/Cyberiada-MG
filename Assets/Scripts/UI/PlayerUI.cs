@@ -35,11 +35,14 @@ public class PlayerUI : MonoBehaviour
             hintText.text = message;
     }
 
-    private void SetShortJumpText() => UpdateMessage("Press Space to jump");
-    private void SetLongJumpText() => UpdateMessage("Hold Space to jump higher");
-    private void SetRunningJumpText() => UpdateMessage("Run to one side and press and hold Space to jump even higher");
-    private void SetMovementext() => UpdateMessage("Use WASD to move");
-    private void HandleMessages(string message)
+    private void SetShortJumpText() => UpdateMessage("Press [Space] to jump");
+    private void SetLongJumpText() => UpdateMessage("Hold [Space] to jump higher");
+    private void SetRunningJumpText() => UpdateMessage("Run to one side, then press and hold [Space] to jump even higher and furhter.");
+    private void SetMovementText() => UpdateMessage("Use [WASD] to move");
+    private void SetEnterablePlatformText() => UpdateMessage("You can enter wooden platforms from below and drop from them using [S]");
+    private void SetSpikesText() => UpdateMessage("Be careful! Spikes deal damage when you touch them, better be safe.");
+    private void SetWallJumpText() => UpdateMessage("When touching the wall, press [SPACE] to jump off it.");
+    private void HandleMessages(GameObject gameObject, string message)
     {
         switch (message)
         {
@@ -53,7 +56,17 @@ public class PlayerUI : MonoBehaviour
                 SetRunningJumpText();
                 break;
             case "hint_movement":
-                SetMovementext();
+                SetMovementText();
+                break;
+            case "hint_enterable_platform":
+                SetEnterablePlatformText();
+                break;
+            case "hint_spikes":
+                SetSpikesText();
+                break;
+            case "hint_wall_jump":
+                SetWallJumpText();
+                gameObject.GetComponent<PlayerMove>().SetCanWallJump(true); // TODO: This is a temporary solution, should be removed later
                 break;
             default:
                 hintText.text = "";

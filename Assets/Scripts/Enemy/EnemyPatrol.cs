@@ -34,6 +34,10 @@ public class EnemyPatrol : MonoBehaviour
     private SpriteRenderer renderer;
     public Animator anim;
 
+    [Header("Renderer")]
+    [SerializeField] private Color onHitColor = Color.red;
+    [SerializeField] private Renderer onHitRenderer;
+
     void Start()
     {
         enemyRb = GetComponent<Rigidbody>();
@@ -149,7 +153,7 @@ public class EnemyPatrol : MonoBehaviour
     {
         Vector3 rayOrigin = transform.position + new Vector3(directionX * patrolEdgeSize, 0f, 0f);
         float rayLength = 2.5f;
-        return Physics.Raycast(rayOrigin, Vector3.down, rayLength, LayerMask.GetMask("Ground"));
+        return Physics.Raycast(rayOrigin, Vector3.down, rayLength, LayerMask.GetMask("Ground", "EnterablePlatform"));
     }
 
     private void Flip()
@@ -203,5 +207,17 @@ public class EnemyPatrol : MonoBehaviour
         Gizmos.color = Color.red;
         Vector3 fieldOfVisionSize = new Vector3(fieldOfVisionHorisontalRange, fieldOfVisionVerticalRange, 5f);
         Gizmos.DrawWireCube(transformer.position, fieldOfVisionSize);
+    }
+
+    public void onHitChangeColor()
+    {
+        StartCoroutine(changeColor());
+    }
+
+    IEnumerator changeColor()
+    {
+        onHitRenderer.material.SetColor("_SolidColor", onHitColor);
+        yield return new WaitForSeconds(0.2f);
+        onHitRenderer.material.SetColor("_SolidColor", new Color(0.0f, 0.0f, 0.0f, 0.0f));
     }
 }

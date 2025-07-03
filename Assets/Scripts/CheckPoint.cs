@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +10,14 @@ public class CheckPoint : MonoBehaviour
     [SerializeField] private SpriteRenderer interactionMarker;
     private Animator anim;
     private bool interacted;
+    private CheckPointManager checkPointManager;
+
+    public event Action player;
+
+    private void Awake()
+    {
+        checkPointManager = GameObject.FindGameObjectWithTag("checkPointManager").GetComponent<CheckPointManager>();
+    }
 
     private void Start()
     {
@@ -21,11 +30,13 @@ public class CheckPoint : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            checkPointManager.setCheckPointInRage(this.gameObject);
+
             interactionMarker.enabled = true;
             playerInRangeOfCheckPoint = true;
             playerStats = other.GetComponent<PlayerStats>();
             playerYPosition = other.gameObject.transform.position.y;
-            OnTalkDebug();
+            //OnTalkDebug();
         }
     }
 
@@ -33,13 +44,14 @@ public class CheckPoint : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            checkPointManager.removeCheckPointInRage();
             interactionMarker.enabled = false;
             playerInRangeOfCheckPoint = false;
             playerStats = null;
         }
     }
 
-    void OnTalk(InputValue inputValue)
+    public void Interact()
     {
         if (playerInRangeOfCheckPoint)
         {
