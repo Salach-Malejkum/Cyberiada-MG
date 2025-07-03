@@ -45,13 +45,16 @@ public class PlayerAttack : MonoBehaviour
         rangedAttackTimeCounter += Mathf.Clamp(attackTimeCounter + Time.deltaTime, 0f, stats.TimeBtwAttacks * rangedAttackDelayMultiplier + 1f);
         comboEndCounter += Time.deltaTime;
 
-        if (Mathf.Abs(Time.time - beatTime) <= attackErrorMargin)
+        if (playerMove.canAttack)
         {
-            mat_renderer.material.SetColor("_OutlineColor", onBeatColor);
-        }
-        else
-        {
-            mat_renderer.material.SetColor("_OutlineColor", offBeatColor);
+            if (Mathf.Abs(Time.time - beatTime) <= attackErrorMargin)
+            {
+                mat_renderer.material.SetColor("_OutlineColor", onBeatColor);
+            }
+            else
+            {
+                mat_renderer.material.SetColor("_OutlineColor", offBeatColor);
+            }
         }
     }
 
