@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FullScreenPassRendererFeature
   m_EditorClassIdentifier: 
   m_Active: 1
-  injectionPoint: 600
+  injectionPoint: 450
   fetchColorBuffer: 1
   requirements: 1
   passMaterial: {fileID: 2100000, guid: a094ee69e0863ab4d83c0242d1dd6725, type: 2}
@@ -56,7 +56,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   m_TransparentLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 385
   m_DefaultStencilState:
     overrideStencilState: 0
     stencilReference: 0
