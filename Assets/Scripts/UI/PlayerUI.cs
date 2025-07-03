@@ -42,6 +42,8 @@ public class PlayerUI : MonoBehaviour
     private void SetEnterablePlatformText() => UpdateMessage("You can enter wooden platforms from below and drop from them using [S]");
     private void SetSpikesText() => UpdateMessage("Be careful! Spikes deal damage when you touch them, better be safe.");
     private void SetWallJumpText() => UpdateMessage("When touching the wall, press [SPACE] to jump off it.");
+    private void SetTalkNpcText() => UpdateMessage("Press [F] to talk to NPCs");
+
     private void HandleMessages(GameObject gameObject, string message)
     {
         switch (message)
@@ -67,6 +69,9 @@ public class PlayerUI : MonoBehaviour
             case "hint_wall_jump":
                 SetWallJumpText();
                 gameObject.GetComponent<PlayerMove>().SetCanWallJump(true); // TODO: This is a temporary solution, should be removed later
+                break;
+            case "hint_talk_npc":
+                SetTalkNpcText();
                 break;
             default:
                 hintText.text = "";
