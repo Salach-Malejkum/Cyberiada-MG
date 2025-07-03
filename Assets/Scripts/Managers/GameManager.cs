@@ -9,8 +9,9 @@ public class GameManager : MonoBehaviour
     public string nextSpawn;
     private GameObject player;
 
-    [Header("Dialogues Finished")]
+    [Header("Finished Actions")]
     [SerializeField] public List<DialogueSO> dialogues {  get; private set; }
+    [SerializeField] public List<string> finishedHints;
 
     [Header("Move")]
     [SerializeField] private float baseMoveSpeed;
