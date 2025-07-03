@@ -274,6 +274,7 @@ public class PlayerMove : MonoBehaviour
 
     public void DashCancel()
     {
+        anim.SetBool("IsDashing", false);
         isDashing = false;
         rb.useGravity = true;
     }
@@ -282,6 +283,7 @@ public class PlayerMove : MonoBehaviour
     {
         canDash = false;
         isDashing = true;
+        anim.SetBool("IsDashing", true);
         rb.useGravity = false;
         float speedBefourDash = rb.linearVelocity.x;
         rb.linearVelocity = new Vector3((isFacingRight ? 1f : -1f) * dashPower, 0f, 0f);

@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: RangeClip
+  m_Name: DashClip
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,17 +21,11 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 21300000, guid: 75a506eb57101084e8a98c893f802ed1, type: 3}
+      value: {fileID: 21300000, guid: ec5f71e97d7c876458688923e05bc05e, type: 3}
     - time: 0.1
-      value: {fileID: 21300000, guid: bb9d558f80bfea946a142f61d2cc49fb, type: 3}
+      value: {fileID: 21300000, guid: 0d7d218f6f92c2141b7229f30a76f6cb, type: 3}
     - time: 0.2
-      value: {fileID: 21300000, guid: 3d8e50aab7634344eae211398d53a885, type: 3}
-    - time: 0.3
-      value: {fileID: 21300000, guid: f6f451b95d7446645922e5d7c961583e, type: 3}
-    - time: 0.4
-      value: {fileID: 21300000, guid: 90608f7fc203580418d34416ac9490f2, type: 3}
-    - time: 0.5
-      value: {fileID: 21300000, guid: 5f3cfff8aacba2f4d9ef8b20ab004f74, type: 3}
+      value: {fileID: 21300000, guid: 4097f8ece69137a4e94119943d11c1a5, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -54,18 +48,15 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 75a506eb57101084e8a98c893f802ed1, type: 3}
-    - {fileID: 21300000, guid: bb9d558f80bfea946a142f61d2cc49fb, type: 3}
-    - {fileID: 21300000, guid: 3d8e50aab7634344eae211398d53a885, type: 3}
-    - {fileID: 21300000, guid: f6f451b95d7446645922e5d7c961583e, type: 3}
-    - {fileID: 21300000, guid: 90608f7fc203580418d34416ac9490f2, type: 3}
-    - {fileID: 21300000, guid: 5f3cfff8aacba2f4d9ef8b20ab004f74, type: 3}
+    - {fileID: 21300000, guid: ec5f71e97d7c876458688923e05bc05e, type: 3}
+    - {fileID: 21300000, guid: 0d7d218f6f92c2141b7229f30a76f6cb, type: 3}
+    - {fileID: 21300000, guid: 4097f8ece69137a4e94119943d11c1a5, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.51666665
+    m_StopTime: 0.21666667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -84,18 +75,4 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events:
-  - time: 0.2
-    functionName: PlayRAtk
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.4
-    functionName: ShootRangedProjectile
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
+  m_Events: []

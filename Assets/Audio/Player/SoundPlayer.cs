@@ -10,6 +10,7 @@ public class SoundPlayer : MonoBehaviour
     [Header("Atk")]
     [SerializeField] private EventReference atk_1;
     [SerializeField] private EventReference atk_2;
+    [SerializeField] private EventReference r_atk_1;
     [Header("Run")]
     [SerializeField] private EventReference run_1;
     [SerializeField] private EventReference run_2;
@@ -28,6 +29,8 @@ public class SoundPlayer : MonoBehaviour
     public void PlayAtk1() { SFXManager.instance.PlayOneShot(atk_1, this.transform.position); }
 
     public void PlayAtk2() { SFXManager.instance.PlayOneShot(atk_2, this.transform.position); }
+
+    public void PlayRAtk() { SFXManager.instance.PlayOneShot(r_atk_1, this.transform.position); }
 
     public void PlayRun1() { SFXManager.instance.PlayOneShot(run_1, this.transform.position); }
 
