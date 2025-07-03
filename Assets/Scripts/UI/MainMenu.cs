@@ -12,13 +12,6 @@ public class MainMenu : MonoBehaviour
     [SerializeField] public Button firstMainMenuButton;
     [SerializeField] private Button firstOptionsButton;
 
-    /*private void Awake()
-    {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-        firstButton.Select();
-    }*/
-
     private void Start()
     {
         Cursor.visible = true;

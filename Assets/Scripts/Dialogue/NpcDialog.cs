@@ -64,7 +64,6 @@ public class NpcDialog : MonoBehaviour
             speechBubbleRenderer.enabled = false;
             dialogueManager.TurnOffDialogue();
             dialogueInitiated = false;
-            //RemoveConversationsHeld();
         }
     }
 
@@ -108,7 +107,7 @@ public class NpcDialog : MonoBehaviour
     {
         for(int i = 0; i < conversations.Length; i++)
         {
-            if (conversations[i] != null /*&& conversations[i].wasHeld*/)
+            if (conversations[i] != null)
                 if (!conversations[i].isRepeatable && conversations[i] == conversation)
                 {
                     conversations[i] = null;

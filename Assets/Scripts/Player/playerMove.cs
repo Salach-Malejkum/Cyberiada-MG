@@ -370,11 +370,9 @@ public class PlayerMove : MonoBehaviour
 
     public bool IsExitPlatformPerformed()
     {
-        // Get the current gamepad
         var gamepad = Gamepad.current;
         if (gamepad == null) return false;
 
-        // Check if left stick is down
         if (isOnEnterablePlatform && gamepad.leftStick.down.ReadValue() > 0.9f)
         {
             return true;
@@ -382,7 +380,6 @@ public class PlayerMove : MonoBehaviour
 
         return false;
     }
-    //todo move or rename
     private void FallCheckPoint()
     {
         if (isGrounded)

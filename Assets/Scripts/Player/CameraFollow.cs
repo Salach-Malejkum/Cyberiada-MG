@@ -59,7 +59,6 @@ public class CameraFollow : MonoBehaviour
     void OnLook(InputValue value)
     {
         lookInputY = value.Get<float>();
-        Debug.Log(lookInputY);
         SendMessage("HandleLookInput", lookInputY, SendMessageOptions.DontRequireReceiver);
     }
 }

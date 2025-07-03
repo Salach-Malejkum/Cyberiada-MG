@@ -56,7 +56,6 @@ public class DialogueManager : MonoBehaviour
     {
         currentNpcDialog = npcDialogue;
         currentConversation = npcDialogue.conversation;
-        //CheckForEvents();
         dialogueActivated = true;
     }
 
@@ -85,7 +84,6 @@ public class DialogueManager : MonoBehaviour
         {
             currentNpcDialog.RemoveConversationsHeld();
             CheckForEvents();
-            //currentConversation.wasHeld = true;
             TurnOffDialogue();
         }
         else
@@ -147,7 +145,6 @@ public class DialogueManager : MonoBehaviour
             button.SetActive(false);
         }
 
-        //currentConversation.wasHeld = true;
         currentNpcDialog.RemoveConversationsHeld();
 
         if (optionNum == 0)
@@ -171,7 +168,6 @@ public class DialogueManager : MonoBehaviour
             currentConversation = currentConversation.option4;
         }
         CheckForEvents();
-        stepNum = 0;
         ManageDialogue();
     }
 
@@ -195,7 +191,6 @@ public class DialogueManager : MonoBehaviour
         {
             if (optionButton[0].activeSelf)
             {
-                Debug.Log("button 1 entered");
                 Option(0);
             }
         }
@@ -207,7 +202,6 @@ public class DialogueManager : MonoBehaviour
         {
             if (optionButton[1].activeSelf)
             {
-                Debug.Log("button 2 entered");
                 Option(1);
             }
         }
@@ -219,7 +213,6 @@ public class DialogueManager : MonoBehaviour
         {
             if (optionButton[2].activeSelf)
             {
-                Debug.Log("button 3 entered");
                 Option(2);
             }
         }
@@ -231,7 +224,6 @@ public class DialogueManager : MonoBehaviour
         {
             if (optionButton[3].activeSelf)
             {
-                Debug.Log("button 4 entered");
                 Option(3);
             }
         }
@@ -242,7 +234,6 @@ public class DialogueManager : MonoBehaviour
         {
             if (optionButton[4].activeSelf)
             {
-                Debug.Log("button 5 entered");
                 Option(4);
             }
         }

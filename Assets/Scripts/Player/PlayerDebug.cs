@@ -12,7 +12,6 @@ public class PlayerDebug : MonoBehaviour
         // new Vector3(241, 35, 0)
     };
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.F1))

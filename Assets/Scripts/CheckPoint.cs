@@ -36,7 +36,6 @@ public class CheckPoint : MonoBehaviour
             playerInRangeOfCheckPoint = true;
             playerStats = other.GetComponent<PlayerStats>();
             playerYPosition = other.gameObject.transform.position.y;
-            //OnTalkDebug();
         }
     }
 
@@ -52,20 +51,6 @@ public class CheckPoint : MonoBehaviour
     }
 
     public void Interact()
-    {
-        if (playerInRangeOfCheckPoint)
-        {
-            playerStats.UpdateRespawnCoordinates(new Vector3(transform.position.x, playerYPosition, 0f));
-            if (!interacted)
-            {
-                interacted = true;
-                anim.SetBool("interacted", interacted);
-                transform.position = transform.position + new Vector3(0, 0.5f, 0);
-            }
-        }
-    }
-
-    void OnTalkDebug() // TODO DO WYJEBANIA
     {
         if (playerInRangeOfCheckPoint)
         {

@@ -57,9 +57,7 @@ public class EnemyMeleeAttack : MonoBehaviour, IPlayerInAttackRange
         {
             if (meleeComboAttackMap[attackMapIndex] == 1)
             {
-                //start animation
                 patrol.anim.SetBool("attack", true);
-                //DealMeleeDamage(); // temp until animations ready then called by animation events
                 attackMapIndex++;
                 attackNumber++;
             }

@@ -91,9 +91,7 @@ public class PlayerStats : UnitStats
     {
         SpriteRenderer renderer = this.gameObject.GetComponent<SpriteRenderer>();
         renderer.enabled = false;
-        //fade in
         yield return new WaitForSeconds(timeToRespawn);
-        //fade out
         if (isPlayerDead)
         {
             transform.position = unitRespawnCoordinates;

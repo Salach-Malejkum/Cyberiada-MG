@@ -78,10 +78,8 @@ public class EnemyPatrol : MonoBehaviour
         enemyRb.linearVelocity = new Vector3(moveDirection * speed, 0f, 0f);
         anim.SetFloat("Speed", enemyRb.linearVelocity.magnitude);
 
-        Debug.Log(Vector3.Distance(transform.position, currentDestination.position));
         if (Vector3.Distance(transform.position, currentDestination.position) < patrolEdgeSize)
         {
-            Debug.Log("patrol edge");
             StartCoroutine(PatrolPause());
         }
     }

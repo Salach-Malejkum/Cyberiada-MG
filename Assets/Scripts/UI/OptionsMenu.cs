@@ -9,9 +9,6 @@ public class OptionsMenu : MonoBehaviour
     [SerializeField] private GameObject mainPanel;
     [SerializeField] private Button firstMainMenuButton;
 
-
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         masterVolumeSlider.value = SFXManager.instance.masterVolume;

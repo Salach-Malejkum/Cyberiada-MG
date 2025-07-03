@@ -42,9 +42,6 @@ public class GameManager : MonoBehaviour
     [Header("Stats")]
     [SerializeField] private float playerHP;
 
-
-
-
     private void Awake()
     {
         if (instance != null && instance != this)
