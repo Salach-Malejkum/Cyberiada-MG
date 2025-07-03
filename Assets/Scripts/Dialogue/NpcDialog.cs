@@ -103,7 +103,7 @@ public class NpcDialog : MonoBehaviour
         }
     }
 
-    public void RemoveConversationsHeld()
+    public void RemoveConversationsHeld(bool isConversationContinued)
     {
         for(int i = 0; i < conversations.Length; i++)
         {
@@ -115,6 +115,6 @@ public class NpcDialog : MonoBehaviour
                 }
         }
         conversation = null;
-        dialogueInitiated = false;
+        dialogueInitiated = isConversationContinued;
     }
 }

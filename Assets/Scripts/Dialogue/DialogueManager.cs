@@ -65,6 +65,8 @@ public class DialogueManager : MonoBehaviour
         dialogueActivated = false;
         dialogueCanvas.SetActive(false);
         optionsPanel.SetActive(false);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void OnTalk(InputAction.CallbackContext inputAction)
@@ -82,13 +84,12 @@ public class DialogueManager : MonoBehaviour
     {
         if (stepNum >= currentConversation.actors.Length)
         {
-            currentNpcDialog.RemoveConversationsHeld();
+            currentNpcDialog.RemoveConversationsHeld(false);
             CheckForEvents();
             TurnOffDialogue();
         }
         else
         {
-
             PlayDialogue();
         }
     }
@@ -124,6 +125,8 @@ public class DialogueManager : MonoBehaviour
 
                 optionButton[0].GetComponent<Button>().Select();
             }
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
         
         if (stepNum < currentConversation.dialogue.Length)
@@ -145,7 +148,7 @@ public class DialogueManager : MonoBehaviour
             button.SetActive(false);
         }
 
-        currentNpcDialog.RemoveConversationsHeld();
+        
 
         if (optionNum == 0)
         {
@@ -167,6 +170,21 @@ public class DialogueManager : MonoBehaviour
         {
             currentConversation = currentConversation.option4;
         }
+
+        if (currentConversation != null)
+        {
+            currentNpcDialog.RemoveConversationsHeld(true);
+            stepNum = 0;
+        }
+        else
+        {
+            currentNpcDialog.RemoveConversationsHeld(false);
+            stepNum += 1;
+        }
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
         CheckForEvents();
         ManageDialogue();
     }

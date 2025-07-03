@@ -25,8 +25,7 @@ public class PauseMenu : MonoBehaviour
         }
         else
         {
-            EnablePanels();
-            Time.timeScale = 0;
+            Pause();
         }
     }
 
@@ -47,9 +46,19 @@ public class PauseMenu : MonoBehaviour
         pauseMenuPanel.GetComponent<MainMenu>().firstMainMenuButton.Select();
     }
 
+    public void Pause()
+    {
+        EnablePanels();
+        Time.timeScale = 0;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     public void Resume()
     {
         DisablePanels();
         Time.timeScale = 1;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }
