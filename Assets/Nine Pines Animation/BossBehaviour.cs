@@ -12,6 +12,7 @@ public class BossBehaviour : MonoBehaviour
     [Header("Boss Params")]
     [SerializeField] private float walkSpeed = 2f;
     [SerializeField] private float slideSpeed = 5f;
+    [SerializeField] private float slideTimer = 3f;
 
     [Header("Renderer")]
     [SerializeField] private Color onHitColor = Color.red;
@@ -82,18 +83,16 @@ public class BossBehaviour : MonoBehaviour
     }
 
     private bool isAttacking;
+    private bool canSlide = true;
     void FixedUpdate()
     {
         rb.linearVelocity = Vector3.zero;
         if (isAttacking) return;
 
-        if (Vector3.Distance(new Vector3(this.transform.position.x, 0f, 0f), new Vector3(player.transform.position.x, 0f, 0f)) > runRange)
+        if (Vector3.Distance(new Vector3(this.transform.position.x, 0f, 0f), new Vector3(player.transform.position.x, 0f, 0f)) > runRange && canSlide)
         {
-            speed = slideSpeed;
-        }
-        else
-        {
-            speed = walkSpeed;
+            canSlide = false;
+            StartCoroutine(SlideOffCooldown());
         }
 
         if (!BossInBounds() || returning)
@@ -143,6 +142,20 @@ public class BossBehaviour : MonoBehaviour
         yield return new WaitForSeconds(1f);
         animator.SetTrigger("ExitAttack");
         isAttacking = false;
+    }
+
+    IEnumerator SlideOffCooldown()
+    {
+        speed = slideSpeed;
+        yield return new WaitForSeconds(slideTimer);
+        speed = walkSpeed;
+        StartCoroutine(SlideResetCooldown());
+    }
+
+    IEnumerator SlideResetCooldown()
+    {
+        yield return new WaitForSeconds(slideTimer);
+        canSlide = true;
     }
 
     private RaycastHit[] hits;

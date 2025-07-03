@@ -55,6 +55,7 @@ public class CheckPoint : MonoBehaviour
         if (playerInRangeOfCheckPoint)
         {
             playerStats.UpdateRespawnCoordinates(new Vector3(transform.position.x, playerYPosition, 0f));
+            playerStats.HealthRestored(playerStats.UnitMaxHealth);
             if (!interacted)
             {
                 interacted = true;
