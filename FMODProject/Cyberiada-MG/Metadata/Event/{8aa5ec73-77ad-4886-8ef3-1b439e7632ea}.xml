@@ -97,6 +97,8 @@
 		<relationship name="effects">
 			<destination>{c2c03d62-3717-415b-916a-5c38fb6d3b83}</destination>
 			<destination>{e941054b-8c40-46c3-8bfb-46b830d06a61}</destination>
+			<destination>{9854dae1-b3cf-4a67-ab64-055b651922b1}</destination>
+			<destination>{a915db05-31f3-4130-849d-c3a21232a5bb}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{c05d5613-68ca-4f0d-ab51-64e7db64e644}" />
@@ -108,4 +110,26 @@
 	<object class="MixerBusFader" id="{d3bb5a1d-beb7-4760-a967-e917038beaf0}" />
 	<object class="MixerBusFader" id="{c2c03d62-3717-415b-916a-5c38fb6d3b83}" />
 	<object class="SpatialiserEffect" id="{e941054b-8c40-46c3-8bfb-46b830d06a61}" />
+	<object class="MultibandEqEffect" id="{9854dae1-b3cf-4a67-ab64-055b651922b1}">
+		<property name="frequencyA">
+			<value>943.399658</value>
+		</property>
+		<property name="frequencyB">
+			<value>81.8291092</value>
+		</property>
+		<property name="qualityA">
+			<value>1.82165527</value>
+		</property>
+		<property name="qualityB">
+			<value>0.751586199</value>
+		</property>
+	</object>
+	<object class="SFXReverbEffect" id="{a915db05-31f3-4130-849d-c3a21232a5bb}">
+		<property name="decayTime">
+			<value>500</value>
+		</property>
+		<property name="HFDecayRatio">
+			<value>23.5</value>
+		</property>
+	</object>
 </objects>
