@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51748c50c3a34bf479eb295815aae249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectHP: 1
+  objectHP: 2
   hitParticles: {fileID: 780332428428896173, guid: a17b4662beca6814daf9c5138da3dfde, type: 3}
   hitSound:
     Guid:

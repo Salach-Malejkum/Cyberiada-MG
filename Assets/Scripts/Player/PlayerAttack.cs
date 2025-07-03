@@ -57,7 +57,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void OnRangedAttack(InputAction.CallbackContext inputAction)
     {
-        if (playerMove.canRangeAttack && inputAction.started && rangedAttackTimeCounter >= stats.TimeBtwAttacks * rangedAttackDelayMultiplier)
+        if (playerMove.canRangeAttack && inputAction.started && rangedAttackTimeCounter >= stats.TimeBtwAttacks * rangedAttackDelayMultiplier && !playerMove.isWalled)
         {
             playerMove.isAttacking = true;
             anim.SetTrigger("RangedAttack");
@@ -80,7 +80,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void OnMeleeAttack(InputAction.CallbackContext inputAction)
     {
-        if (playerMove.GetCanAttack() && inputAction.started && attackTimeCounter >= stats.TimeBtwAttacks)
+        if (playerMove.GetCanAttack() && inputAction.started && attackTimeCounter >= stats.TimeBtwAttacks && !playerMove.isWalled)
         {
             playerMove.isAttacking = true;
             anim.SetTrigger("AttackTrigger");

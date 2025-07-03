@@ -838,8 +838,10 @@ MonoBehaviour:
   baseMoveSpeed: 5
   jumpForce: 16
   wallJumpForce: 20
+  wallJumpVerticalMultiplier: 1.05
   jumpCancelMulti: 0.3
   airDragMovementModifier: 10
+  wallGravity: 1
   isAttacking: 0
   groundedManager: {fileID: 4053845027304592057}
   isGrounded: 0
@@ -848,7 +850,7 @@ MonoBehaviour:
   dashCooldown: 1
   timeToSprint: 1
   maxSprintSpeed: 8
-  sprintSpeedIncrement: 0.01
+  sprintSpeedIncrement: 0.02
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -860,10 +862,10 @@ MonoBehaviour:
     m_Bits: 64
   canDoubleJump: 0
   canDash: 0
-  canWallJump: 1
+  canWallJump: 0
   canBlock: 0
-  canAttack: 1
-  canRangeAttack: 1
+  canAttack: 0
+  canRangeAttack: 0
   attackPosition: {fileID: 8004490164030886986}
   firePoint: {fileID: 8347091120211506341}
 --- !u!114 &6545984004989396839
@@ -2907,6 +2909,7 @@ MonoBehaviour:
   actorSO:
   - {fileID: 11400000, guid: 9fecbd40648d0c7488875d79bbf61331, type: 2}
   - {fileID: 11400000, guid: ff12a1e99136dd94c97f79945df1a85d, type: 2}
+  - {fileID: 11400000, guid: 9102f25d09f3d9c45bb863646e857263, type: 2}
   optionButton:
   - {fileID: 6059059550288577997}
   - {fileID: 6912516019854690168}

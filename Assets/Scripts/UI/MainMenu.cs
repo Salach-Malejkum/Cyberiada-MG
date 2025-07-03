@@ -28,7 +28,6 @@ public class MainMenu : MonoBehaviour
 
     public void StartGmae()
     {
-        Debug.Log("start");
         SceneManager.LoadScene(sceneName);
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -36,7 +35,6 @@ public class MainMenu : MonoBehaviour
 
     public void ExitGame()
     {
-        Debug.Log("exit");
         Application.Quit();
     }
 
@@ -45,7 +43,6 @@ public class MainMenu : MonoBehaviour
         optionsPanel.SetActive(true);
         firstOptionsButton.Select();
         this.gameObject.SetActive(false);
-        Debug.Log("options");
     }
 
     public void PlayOnClick()

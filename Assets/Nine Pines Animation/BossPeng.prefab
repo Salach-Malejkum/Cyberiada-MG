@@ -192,7 +192,7 @@ MonoBehaviour:
   leftBounds: {fileID: 7962252823652414881}
   rightBounds: {fileID: 5803252812295037871}
   centerPoint: {fileID: 2384404794762511105}
-  walkSpeed: 3
+  walkSpeed: 5
   slideSpeed: 8
   onHitColor: {r: 1, g: 0, b: 0, a: 1}
   onHitRenderer: {fileID: 1471037016650076076}

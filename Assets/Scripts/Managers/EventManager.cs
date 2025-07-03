@@ -28,6 +28,9 @@ public class EventManager : MonoBehaviour
                 case 1:
                     HealPlayer();
                     break;
+                case 2:
+                    DrinkTea(); 
+                    break;
             }
 
         }
@@ -58,6 +61,11 @@ public class EventManager : MonoBehaviour
     {
         playerStats.HealthRestored(playerStats.UnitMaxHealth);
     }
+
+    private void DrinkTea()
+    {
+        playerMove.DrinkTea();
+    }
 }
 
 public enum DialogueEvents
@@ -65,6 +73,6 @@ public enum DialogueEvents
     NoEvent = -1,
     DrinkInitialPotion = 0,
     HealPlayer = 1,
-    Event3 = 2,
+    DrinkTea = 2,
     Event4 = 3,
 };

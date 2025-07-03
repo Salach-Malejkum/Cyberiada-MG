@@ -11,14 +11,16 @@ public class PlayerMove : MonoBehaviour
     [Header("Jump")]
     [SerializeField] public float jumpForce = 10f;
     [SerializeField] public float wallJumpForce = 5f;
+    [SerializeField] public float wallJumpVerticalMultiplier = 1.05f;
     [SerializeField][Range(0, 1)] public float jumpCancelMulti = 0.5f;
     [SerializeField] public float airDragMovementModifier = 400f;
+    [SerializeField] private float wallGravity = 1f;
     [Header("Attacking")]
     public bool isAttacking = false;
     [Header("IsGrounded")]
     [SerializeField] private GroundedManager groundedManager;
     public bool isGrounded;
-    [SerializeField] private bool isWalled = false;
+    [SerializeField] public bool isWalled {  get; private set; }
     private bool doubleJumped = false;
     public bool isFacingRight { get; private set; }
     [Header("Dash")]
@@ -191,7 +193,7 @@ public class PlayerMove : MonoBehaviour
         if (canWallJump && isWalled)
         {
             int sign = isWallLeft ? 1 : -1;
-            rb.AddForce(new Vector3(sign * wallJumpForce, wallJumpForce, 0f), ForceMode.Impulse);
+            rb.AddForce(new Vector3(sign * wallJumpForce, wallJumpForce * wallJumpVerticalMultiplier, 0f), ForceMode.Impulse);
         }
     }
 
@@ -391,6 +393,12 @@ public class PlayerMove : MonoBehaviour
     {
         canDoubleJump = true;
         canAttack = true;
+    }
+
+    public void DrinkTea()
+    {
+        canRangeAttack = true;
+        canDash = true;
     }
 
     public bool GetCanAttack()
