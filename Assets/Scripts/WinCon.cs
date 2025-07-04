@@ -23,6 +23,8 @@ public class WinCon : MonoBehaviour
         Time.timeScale = 0;
         yield return new WaitForSecondsRealtime(waitTime);
         Time.timeScale = 1;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene(sceneName);
     }
 }
