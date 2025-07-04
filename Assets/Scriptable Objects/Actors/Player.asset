@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: 
   actorName: Lelush
-  actorPortrait: {fileID: 21300000, guid: e6b1aa9684b25ec43a815e9955422837, type: 3}
+  actorPortrait: {fileID: 21300000, guid: 06144b3ba28426e44bdd831d52129552, type: 3}

@@ -17,12 +17,12 @@ MonoBehaviour:
   eventsStarted: 02000000
   isRepeatable: 0
   dialogue:
-  - Oh darlin', what happened to you?
+  - Lelush! Oh darlin', what happened to you?
   - Here, take a sip.
   - '*You can now use [Right Mouse Button] to perform a ranged attack and [Shift]
     to dash*'
   - Feelin' better?
-  - Tell me, did you see the penguin?
+  - Tell me, did you see a "jumping mushroom"?
   optionText:
   - Yes
   - No

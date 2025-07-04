@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9af1615386fa5048b74e827c6bbb1d7, type: 3}
   m_Name: DrinkInitialPotion
   m_EditorClassIdentifier: 
-  actors: 020000000200000001000000
+  actors: 0200000002000000010000000200000001000000020000000100000002000000020000000200000002000000020000000100000001000000
   eventsRequired: 
   eventsStarted: 00000000
   isRepeatable: 0
@@ -22,6 +22,21 @@ MonoBehaviour:
   - 'You can now attack using [LMB] and double jump by pressing [Space] twice.
 
 '
+  - 'Look at you all bright and shining. '
+  - Thank you, Master Vitalis.
+  - There was an attack on our Village again. Mushrooms are dangerously close.
+  - Master... I don't want to hide anymore...
+  - I understand Lelush.
+  - I've teached you everything I could. I think you are ready, after all.. We need
+    more hands to fight.
+  - It's getting worse and worse each day. Some parts of the forest are dying without
+    a sun.
+  - Mushroom grow bigger and bigger covering all the sunlight and the sky.
+  - I'll give you your first task - find Miss Tea-Badger. She went somewhere again...
+    I hope she's alright.
+  - I will do my best, Master!
+  - '*You might notice that you glow to the beat now. When attacking on beat, you
+    will deal bonus damage*'
   optionText: []
   option0: {fileID: 0}
   option1: {fileID: 0}
