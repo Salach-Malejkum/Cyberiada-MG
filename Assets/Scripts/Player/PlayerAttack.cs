@@ -12,6 +12,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private float attackErrorMargin = 0.1f;
     [SerializeField] private float rangedAttackDelayMultiplier = 30f;
+    [SerializeField] private float rangedAttackDamageReductionDivider = 2f;
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform firePoint;
     private float attackTimeCounter;
@@ -60,7 +61,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void OnRangedAttack(InputAction.CallbackContext inputAction)
     {
-        if (playerMove.canRangeAttack && inputAction.started && rangedAttackTimeCounter >= stats.TimeBtwAttacks * rangedAttackDelayMultiplier && !playerMove.isWalled)
+        if (playerMove.canRangeAttack && inputAction.started && rangedAttackTimeCounter >= stats.TimeBtwAttacks * rangedAttackDelayMultiplier && !playerMove.isWalled && !playerMove.isAttacking)
         {
             playerMove.isAttacking = true;
             anim.SetTrigger("RangedAttack");
@@ -77,13 +78,20 @@ public class PlayerAttack : MonoBehaviour
         PlayerProjectile projectileScript = projectileInstance.GetComponent<PlayerProjectile>();
         if (projectileScript != null)
         {
-            projectileScript.SetShooter(stats.UnitAttackDamage, firePoint.localPosition.x);
+            if (isOnBeat)
+            {
+                projectileScript.SetShooter(stats.UnitAttackDamage / rangedAttackDamageReductionDivider + stats.UnitAttackBuff, firePoint.localPosition.x);
+            }
+            else
+            {
+                projectileScript.SetShooter(stats.UnitAttackDamage / rangedAttackDamageReductionDivider, firePoint.localPosition.x);
+            }
         }
     }
 
     public void OnMeleeAttack(InputAction.CallbackContext inputAction)
     {
-        if (playerMove.GetCanAttack() && inputAction.started && attackTimeCounter >= stats.TimeBtwAttacks && !playerMove.isWalled)
+        if (playerMove.GetCanAttack() && inputAction.started && attackTimeCounter >= stats.TimeBtwAttacks && !playerMove.isWalled && !playerMove.isAttacking)
         {
             playerMove.isAttacking = true;
             anim.SetTrigger("AttackTrigger");
@@ -148,7 +156,16 @@ public class PlayerAttack : MonoBehaviour
 
             if (destructibleObject != null)
             {
-                destructibleObject.TakeDamage();
+                
+                if (isOnBeat)
+                {
+                    print("test");
+                    destructibleObject.TakeDamage((int)stats.UnitAttackDamage + (int)stats.UnitAttackBuff);
+                }
+                else
+                {
+                    destructibleObject.TakeDamage(1);
+                }
             }
 
             if (enemyStats != null)

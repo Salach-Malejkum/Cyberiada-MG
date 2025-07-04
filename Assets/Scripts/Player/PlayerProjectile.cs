@@ -43,7 +43,7 @@ public class PlayerProjectile : MonoBehaviour
 
             if (destructibleObject != null)
             {
-                destructibleObject.TakeDamage();
+                destructibleObject.TakeDamage((int)this.damageAmount);
             }
 
             if (enemyStats != null)

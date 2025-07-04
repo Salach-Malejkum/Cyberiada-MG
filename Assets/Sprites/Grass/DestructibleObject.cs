@@ -9,13 +9,13 @@ public class DestructibleObject : MonoBehaviour
     [SerializeField] private EventReference hitSound;
     private bool destroyed = false;
 
-    public void TakeDamage()
+    public void TakeDamage(int damage)
     {
+        objectHP -= damage;
         if (objectHP > 0)
         {
             Instantiate(hitParticles, transform.position, Quaternion.identity);
             SFXManager.instance.PlayOneShot(hitSound, this.transform.position);
-            objectHP--;
         }
         else
         {
