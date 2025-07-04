@@ -409,4 +409,9 @@ public class PlayerMove : MonoBehaviour
     {
         this.canWallJump = canWallJump;
     }
+
+    public void SetIsAttackingOff()
+    {
+        isAttacking = false;
+    }
 }

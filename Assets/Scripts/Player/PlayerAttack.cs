@@ -159,7 +159,6 @@ public class PlayerAttack : MonoBehaviour
                 
                 if (isOnBeat)
                 {
-                    print("test");
                     destructibleObject.TakeDamage((int)stats.UnitAttackDamage + (int)stats.UnitAttackBuff);
                 }
                 else
