@@ -563,6 +563,7 @@ MonoBehaviour:
   Banks:
   - Music
   - MusicBackup
+  - MusicVol
   - SFX
   BanksToLoad: []
   LiveUpdatePort: 9264
