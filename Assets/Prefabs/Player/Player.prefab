@@ -912,7 +912,7 @@ MonoBehaviour:
   firePoint: {fileID: 8347091120211506341}
   mat_renderer: {fileID: 5722249797344147198}
   onBeatColor: {r: 1, g: 1, b: 1, a: 1}
-  offBeatColor: {r: 0.6084906, g: 0.9745075, b: 1, a: 1}
+  offBeatColor: {r: 0, g: 0.71066046, b: 0.764151, a: 1}
 --- !u!95 &1944364153601993666
 Animator:
   serializedVersion: 7
@@ -6672,11 +6672,15 @@ PrefabInstance:
     - target: {fileID: 2174155237143823199, guid: 5348229a6a073894394eb5bd31895020, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: e65d2cf93eb36364899e4fdce0ae4fed, type: 2}
+      objectReference: {fileID: 11400000, guid: 8906cb7a022c99048aba8d9e8236a667, type: 2}
     - target: {fileID: 2174155237143823199, guid: 5348229a6a073894394eb5bd31895020, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -2063607974148623705, guid: e65d2cf93eb36364899e4fdce0ae4fed, type: 2}
+      objectReference: {fileID: 584563700443125920, guid: 8906cb7a022c99048aba8d9e8236a667, type: 2}
+    - target: {fileID: 2174155237143823199, guid: 5348229a6a073894394eb5bd31895020, type: 3}
+      propertyPath: m_characterSpacing
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2174155237143823199, guid: 5348229a6a073894394eb5bd31895020, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
