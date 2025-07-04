@@ -11751,6 +11751,76 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f79db904ad3f89c4483e653e72572281, type: 3}
+--- !u!1 &194510051
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 194510054}
+  - component: {fileID: 194510053}
+  - component: {fileID: 194510052}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &194510052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 194510051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f220822cb157d7b459226ddf8f4365cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitTime: 5
+  endScreen: {fileID: 1849169930}
+  sceneName: 00_MainMenu
+  levelBoss: {fileID: 539685187}
+--- !u!65 &194510053
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 194510051}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 19.74, y: 25.08, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &194510054
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 194510051}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 241.46, y: 43.14, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &195582215
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27550,6 +27620,11 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!1 &539685187 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1994099509040872301, guid: be11aa1f60931924eb15ed7fb39aed94, type: 3}
+  m_PrefabInstance: {fileID: 5759182034220000232}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &542037818
 Mesh:
   m_ObjectHideFlags: 0
@@ -43346,6 +43421,7 @@ MonoBehaviour:
   waitTime: 5
   endScreen: {fileID: 1849169930}
   sceneName: MainMenu
+  levelBoss: {fileID: 0}
 --- !u!43 &876354484
 Mesh:
   m_ObjectHideFlags: 0
@@ -87592,7 +87668,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7600362110069822600, guid: 48e2f1bc4239b794b9749561646bff8a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 247.56
+      value: 247.57
       objectReference: {fileID: 0}
     - target: {fileID: 7600362110069822600, guid: 48e2f1bc4239b794b9749561646bff8a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -87600,7 +87676,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7600362110069822600, guid: 48e2f1bc4239b794b9749561646bff8a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.3
+      value: 0.42
       objectReference: {fileID: 0}
     - target: {fileID: 7600362110069822600, guid: 48e2f1bc4239b794b9749561646bff8a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -105249,3 +105325,4 @@ SceneRoots:
   - {fileID: 170098610}
   - {fileID: 877765508}
   - {fileID: 2027622454}
+  - {fileID: 194510054}
