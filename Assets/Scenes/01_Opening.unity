@@ -1263,6 +1263,7 @@ MonoBehaviour:
   button: {fileID: 197210152}
   waitTime: 3
   sceneName: 02_Tutorial_Cave
+  videoPlayer: {fileID: 65628978}
 --- !u!114 &1148436485
 MonoBehaviour:
   m_ObjectHideFlags: 0
