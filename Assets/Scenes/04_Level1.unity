@@ -43389,7 +43389,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.57, y: 10, z: 1}
+  m_Size: {x: 12.27, y: 21.27, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &873662763
 Transform:
@@ -43400,7 +43400,7 @@ Transform:
   m_GameObject: {fileID: 873662761}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 253.23, y: 34, z: 0}
+  m_LocalPosition: {x: 245.08, y: 42.59, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -43421,7 +43421,7 @@ MonoBehaviour:
   waitTime: 5
   endScreen: {fileID: 1849169930}
   sceneName: MainMenu
-  levelBoss: {fileID: 0}
+  levelBoss: {fileID: 5759182034220000233}
 --- !u!43 &876354484
 Mesh:
   m_ObjectHideFlags: 0
@@ -87917,7 +87917,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7600362110069822600, guid: 48e2f1bc4239b794b9749561646bff8a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 247.56
+      value: 247.57
       objectReference: {fileID: 0}
     - target: {fileID: 7600362110069822600, guid: 48e2f1bc4239b794b9749561646bff8a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -87925,7 +87925,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7600362110069822600, guid: 48e2f1bc4239b794b9749561646bff8a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.3
+      value: 0.59
       objectReference: {fileID: 0}
     - target: {fileID: 7600362110069822600, guid: 48e2f1bc4239b794b9749561646bff8a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -104745,6 +104745,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be11aa1f60931924eb15ed7fb39aed94, type: 3}
+--- !u!1 &5759182034220000233 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1994099509040872301, guid: be11aa1f60931924eb15ed7fb39aed94, type: 3}
+  m_PrefabInstance: {fileID: 5759182034220000232}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7114225078470889762
 MonoBehaviour:
   m_ObjectHideFlags: 0
