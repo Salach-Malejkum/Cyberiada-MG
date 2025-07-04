@@ -11,7 +11,6 @@ public class WinCon : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log(other.CompareTag("Player") + " " + levelBoss.GetComponent<EnemyStats>().UnitCurrentHealth);
         if (other.CompareTag("Player") && levelBoss.GetComponent<EnemyStats>().UnitCurrentHealth <= 0)
         {
             endScreen.SetActive(true);
