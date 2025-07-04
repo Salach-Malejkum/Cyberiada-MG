@@ -64,7 +64,6 @@ public class CheckPoint : MonoBehaviour
             {
                 interacted = true;
                 anim.SetBool("interacted", interacted);
-                transform.position = transform.position + new Vector3(0, 0.5f, 0);
             }
         }
     }
@@ -78,7 +77,6 @@ public class CheckPoint : MonoBehaviour
             enemies[i].SetActive(true);
             enemyStats.HealthRestored(enemyStats.UnitMaxHealth);
             enemyPatrol.onRespawnChangeColor();
-            print(enemies[i].name);
         }
     }
 }

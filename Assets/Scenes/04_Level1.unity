@@ -73428,13 +73428,17 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4790809193754651162, guid: c1f6cda7f7e95d34ea81d753fe0448d5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.3052101
+      objectReference: {fileID: 0}
     - target: {fileID: 5457562348365217338, guid: c1f6cda7f7e95d34ea81d753fe0448d5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 105
       objectReference: {fileID: 0}
     - target: {fileID: 5457562348365217338, guid: c1f6cda7f7e95d34ea81d753fe0448d5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 30.61
+      value: 29.374
       objectReference: {fileID: 0}
     - target: {fileID: 5457562348365217338, guid: c1f6cda7f7e95d34ea81d753fe0448d5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -104360,7 +104364,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 735054938905961148, guid: be11aa1f60931924eb15ed7fb39aed94, type: 3}
       propertyPath: unitMaxHealth
-      value: 500
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 1471037016650076076, guid: be11aa1f60931924eb15ed7fb39aed94, type: 3}
       propertyPath: m_Color.b

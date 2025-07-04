@@ -181,9 +181,9 @@ public class BossBehaviour : MonoBehaviour
 
     IEnumerator changeColor()
     {
-        onHitRenderer.material.SetColor("_SolidColor", onHitColor);
+        onHitRenderer.material.SetColor("_OnHitColor", onHitColor);
         yield return new WaitForSeconds(0.2f);
-        onHitRenderer.material.SetColor("_SolidColor", new Color(0.0f, 0.0f, 0.0f, 0.0f));
+        onHitRenderer.material.SetColor("_OnHitColor", new Color(0.0f, 0.0f, 0.0f, 0.0f));
     }
 
     private void OnDrawGizmos()

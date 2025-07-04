@@ -93,9 +93,9 @@ Transform:
   m_GameObject: {fileID: 1994099509040872301}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.82, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: -0.08, z: 0}
+  m_LocalScale: {x: 1.6, y: 1.6, z: 1.6}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 835558017796261198}
   m_Father: {fileID: 8221571741667717048}
@@ -123,7 +123,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4fc7ee4c6669fb64b9a2c40d0adb224a, type: 2}
+  - {fileID: 2100000, guid: 001e40cf554beaa45959376c0a3acb35, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -198,7 +198,7 @@ MonoBehaviour:
   onHitColor: {r: 1, g: 0, b: 0, a: 1}
   onHitRenderer: {fileID: 1471037016650076076}
   attackTransform: {fileID: 835558017796261198}
-  attackRange: 1.5
+  attackRange: 1.6
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -294,7 +294,7 @@ Transform:
   m_GameObject: {fileID: 2206506036071729506}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.108, y: -0.827, z: 0}
+  m_LocalPosition: {x: -0.108, y: -0.426, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
