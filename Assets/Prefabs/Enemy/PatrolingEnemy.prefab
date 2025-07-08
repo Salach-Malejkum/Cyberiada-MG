@@ -87,7 +87,7 @@ Transform:
   m_GameObject: {fileID: 3612101097976324237}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.03, y: 1.19, z: 0}
+  m_LocalPosition: {x: 0.03, y: -0.437, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -232,7 +232,7 @@ MonoBehaviour:
   rightEdge: {fileID: 4039365863838941631}
   patrolEdgeSize: 0.5
   patrolPauseTime: 2
-  fieldOfVisionVerticalRange: 4
+  fieldOfVisionVerticalRange: 2
   fieldOfVisionHorisontalRange: 10
   playerLayer:
     serializedVersion: 2
