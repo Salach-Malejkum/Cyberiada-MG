@@ -7,19 +7,24 @@ public class WinCon : MonoBehaviour
     [SerializeField] private float waitTime;
     [SerializeField] private GameObject endScreen;
     [SerializeField] private string sceneName;
+    [SerializeField] private GameObject levelBoss;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerStay(Collider other)
     {
-        endScreen.SetActive(true);
-        StartCoroutine(EndGame());
+        if (other.CompareTag("Player") && levelBoss.GetComponent<EnemyStats>().UnitCurrentHealth <= 0)
+        {
+            endScreen.SetActive(true);
+            StartCoroutine(EndGame());
+        }
     }
-
 
     private IEnumerator EndGame()
     {
         Time.timeScale = 0;
         yield return new WaitForSecondsRealtime(waitTime);
         Time.timeScale = 1;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene(sceneName);
     }
 }

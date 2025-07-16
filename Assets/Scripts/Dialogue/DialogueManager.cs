@@ -26,6 +26,7 @@ public class DialogueManager : MonoBehaviour
     private GameObject optionsPanel;
 
     private EventManager eventManager;
+    [SerializeField] private InputActionAsset playerInput;
 
     private void Start()
     {
@@ -56,7 +57,6 @@ public class DialogueManager : MonoBehaviour
     {
         currentNpcDialog = npcDialogue;
         currentConversation = npcDialogue.conversation;
-        CheckForEvents();
         dialogueActivated = true;
     }
 
@@ -66,23 +66,37 @@ public class DialogueManager : MonoBehaviour
         dialogueActivated = false;
         dialogueCanvas.SetActive(false);
         optionsPanel.SetActive(false);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        //playerInput.SwitchCurrentActionMap("Player");
+        playerInput.FindActionMap("Player").Enable();
+        playerInput.FindActionMap("UI").Enable();
+        playerInput.FindActionMap("Camera").Enable();
+        playerInput.FindActionMap("CheckPoint").Enable();
     }
 
-    void OnTalk(InputValue inputValue)
+    public void OnTalk(InputAction.CallbackContext inputAction)
     {
-        if (dialogueActivated)
+        if (inputAction.started)
         {
-            if (stepNum >= currentConversation.actors.Length)
+            if (dialogueActivated)
             {
-                currentNpcDialog.RemoveConversationsHeld();
-                //currentConversation.wasHeld = true;
-                TurnOffDialogue();
-            } 
-            else
-            {
-
-                PlayDialogue();
+                ManageDialogue();
             }
+        }
+    }
+
+    private void ManageDialogue()
+    {
+        if (stepNum >= currentConversation.actors.Length)
+        {
+            currentNpcDialog.RemoveConversationsHeld(false);
+            CheckForEvents();
+            TurnOffDialogue();
+        }
+        else
+        {
+            PlayDialogue();
         }
     }
 
@@ -100,7 +114,7 @@ public class DialogueManager : MonoBehaviour
 
         actor.text = currentSpeaker;
         portrait.sprite = currentPortrait;
-        
+
         if (currentConversation.actors[stepNum] == DialogueActors.Branch)
         {
             for (int i = 0; i < currentConversation.optionText.Length; i++)
@@ -117,8 +131,10 @@ public class DialogueManager : MonoBehaviour
 
                 optionButton[0].GetComponent<Button>().Select();
             }
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
-        
+
         if (stepNum < currentConversation.dialogue.Length)
         {
             dialogueText.text = currentConversation.dialogue[stepNum];
@@ -128,19 +144,22 @@ public class DialogueManager : MonoBehaviour
             optionsPanel.SetActive(true);
         }
         dialogueCanvas.SetActive(true);
+        //playerInput.SwitchCurrentActionMap("Dialogue");
+        playerInput.FindActionMap("Player").Disable();
+        playerInput.FindActionMap("UI").Disable();
+        playerInput.FindActionMap("Camera").Disable();
+        playerInput.FindActionMap("CheckPoint").Disable();
         stepNum += 1;
     }
 
     public void Option(int optionNum)
     {
-        //Debug.Log("OptionSelected");
         foreach (GameObject button in optionButton)
         {
             button.SetActive(false);
         }
 
-        //currentConversation.wasHeld = true;
-        currentNpcDialog.RemoveConversationsHeld();
+        CheckForEvents();
 
         if (optionNum == 0)
         {
@@ -162,8 +181,22 @@ public class DialogueManager : MonoBehaviour
         {
             currentConversation = currentConversation.option4;
         }
-        CheckForEvents();
-        stepNum = 0;
+
+        if (currentConversation != null)
+        {
+            currentNpcDialog.RemoveConversationsHeld(true);
+            stepNum = 0;
+        }
+        else
+        {
+            currentNpcDialog.RemoveConversationsHeld(false);
+            stepNum += 1;
+        }
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        ManageDialogue();
     }
 
     private void CheckForEvents()
@@ -178,6 +211,94 @@ public class DialogueManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void OnClickButton0(InputAction.CallbackContext inputAction)
+    {
+        if (dialogueActivated)
+        {
+            if (optionButton[0].activeSelf)
+            {
+                Option(0);
+            }
+        }
+    }
+
+    public void OnClickButton1(InputAction.CallbackContext inputAction)
+    {
+        if (dialogueActivated)
+        {
+            if (optionButton[1].activeSelf)
+            {
+                Option(1);
+            }
+        }
+    }
+
+    public void OnClickButton2(InputAction.CallbackContext inputAction)
+    {
+        if (dialogueActivated)
+        {
+            if (optionButton[2].activeSelf)
+            {
+                Option(2);
+            }
+        }
+    }
+
+    public void OnClickButton3(InputAction.CallbackContext inputAction)
+    {
+        if (dialogueActivated)
+        {
+            if (optionButton[3].activeSelf)
+            {
+                Option(3);
+            }
+        }
+    }
+    public void OnClickButton4(InputAction.CallbackContext inputAction)
+    {
+        if (dialogueActivated)
+        {
+            if (optionButton[4].activeSelf)
+            {
+                Option(4);
+            }
+        }
+    }
+    
+    // Handles up/down navigation on gamepad for dialogue options
+    private int selectedOptionIndex = 0;
+
+    public void OnUpDown(InputAction.CallbackContext inputAction)
+    {
+        if (!dialogueActivated || !optionsPanel.activeSelf)
+            return;
+
+        float move = inputAction.ReadValue<float>();
+        if (move > 0.5f)
+            MoveSelection(-1);
+        else if (move < -0.5f)
+            MoveSelection(1);
+    }
+
+    private void MoveSelection(int direction)
+    {
+        int optionsCount = 0;
+        for (int i = 0; i < optionButton.Length; i++)
+            if (optionButton[i].activeSelf) optionsCount++;
+
+        if (optionsCount == 0) return;
+
+        int newIndex = selectedOptionIndex;
+        do
+        {
+            newIndex = (newIndex + direction + optionButton.Length) % optionButton.Length;
+        }
+        while (!optionButton[newIndex].activeSelf);
+
+        selectedOptionIndex = newIndex;
+        optionButton[selectedOptionIndex].GetComponent<Button>().Select();
     }
 }
 

@@ -4,6 +4,8 @@ using UnityEngine;
 public class EventManager : MonoBehaviour
 {
     private bool[] events;
+    [SerializeField] private PlayerMove playerMove;
+    [SerializeField] private PlayerStats playerStats;
 
     private void Start()
     {
@@ -18,6 +20,19 @@ public class EventManager : MonoBehaviour
         if ((int)e != -1)
         {
             events[(int)e] = true;
+            switch ((int)e)
+            {
+                case 0:
+                    DrinkInitialPotion();
+                    break;
+                case 1:
+                    HealPlayer();
+                    break;
+                case 2:
+                    DrinkTea(); 
+                    break;
+            }
+
         }
     }
 
@@ -36,13 +51,28 @@ public class EventManager : MonoBehaviour
         }
         return true;
     }
+
+    private void DrinkInitialPotion()
+    {
+        playerMove.DrinkInitialPotion();
+    }
+
+    private void HealPlayer()
+    {
+        playerStats.HealthRestored(playerStats.UnitMaxHealth);
+    }
+
+    private void DrinkTea()
+    {
+        playerMove.DrinkTea();
+    }
 }
 
 public enum DialogueEvents
 {
     NoEvent = -1,
-    Event1 = 0,
-    Event2 = 1,
-    Event3 = 2,
+    DrinkInitialPotion = 0,
+    HealPlayer = 1,
+    DrinkTea = 2,
     Event4 = 3,
 };

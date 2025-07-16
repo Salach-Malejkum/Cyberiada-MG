@@ -7,7 +7,6 @@ public class DialogueSO : ScriptableObject
     public DialogueEvents[] eventsRequired;
     public DialogueEvents[] eventsStarted;
     public bool isRepeatable;
-    //public bool wasHeld = false;
 
     [Header("Dialogue")]
     [TextArea]

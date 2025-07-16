@@ -11,6 +11,7 @@ public class EnemyMeleeAttack : MonoBehaviour, IPlayerInAttackRange
     private int attackMapIndex;
     private int attackNumber;
     private EnemyStats stats;
+    private EnemyPatrol patrol;
     private Animator anim;
 
     void Start()
@@ -19,6 +20,7 @@ public class EnemyMeleeAttack : MonoBehaviour, IPlayerInAttackRange
         attackMapIndex = 0;
         anim = this.GetComponent<Animator>();
         MusicManager.Instance.Subscribe(AttackToBeat);
+        patrol = this.GetComponent<EnemyPatrol>();
         stats = this.GetComponent<EnemyStats>();
     }
 
@@ -30,6 +32,7 @@ public class EnemyMeleeAttack : MonoBehaviour, IPlayerInAttackRange
     public void EnemyFinishedAttack()
     {
         enemyReadyToAttack = false;
+        patrol.anim.SetBool("attack", false);
     }
 
     public bool EnemyAttacking()
@@ -54,8 +57,7 @@ public class EnemyMeleeAttack : MonoBehaviour, IPlayerInAttackRange
         {
             if (meleeComboAttackMap[attackMapIndex] == 1)
             {
-                //start animation
-                DealMeleeDamage(); // temp until animations ready then called by animation events
+                patrol.anim.SetBool("attack", true);
                 attackMapIndex++;
                 attackNumber++;
             }

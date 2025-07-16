@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using FMODUnity;
 
 public class EnemyPatrol : MonoBehaviour
 {
@@ -33,6 +34,11 @@ public class EnemyPatrol : MonoBehaviour
     private bool isWaiting = false;
     private SpriteRenderer renderer;
     public Animator anim;
+
+    [Header("Renderer")]
+    [SerializeField] private Color onHitColor = Color.red;
+    [SerializeField] private Renderer onHitRenderer;
+    [SerializeField] private EventReference hitSound;
 
     void Start()
     {
@@ -72,9 +78,7 @@ public class EnemyPatrol : MonoBehaviour
         if (isWaiting) return;
 
         enemyRb.linearVelocity = new Vector3(moveDirection * speed, 0f, 0f);
-        if (anim != null)
-            anim.SetFloat("Speed", enemyRb.linearVelocity.magnitude);
-
+        anim.SetFloat("Speed", enemyRb.linearVelocity.magnitude);
 
         if (Vector3.Distance(transform.position, currentDestination.position) < patrolEdgeSize)
         {
@@ -86,8 +90,7 @@ public class EnemyPatrol : MonoBehaviour
     {
         isWaiting = true;
         enemyRb.linearVelocity = Vector3.zero;
-        if (anim != null)
-            anim.SetFloat("Speed", enemyRb.linearVelocity.magnitude);
+        anim.SetFloat("Speed", enemyRb.linearVelocity.magnitude);
         yield return new WaitForSeconds(patrolPauseTime);
         if (patrolWaitCancel)
         {
@@ -120,20 +123,19 @@ public class EnemyPatrol : MonoBehaviour
             PatrolPauseCanceld();
         }
 
+
         if (hasGroundAhead)
         {
             if (playerInAttackRange.PlayerInAttackRange() || playerInAttackRange.EnemyAttacking())
             {
                 enemyRb.linearVelocity = new Vector3(0f, 0f, 0f);
-                if (anim != null)
-                    anim.SetFloat("Speed", enemyRb.linearVelocity.magnitude);
+                anim.SetFloat("Speed", enemyRb.linearVelocity.magnitude);
                 playerInAttackRange.EnemyReadyToAttack();
             }
             else
             {
                 enemyRb.linearVelocity = new Vector3(direction.x * speed, 0f, 0f);
-                if (anim != null)
-                    anim.SetFloat("Speed", enemyRb.linearVelocity.magnitude);
+                anim.SetFloat("Speed", enemyRb.linearVelocity.magnitude);
             }
 
             if ((direction.x > 0 && !renderer.flipX) || (direction.x < 0 && renderer.flipX))
@@ -151,7 +153,7 @@ public class EnemyPatrol : MonoBehaviour
     {
         Vector3 rayOrigin = transform.position + new Vector3(directionX * patrolEdgeSize, 0f, 0f);
         float rayLength = 2.5f;
-        return Physics.Raycast(rayOrigin, Vector3.down, rayLength, LayerMask.GetMask("Ground"));
+        return Physics.Raycast(rayOrigin, Vector3.down, rayLength, LayerMask.GetMask("Ground", "EnterablePlatform"));
     }
 
     private void Flip()
@@ -171,6 +173,8 @@ public class EnemyPatrol : MonoBehaviour
     {
         Vector3 fieldOfVisionSize = new Vector3(fieldOfVisionHorisontalRange, fieldOfVisionVerticalRange, 5f);
         RaycastHit[] hits = Physics.BoxCastAll(transformer.position, fieldOfVisionSize/2, transform.right, Quaternion.identity, 0f, playerLayer);
+
+
 
         if (hits.Length > 0)
         {
@@ -203,5 +207,23 @@ public class EnemyPatrol : MonoBehaviour
         Gizmos.color = Color.red;
         Vector3 fieldOfVisionSize = new Vector3(fieldOfVisionHorisontalRange, fieldOfVisionVerticalRange, 5f);
         Gizmos.DrawWireCube(transformer.position, fieldOfVisionSize);
+    }
+
+    public void onHitChangeColor()
+    {
+        StartCoroutine(changeColor());
+        SFXManager.instance.PlayOneShot(hitSound, this.transform.position);
+    }
+
+    public void onRespawnChangeColor()
+    {
+        onHitRenderer.material.SetColor("_OnHitColor", new Color(0.0f, 0.0f, 0.0f, 0.0f));
+    }
+
+    IEnumerator changeColor()
+    {
+        onHitRenderer.material.SetColor("_OnHitColor", onHitColor);
+        yield return new WaitForSeconds(0.2f);
+        onHitRenderer.material.SetColor("_OnHitColor", new Color(0.0f, 0.0f, 0.0f, 0.0f));
     }
 }

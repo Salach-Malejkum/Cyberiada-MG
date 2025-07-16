@@ -17,33 +17,43 @@ public class NpcDialog : MonoBehaviour
 
     private bool dialogueInitiated;
 
+    [SerializeField] private SpriteRenderer npcRenderer;
+
     private void Start()
     {
         eventManager = GameObject.Find("EventManager").GetComponent<EventManager>();
         dialogueManager = GameObject.Find("DialogueManager").GetComponent<DialogueManager>();
         speechBubbleRenderer = GetComponent<SpriteRenderer>();
         speechBubbleRenderer.enabled = false;
+
+        for (int i = 0; i < conversations.Length; i++)
+        {
+            if (GameManager.instance.dialogues.Contains(conversations[i]))
+            {
+                conversations[i] = null;
+            }
+        }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player") && !dialogueInitiated)
+        if (other.CompareTag("Player"))
         {
-            speechBubbleRenderer.enabled = true;
-
             player = other.gameObject.GetComponent<Transform>();
+            Vector3 direction = (player.position - transform.position).normalized;
+            if ((direction.x > 0 && !npcRenderer.flipX) || (direction.x < 0 && npcRenderer.flipX))
+            {
+                Flip();
+            }
 
-            if(player.position.x > transform.position.x && transform.parent.localScale.x < 0)
+            if (!dialogueInitiated)
             {
-                Flip();
+                speechBubbleRenderer.enabled = true;
+
+                SelectConversation();
+                dialogueManager.InitiateDialogue(this);
+                dialogueInitiated = true;
             }
-            else if (player.position.x < transform.position.x && transform.parent.localScale.x > 0)
-            {
-                Flip();
-            }
-            SelectConversation();
-            dialogueManager.InitiateDialogue(this);
-            dialogueInitiated = true;
         }
     }
 
@@ -54,15 +64,12 @@ public class NpcDialog : MonoBehaviour
             speechBubbleRenderer.enabled = false;
             dialogueManager.TurnOffDialogue();
             dialogueInitiated = false;
-            RemoveConversationsHeld();
         }
     }
 
     private void Flip()
     {
-        Vector3 currentScale = transform.parent.localScale;
-        currentScale.x *= -1;
-        transform.parent.localScale = currentScale;
+        npcRenderer.flipX = !npcRenderer.flipX;
     }
 
     private void SelectConversation()
@@ -96,7 +103,7 @@ public class NpcDialog : MonoBehaviour
         }
     }
 
-    public void RemoveConversationsHeld()
+    public void RemoveConversationsHeld(bool isConversationContinued)
     {
         for(int i = 0; i < conversations.Length; i++)
         {
@@ -104,8 +111,10 @@ public class NpcDialog : MonoBehaviour
                 if (!conversations[i].isRepeatable && conversations[i] == conversation)
                 {
                     conversations[i] = null;
+                    GameManager.instance.AddFinishedDialogue(conversation);
                 }
         }
         conversation = null;
+        dialogueInitiated = isConversationContinued;
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemyStats : UnitStats
@@ -30,6 +31,6 @@ public class EnemyStats : UnitStats
             PlayerStats stats = this.lastAggressor.GetComponent<PlayerStats>();
         
         }
-        Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
     }
 }

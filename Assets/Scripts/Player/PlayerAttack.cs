@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,8 +11,12 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private Transform attackTransform;
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private float attackErrorMargin = 0.1f;
-    [SerializeField] SpriteRenderer rythmDebug;
+    [SerializeField] private float rangedAttackDelayMultiplier = 30f;
+    [SerializeField] private float rangedAttackDamageReductionDivider = 2f;
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private Transform firePoint;
     private float attackTimeCounter;
+    private float rangedAttackTimeCounter;
     private float comboEndCounter;
     private int meleeComboAttackNumber;
     private bool isOnBeat = false;
@@ -20,10 +25,16 @@ public class PlayerAttack : MonoBehaviour
     private PlayerMove playerMove;
     private Animator anim;
 
+    [Header("Material Renderer")]
+    [SerializeField] private Renderer mat_renderer;
+    [SerializeField] private Color onBeatColor;
+    [SerializeField] private Color offBeatColor;
+
     void Start()
     {
         this.stats = GetComponent<PlayerStats>();
         attackTimeCounter = stats.TimeBtwAttacks;
+        rangedAttackTimeCounter = stats.TimeBtwAttacks * rangedAttackDelayMultiplier;
         MusicManager.Instance.Subscribe(CheckBeatChange);
         playerMove = GetComponent<PlayerMove>();
         anim = this.GetComponentInChildren<Animator>();
@@ -31,22 +42,56 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
-        attackTimeCounter += Time.deltaTime;
+        attackTimeCounter += Mathf.Clamp(attackTimeCounter + Time.deltaTime, 0f, stats.TimeBtwAttacks + 1f);
+        rangedAttackTimeCounter += Mathf.Clamp(attackTimeCounter + Time.deltaTime, 0f, stats.TimeBtwAttacks * rangedAttackDelayMultiplier + 1f);
         comboEndCounter += Time.deltaTime;
 
-        if (Mathf.Abs(Time.time - beatTime) <= attackErrorMargin)
+        if (playerMove.canAttack)
         {
-            rythmDebug.color = Color.blue;
+            if (Mathf.Abs(Time.time - beatTime) <= attackErrorMargin)
+            {
+                mat_renderer.material.SetColor("_OutlineColor", onBeatColor);
+            }
+            else
+            {
+                mat_renderer.material.SetColor("_OutlineColor", offBeatColor);
+            }
         }
-        else
+    }
+
+    public void OnRangedAttack(InputAction.CallbackContext inputAction)
+    {
+        if (playerMove.canRangeAttack && inputAction.started && rangedAttackTimeCounter >= stats.TimeBtwAttacks * rangedAttackDelayMultiplier && !playerMove.isWalled && !playerMove.isAttacking)
         {
-            rythmDebug.color = Color.red;
+            playerMove.isAttacking = true;
+            anim.SetTrigger("RangedAttack");
+            attackTime = Time.time;
+
+            rangedAttackTimeCounter = 0;
+        }
+    }
+
+    private void ShootRangedProjectile()
+    {
+        playerMove.isAttacking = false;
+        GameObject projectileInstance = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+        PlayerProjectile projectileScript = projectileInstance.GetComponent<PlayerProjectile>();
+        if (projectileScript != null)
+        {
+            if (isOnBeat)
+            {
+                projectileScript.SetShooter(stats.UnitAttackDamage / rangedAttackDamageReductionDivider + stats.UnitAttackBuff, firePoint.localPosition.x);
+            }
+            else
+            {
+                projectileScript.SetShooter(stats.UnitAttackDamage / rangedAttackDamageReductionDivider, firePoint.localPosition.x);
+            }
         }
     }
 
     public void OnMeleeAttack(InputAction.CallbackContext inputAction)
     {
-        if (playerMove.GetCanAttack() && inputAction.started && attackTimeCounter >= stats.TimeBtwAttacks && playerMove.isGrounded)
+        if (playerMove.GetCanAttack() && inputAction.started && attackTimeCounter >= stats.TimeBtwAttacks && !playerMove.isWalled && !playerMove.isAttacking)
         {
             playerMove.isAttacking = true;
             anim.SetTrigger("AttackTrigger");
@@ -95,7 +140,33 @@ public class PlayerAttack : MonoBehaviour
         hits = Physics.SphereCastAll(attackTransform.position, meleeAttackRadius, transform.right, 0f, enemyLayer);
         for (int i = 0; i < hits.Length; i++)
         {
+            EnemyPatrol enemyPatrol = hits[i].collider.gameObject.GetComponent<EnemyPatrol>();
             EnemyStats enemyStats = hits[i].collider.gameObject.GetComponent<EnemyStats>();
+            BossBehaviour bossBehaviour = hits[i].collider.gameObject.GetComponent<BossBehaviour>();
+            DestructibleObject destructibleObject = hits[i].collider.gameObject.GetComponent<DestructibleObject>();
+
+            if (enemyPatrol != null)
+            {
+                enemyPatrol.onHitChangeColor();
+            }
+            else if (bossBehaviour != null) 
+            { 
+                bossBehaviour.onHitChangeColor(); 
+            }
+
+            if (destructibleObject != null)
+            {
+                
+                if (isOnBeat)
+                {
+                    destructibleObject.TakeDamage((int)stats.UnitAttackDamage + (int)stats.UnitAttackBuff);
+                }
+                else
+                {
+                    destructibleObject.TakeDamage(1);
+                }
+            }
+
             if (enemyStats != null)
             {
                 if (isOnBeat)

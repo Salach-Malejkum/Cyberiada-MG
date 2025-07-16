@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using FMODUnity;
 
 public class PlayerStats : UnitStats
 {
@@ -36,6 +37,7 @@ public class PlayerStats : UnitStats
     {
         get { return this.fallCheckPoint; }
     }
+    [SerializeField] protected float fallCheckPointOffset;
 
     [SerializeField] protected float pitfallDamage;
     public float PitfallDamage
@@ -43,15 +45,20 @@ public class PlayerStats : UnitStats
         get { return this.pitfallDamage; }
     }
 
+    [SerializeField] private Renderer matRenderer;
+    [SerializeField] private EventReference hitSound;
+
     private void Awake()
     {
         this.onUnitDeath += HandlePlayerDeath;
+        this.unitCurrentHealth = this.unitMaxHealth;
     }
 
     private void Start()
     {
-        this.unitCurrentHealth = this.unitMaxHealth;
         this.unitRespawnCoordinates = transform.position;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void OnDestroy()
@@ -62,6 +69,9 @@ public class PlayerStats : UnitStats
     public override void RemoveHealthOnAttack(float damageAmount, GameObject aggressor)
     {
         base.RemoveHealthOnAttack(damageAmount, aggressor);
+        if (aggressor == GameManager.instance.gameObject) return;
+        onHitChangeColor();
+        SFXManager.instance.PlayOneShot(hitSound, this.transform.position);
     }
 
     public void UpdateRespawnCoordinates(Vector3 newCoordinates)
@@ -83,9 +93,7 @@ public class PlayerStats : UnitStats
     {
         SpriteRenderer renderer = this.gameObject.GetComponent<SpriteRenderer>();
         renderer.enabled = false;
-        //fade in
         yield return new WaitForSeconds(timeToRespawn);
-        //fade out
         if (isPlayerDead)
         {
             transform.position = unitRespawnCoordinates;
@@ -93,6 +101,14 @@ public class PlayerStats : UnitStats
         }
         else
         {
+            if(transform.position.x - fallCheckPoint.x < 0)
+            {
+                fallCheckPoint = new Vector3(fallCheckPoint.x + fallCheckPointOffset, fallCheckPoint.y, fallCheckPoint.z);
+            }
+            else
+            {
+                fallCheckPoint = new Vector3(fallCheckPoint.x - fallCheckPointOffset, fallCheckPoint.y, fallCheckPoint.z);
+            }
             transform.position = fallCheckPoint;
         }
         renderer.enabled = true;
@@ -107,12 +123,24 @@ public class PlayerStats : UnitStats
         RemoveHealthOnAttack(pitfallDamage, obj);
     }
 
-    public void handleSpikes(GameObject obj)
+    public void handleSpikes(GameObject obj, int damage)
     {
-        if (UnitCurrentHealth > pitfallDamage)
+        if (UnitCurrentHealth > damage)
         {
             StartCoroutine(Respawn(false, spikesTimeToRespawn));
         }
-        RemoveHealthOnAttack(pitfallDamage, obj);
+        RemoveHealthOnAttack(damage, obj);
+    }
+
+    public void onHitChangeColor()
+    {
+        StartCoroutine(changeColor());
+    }
+
+    IEnumerator changeColor()
+    {
+        matRenderer.material.SetColor("_OnHitColor", Color.white);
+        yield return new WaitForSeconds(0.2f);
+        matRenderer.material.SetColor("_OnHitColor", new Color(0.0f, 0.0f, 0.0f, 0.0f));
     }
 }

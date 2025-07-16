@@ -4,7 +4,7 @@ using UnityEngine;
 [InitializeOnLoad]
 public class AltDuplicateHandle
 {
-    private static GameObject duplicatedObject = null; // Track the duplicated object
+    private static GameObject duplicatedObject = null;
     private static bool isDragging = false;
     private static Vector3 dragStartPosition;
     private static Vector3 dragAxis = Vector3.zero;
@@ -22,20 +22,19 @@ public class AltDuplicateHandle
 
         if (e.alt && e.type == EventType.MouseDrag && e.button == 0)
         {
-            if (duplicatedObject == null) // Only duplicate once
+            if (duplicatedObject == null)
             {
                 duplicatedObject = Object.Instantiate(Selection.activeGameObject);
                 duplicatedObject.name = Selection.activeGameObject.name + " (Copy)";
                 Undo.RegisterCreatedObjectUndo(duplicatedObject, "Duplicate Object");
-                Selection.activeGameObject = duplicatedObject; // Select the new object
+                Selection.activeGameObject = duplicatedObject;
             }
 
             dragStartPosition = duplicatedObject.transform.position;
             isDragging = true;
 
-            // Determine the axis or plane to constrain movement
             float handleSize = HandleUtility.GetHandleSize(dragStartPosition);
-            float pickDist = handleSize * 0.1f; // Picking threshold
+            float pickDist = handleSize * 0.1f;
 
             if (HandleUtility.DistanceToLine(dragStartPosition, dragStartPosition + Vector3.right * handleSize) < pickDist)
                 dragAxis = Vector3.right;
@@ -45,7 +44,6 @@ public class AltDuplicateHandle
                 dragAxis = Vector3.forward;
             else
             {
-                // Default to XY plane if no axis was picked
                 dragPlane = new Plane(Vector3.forward, dragStartPosition);
                 dragAxis = Vector3.zero;
             }
@@ -53,7 +51,6 @@ public class AltDuplicateHandle
             e.Use();
         }
 
-        // Move the duplicated object with axis/plane restriction
         if (duplicatedObject != null)
         {
             EditorGUI.BeginChangeCheck();
@@ -61,12 +58,10 @@ public class AltDuplicateHandle
 
             if (dragAxis != Vector3.zero)
             {
-                // Move along a specific axis
                 newPosition = Handles.Slider(duplicatedObject.transform.position, dragAxis);
             }
             else
             {
-                // Move freely within a plane
                 Ray ray = HandleUtility.GUIPointToWorldRay(e.mousePosition);
                 if (dragPlane.Raycast(ray, out float enter))
                 {
@@ -83,7 +78,6 @@ public class AltDuplicateHandle
             sceneView.Repaint();
         }
 
-        // Reset when mouse button is released
         if (e.type == EventType.MouseUp)
         {
             duplicatedObject = null;
@@ -91,10 +85,9 @@ public class AltDuplicateHandle
             dragAxis = Vector3.zero;
         }
 
-        // Block Unity's default Alt Look while dragging
         if (isDragging && e.isMouse)
         {
-            e.Use(); // Consume event to prevent orbiting
+            e.Use();
         }
     }
 }

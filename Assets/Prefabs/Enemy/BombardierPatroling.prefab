@@ -152,7 +152,7 @@ Transform:
   m_GameObject: {fileID: 7675238333141305269}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.37, y: 1.19, z: 0}
+  m_LocalPosition: {x: 2.66, y: 1.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -174,9 +174,10 @@ GameObject:
   - component: {fileID: 1080848889539490743}
   - component: {fileID: 6166226019802923246}
   - component: {fileID: 6009258486261480747}
+  - component: {fileID: 2969476002574192682}
   m_Layer: 8
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -238,9 +239,9 @@ CapsuleCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1023
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -273,6 +274,15 @@ MonoBehaviour:
   transformer: {fileID: 1019940001000597404}
   attackPosition: {fileID: 3120584718430682998}
   anim: {fileID: 0}
+  onHitColor: {r: 1, g: 0, b: 0, a: 1}
+  onHitRenderer: {fileID: 1080848889539490743}
+  hitSound:
+    Guid:
+      Data1: -441983736
+      Data2: 1217383335
+      Data3: -1235807053
+      Data4: 2031550021
+    Path: event:/Enemy/EnemyHit
 --- !u!114 &3695284307982869749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,7 +297,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitMaxHealth: 100
   unitCurrentHealth: 0
-  unitAttackDamage: 1
+  unitAttackDamage: 10
   unitRespawnCoordinates: {x: 0, y: 0, z: 0}
   lastAggressor: {fileID: 0}
 --- !u!212 &1080848889539490743
@@ -313,7 +323,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 001e40cf554beaa45959376c0a3acb35, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -386,3 +396,43 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2969476002574192682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8847389444795585345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e478a3db46c58d4ea0a753383a1e5c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walk_1:
+    Guid:
+      Data1: 311771452
+      Data2: 1119575265
+      Data3: -32654445
+      Data4: -130744461
+    Path: event:/Enemy/EnemyWalk1
+  walk_2:
+    Guid:
+      Data1: -1309359117
+      Data2: 1207820659
+      Data3: -2068751721
+      Data4: 588544865
+    Path: event:/Enemy/EnemyWalk2
+  walk_3:
+    Guid:
+      Data1: -1968837517
+      Data2: 1216772013
+      Data3: 1125905294
+      Data4: -365791586
+    Path: event:/Enemy/EnemyWalk3
+  atk_1:
+    Guid:
+      Data1: 769629254
+      Data2: 1168070470
+      Data3: -35285860
+      Data4: -166192420
+    Path: event:/Enemy/EnemyAtk

@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -9,30 +11,26 @@ public class PauseMenu : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("pauseStart");
         isGamePaused = false;
         pauseMenuPanel.gameObject.SetActive(false);
         menuBackGround.gameObject.SetActive(false);
+        pauseOptionsPanel.gameObject.SetActive(false);
     }
 
-    void OnPause()
+    public void OnPause(InputAction.CallbackContext inputAction)
     {
         if (isGamePaused)
         {
-            Debug.Log("unpause");
             Resume();
         }
         else
         {
-            Debug.Log("pause");
-            EnablePanels();
-            Time.timeScale = 0;
+            Pause();
         }
     }
 
     private void DisablePanels()
     {
-        Debug.Log("disable");
         isGamePaused = false;
         pauseMenuPanel.gameObject.SetActive(false);
         menuBackGround.gameObject.SetActive(false);
@@ -41,16 +39,26 @@ public class PauseMenu : MonoBehaviour
 
     private void EnablePanels()
     {
-        Debug.Log("enable");
         isGamePaused = true;
         pauseMenuPanel.gameObject.SetActive(true);
         menuBackGround.gameObject.SetActive(true);
         pauseOptionsPanel.gameObject.SetActive(false);
+        pauseMenuPanel.GetComponent<MainMenu>().firstMainMenuButton.Select();
+    }
+
+    public void Pause()
+    {
+        EnablePanels();
+        Time.timeScale = 0;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void Resume()
     {
         DisablePanels();
         Time.timeScale = 1;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }

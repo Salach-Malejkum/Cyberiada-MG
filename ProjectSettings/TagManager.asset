@@ -5,6 +5,13 @@ TagManager:
   serializedVersion: 3
   tags:
   - OptionButton
+  - SpawnLeft
+  - SpawnRight
+  - DestructibleObject
+  - inputSystem
+  - CheckPoint
+  - checkPointManager
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -16,7 +23,7 @@ TagManager:
   - Player
   - Enemy
   - EnterablePlatform
-  - 
+  - PlayerProjectile
   - 
   - 
   - 
